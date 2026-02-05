@@ -136,7 +136,7 @@ export const PROJECTS: Project[] = [
     heroImage: '/assets/projects/dominos-global/hero.jpg',
     visuals: [
       '/assets/projects/dominos-global/craft-hierarchy.jpg',
-      '/assets/projects/dominos-global/craft-motion.jpg',
+      '/assets/projects/dominos-global/craft-motion.m4v',
       '/assets/projects/dominos-global/craft-density.jpg'
     ],
     tools: ['Sketch', 'Principle', 'Keynote', 'Pixelmator Pro', 'Zeplin']

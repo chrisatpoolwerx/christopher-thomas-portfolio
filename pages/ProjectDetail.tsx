@@ -628,12 +628,23 @@ export const ProjectDetail: React.FC = () => {
               <p className="text-lg md:text-2xl leading-relaxed opacity-60 font-light">{c.content}</p>
             </div>
             <div className="md:col-span-7">
-               <motion.div 
+               <motion.div
                  className={`aspect-[16/10] bg-gray-100 rounded-2xl md:rounded-[4rem] overflow-hidden ${isAR ? 'shadow-2xl' : ''}`}
                  whileHover={{ scale: 1.02 }}
                  transition={{ duration: 1 }}
                >
-                 <img src={project.visuals[i] || project.heroImage} className={`w-full h-full object-cover transition-all duration-1000 ${isAR ? '' : 'grayscale hover:grayscale-0'}`} alt={c.section} />
+                 {(project.visuals[i] || '').match(/\.(m4v|mp4|webm|mov)$/i) ? (
+                   <video
+                     src={project.visuals[i]}
+                     className={`w-full h-full object-cover ${isAR ? '' : 'grayscale hover:grayscale-0'} transition-all duration-1000`}
+                     autoPlay
+                     loop
+                     muted
+                     playsInline
+                   />
+                 ) : (
+                   <img src={project.visuals[i] || project.heroImage} className={`w-full h-full object-cover transition-all duration-1000 ${isAR ? '' : 'grayscale hover:grayscale-0'}`} alt={c.section || c.title} />
+                 )}
                </motion.div>
             </div>
           </div>
