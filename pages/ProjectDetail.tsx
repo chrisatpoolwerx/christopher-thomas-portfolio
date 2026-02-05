@@ -380,7 +380,7 @@ const EcosystemDiagram: React.FC = () => {
                 {node.icon}
               </div>
               <p className="text-xs md:text-sm font-bold uppercase tracking-widest mb-2">{node.label}</p>
-              <p className="text-[10px] opacity-50 tracking-wide max-w-[140px]">{node.desc}</p>
+              <p className="text-[10px] opacity-50 uppercase tracking-wider max-w-[140px]">{node.desc}</p>
             </motion.div>
           ))}
         </div>
