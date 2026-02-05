@@ -133,16 +133,20 @@ public/assets/
 
 | Filename | Size | Format | Description |
 |----------|------|--------|-------------|
-| `hero.jpg` | 2000x1250 | JPG | Hero image - AR pizza in spatial environment |
-| `craft-1.jpg` | 1200x750 | JPG | Craft section: Spatial restraint/ingredient motion |
-| `craft-2.jpg` | 1200x750 | JPG | Craft section: Depth and focus layers |
-| `craft-3.jpg` | 1200x750 | JPG | Craft section: Material/texture realism |
+| `hero.jpg` | 2000x1250 | JPG | Hero image - AR pizza customization in action |
+| `ar-mode.jpg` | 1200x900 | JPG | Side-by-side: Full AR mode with pizza placement (4:3) |
+| `non-ar-mode.jpg` | 1200x900 | JPG | Side-by-side: Camera-off fallback mode (4:3) |
+| `craft-animation.jpg` | 1200x750 | JPG | Craft: Tactile animation showing ingredient motion |
+| `craft-delight.jpg` | 1200x750 | JPG | Craft: Easter egg animations for specific ingredients |
+| `craft-system.jpg` | 1200x750 | JPG | Craft: Next Gen UI system adapted for AR context |
 
 **Content Direction:**
-- Hero: Hands interacting with AR pizza, or floating 3D pizza view
-- Craft 1: Ingredient placement interaction sequence
-- Craft 2: Depth-of-field showing focus hierarchy
-- Craft 3: Close-up of realistic topping textures
+- Hero: User interacting with AR pizza, showing the spatial customization experience
+- AR Mode: Full ARKit experience with pizza placed in real environment
+- Non-AR Mode: Graceful fallback with pizza on neutral background
+- Craft Animation: Motion sequences showing tactile ingredient feedback
+- Craft Delight: Fun Easter egg moments that reward exploration
+- Craft System: Card metaphor UI and navigation colour system in AR
 
 ---
 
@@ -233,9 +237,11 @@ Update constants.tsx to use WebP with JPG fallback via `<picture>` element or mo
 
 ### AR Pizza Chef
 - [ ] hero.jpg
-- [ ] craft-1.jpg
-- [ ] craft-2.jpg
-- [ ] craft-3.jpg
+- [ ] ar-mode.jpg
+- [ ] non-ar-mode.jpg
+- [ ] craft-animation.jpg
+- [ ] craft-delight.jpg
+- [ ] craft-system.jpg
 
 ---
 

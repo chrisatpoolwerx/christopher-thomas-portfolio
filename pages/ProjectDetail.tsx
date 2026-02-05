@@ -581,15 +581,80 @@ export const ProjectDetail: React.FC = () => {
       )}
 
       {isAR && (
-        <section className="mt-32 md:mt-80 px-6 md:px-8 max-w-screen-xl mx-auto">
-          <div className="mb-16 md:mb-24">
-            <h2 className="text-4xl md:text-6xl font-serif mb-8 md:mb-12 tracking-tighter">Spatial <span className="text-brand italic">Fluidity</span></h2>
-            <p className="text-lg md:text-2xl opacity-60 max-w-3xl font-light">
-              Designing for emerging mediums reinforced the importance of restraint — ensuring the spatial environment felt responsive rather than theatrical.
-            </p>
-          </div>
-          <SpatialDiagram />
-        </section>
+        <>
+          {/* Designing the Interaction Model */}
+          <section className="mt-32 md:mt-80 px-6 md:px-8 max-w-screen-xl mx-auto">
+            <div className="mb-16 md:mb-24">
+              <h2 className="text-4xl md:text-6xl font-serif mb-8 md:mb-12 tracking-tighter">Designing the <span className="text-brand italic">Interaction Model</span></h2>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24">
+              <motion.div
+                className="space-y-6"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+              >
+                <h3 className="text-2xl md:text-3xl font-serif italic">Under-thumb customisation</h3>
+                <p className="text-lg md:text-xl opacity-60 leading-relaxed font-light">
+                  To keep the experience fast and ergonomic, we introduced a swipe-navigable ingredient picker designed to keep customisations under the user's thumb, with single-gesture add/remove interactions.
+                </p>
+              </motion.div>
+              <motion.div
+                className="space-y-6"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.1 }}
+              >
+                <h3 className="text-2xl md:text-3xl font-serif italic">"AR Optional" by design</h3>
+                <p className="text-lg md:text-xl opacity-60 leading-relaxed font-light">
+                  For devices without ARKit — or users who simply didn't want to place a pizza on the floor — we added a camera-off toggle and rendered the pizza against a neutral background.
+                </p>
+              </motion.div>
+            </div>
+          </section>
+
+          {/* AR Interface Showcase */}
+          <section className="mt-24 md:mt-40 px-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+              <motion.div
+                className="aspect-[4/3] bg-gray-100 rounded-2xl md:rounded-[2rem] overflow-hidden"
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+              >
+                <img
+                  src="/assets/projects/ar-pizza/ar-mode.jpg"
+                  className="w-full h-full object-cover"
+                  alt="AR mode with pizza placement"
+                />
+              </motion.div>
+              <motion.div
+                className="aspect-[4/3] bg-gray-100 rounded-2xl md:rounded-[2rem] overflow-hidden"
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.1 }}
+              >
+                <img
+                  src="/assets/projects/ar-pizza/non-ar-mode.jpg"
+                  className="w-full h-full object-cover"
+                  alt="Non-AR fallback mode"
+                />
+              </motion.div>
+            </div>
+            <div className="flex justify-between mt-6 px-2 text-sm opacity-40 uppercase tracking-widest">
+              <span>AR Mode</span>
+              <span>Camera-Off Fallback</span>
+            </div>
+          </section>
+
+          {/* Spatial Diagram */}
+          <section className="mt-32 md:mt-64 px-6 md:px-8 max-w-screen-xl mx-auto">
+            <SpatialDiagram />
+          </section>
+        </>
       )}
 
       {/* Domino's Specific Sections */}

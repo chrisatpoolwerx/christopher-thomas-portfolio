@@ -144,43 +144,50 @@ export const PROJECTS: Project[] = [
   {
     id: 'ar-pizza',
     title: 'AR Pizza Chef',
-    subtitle: 'Spatial Interaction',
-    oneLine: 'Reimagining food customization through spatial interaction.',
-    context: 'Customizing a pizza is inherently visual, yet traditional interfaces reduce the experience to lists and modifiers. AR Pizza Chef explored a more natural model — allowing customers to construct their pizza in physical space, transforming configuration into an intuitive, hands-on experience.',
-    role: 'Lead Product Designer',
+    subtitle: 'Spatial Commerce Experience',
+    oneLine: 'Turning pizza customization into a joyful, high-conversion spatial experience — integrated directly into ordering.',
+    context: "Customising a pizza is typically a necessary but tedious step — dense with options, low delight, and easy to rush. We explored how AR could transform that moment into something tactile and expressive without breaking the ordering flow.",
+    role: 'Lead Product Designer, Ordering Platform / Next Gen UI',
     scope: [
-      'Led interaction design for the AR experience',
-      'Defined spatial manipulation patterns',
-      'Crafted the visual behavior of ingredients',
-      'Directed prototyping and experiential testing',
-      'Collaborated with engineering to align interaction with technical constraints'
+      'Led UX + UI design for New Pizza Chef as an integrated ordering experience',
+      'Ran focus groups and user research to validate direction and shape the concept',
+      'Adapted the Next Generation UI system into AR (card metaphor, navigation colours)',
+      'Defined interaction patterns, animations, and delight mechanics',
+      'Partnered with Deloitte Digital under a tight 6-month delivery window'
     ],
     hardThings: [
-      'Limited precedent for spatial food interaction',
-      'Balancing realism with interface clarity',
-      'Preventing gesture fatigue',
-      'Maintaining responsiveness in 3D space',
-      'Ensuring the experience enhanced — rather than slowed — ordering'
+      'Early concept started as standalone AR app; research showed embedding into core ordering was the winning path',
+      'Shipping fast: ~6-month turnaround with external build partner (Deloitte Digital)',
+      'Inclusivity: not every device supported ARKit, and not every user wanted camera-on AR',
+      'Making "joy" real: delight had to be intentional, not noisy — and support comprehension'
     ],
-    insight: 'When customization becomes physical, decision-making becomes faster and more confident.',
-    modelDescription: 'Rather than choosing toppings from a list, customers assemble their pizza directly — placing ingredients, adjusting quantity, and immediately understanding the outcome.',
+    insight: "AR shouldn't be a novelty layer — it should make a real workflow feel easier, clearer, and more engaging.",
+    modelDescription: 'Under-thumb customisation with direct manipulation. A swipe-navigable ingredient picker keeps customisations ergonomic, with single-gesture add/remove interactions.',
+    arOptionalDescription: "For devices without ARKit — or users who simply didn't want to place a pizza on the floor — we added a camera-off toggle and rendered the pizza against a neutral background.",
     principles: [
-      { title: 'Direct Manipulation', description: 'Objects behave as users expect in the physical world.' },
-      { title: 'Immediate Feedback', description: 'Every gesture produces a visible, satisfying response.' },
-      { title: 'Play Without Friction', description: 'Delight should never introduce delay into the ordering flow.' },
-      { title: 'Familiarity Through Physics', description: 'Motion and placement mirror real-world behavior to reduce learning time.' }
+      { title: 'Under-Thumb Navigation', description: 'Swipe-navigable ingredient picker keeps customisation fast and ergonomic.' },
+      { title: 'AR Optional', description: 'Camera-off toggle for devices without ARKit or users who prefer it.' },
+      { title: 'Direct Manipulation', description: 'Single-gesture add/remove interactions for speed and clarity.' },
+      { title: 'Designed Delight', description: 'Easter egg animations reward exploration without sacrificing speed.' }
     ],
     craft: [
-      { section: 'Spatial Restraint', content: 'Ingredient motion was intentionally controlled to avoid perceptual chaos, ensuring the environment felt responsive rather than theatrical.' },
-      { section: 'Depth & Focus', content: 'Visual layering guides attention naturally toward the active plane, preventing cognitive drift within the 3D space.' },
-      { section: 'Material Realism', content: 'Textures were calibrated to feel believable without tipping into simulation — preserving clarity over spectacle.' }
+      { section: 'Tactile Animation', content: 'Motion as communication: animation conveyed ingredient changes with tactility and clarity, not decoration.' },
+      { section: 'Designed Delight', content: 'Custom 2D "Easter egg" animations for specific ingredients rewarded exploration and reinforced joy as a design goal.' },
+      { section: 'System Consistency', content: 'First implementation of Next Generation UI inside the Domino\'s app: card-metaphor UI and updated navigation colour system adapted for AR.' }
     ],
-    outcome: 'The experience demonstrated how spatial computing can transform transactional interfaces into intuitive, experiential ones — earning industry recognition and informing future interaction exploration.',
-    reflection: 'Designing for emerging mediums reinforced the importance of restraint — the most successful moments felt inevitable, not novel.',
-    heroImage: 'https://images.unsplash.com/photo-1593504049359-74330189a355?auto=format&fit=crop&q=80&w=2000',
+    outcomes: [
+      'Shipped as an upgrade inside the Domino\'s ordering app, not a standalone experiment',
+      'Recognised by IDC\'s 2019 Digital Transformation Awards as Omni Experience Innovator — won overall globally in category',
+      '"Beloved feature" impact: repeatedly called out in customer reviews as surprisingly great/fun',
+      'Commercial impact: users who built a pizza in New Pizza Chef were almost certain to convert',
+      'Expanded to Mac via iOS apps with higher-resolution textures, positioned for global rollout'
+    ],
+    reflection: "The biggest learning was restraint: the best 'wow' moments were the ones that made the workflow feel more natural — not more complicated. The bar for delight in commerce is high: it has to earn its place by improving comprehension and momentum.",
+    heroImage: '/assets/projects/ar-pizza/hero.jpg',
     visuals: [
-      'https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&q=80&w=1200',
-      'https://images.unsplash.com/photo-1590947132387-155cc02f3212?auto=format&fit=crop&q=80&w=1200'
+      '/assets/projects/ar-pizza/craft-animation.jpg',
+      '/assets/projects/ar-pizza/craft-delight.jpg',
+      '/assets/projects/ar-pizza/craft-system.jpg'
     ],
     tools: ['Sketch', 'Principle', 'Keynote', 'Pixelmator Pro', 'Xcode', 'Reality Composer']
   }
