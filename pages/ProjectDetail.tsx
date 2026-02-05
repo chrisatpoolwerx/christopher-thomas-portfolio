@@ -327,23 +327,51 @@ const DesignSystemDiagram: React.FC = () => {
   );
 };
 
+const IconDashboard = () => (
+  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="3" y="3" width="7" height="9" rx="1"></rect>
+    <rect x="14" y="3" width="7" height="5" rx="1"></rect>
+    <rect x="14" y="12" width="7" height="9" rx="1"></rect>
+    <rect x="3" y="16" width="7" height="5" rx="1"></rect>
+  </svg>
+);
+
+const IconServer = () => (
+  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
+    <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
+    <line x1="6" y1="6" x2="6.01" y2="6"></line>
+    <line x1="6" y1="18" x2="6.01" y2="18"></line>
+  </svg>
+);
+
+const IconDocument = () => (
+  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+    <polyline points="14 2 14 8 20 8"></polyline>
+    <line x1="16" y1="13" x2="8" y2="13"></line>
+    <line x1="16" y1="17" x2="8" y2="17"></line>
+    <polyline points="10 9 9 9 8 9"></polyline>
+  </svg>
+);
+
 const EcosystemDiagram: React.FC = () => {
   return (
     <div className="w-full py-20 px-8 bg-white border border-black/5 rounded-[3rem] md:rounded-[5rem] shadow-2xl shadow-black/5 overflow-hidden">
-      <div className="max-w-4xl mx-auto">
-        <h4 className="text-xs uppercase tracking-[0.5em] text-brand font-bold mb-16 text-center">Ecosystem Architecture</h4>
-        <div className="relative flex flex-col md:flex-row items-center justify-between gap-12">
+      <div className="max-w-5xl mx-auto">
+        <h4 className="text-xs uppercase tracking-[0.5em] text-brand font-bold mb-16 text-center">System Architecture</h4>
+        <div className="relative flex flex-col md:flex-row items-center justify-between gap-8 md:gap-6">
           <div className="hidden md:block absolute top-1/2 left-0 w-full h-[1px] bg-black/5 -translate-y-1/2" />
-          
+
           {[
-            { label: 'Customer App', icon: <IconSmartphone />, desc: 'Continuous Visibility' },
-            { label: 'Technician Tools', icon: <IconWrench />, desc: 'Guided Execution' },
-            { label: 'Service Layer', icon: <IconBuilding />, desc: 'Operational Support' },
-            { label: 'Water Outcomes', icon: <IconWater />, desc: 'Healthy Result' }
+            { label: 'Technician App', icon: <IconSmartphone />, desc: 'Simple poolside data capture' },
+            { label: 'Store Dashboard', icon: <IconDashboard />, desc: 'Review, edit & generate reports' },
+            { label: 'Service Backend', icon: <IconServer />, desc: 'LLM generation & document assembly' },
+            { label: 'Customer Report', icon: <IconDocument />, desc: 'Clarity and confidence delivered' }
           ].map((node, i) => (
-            <motion.div 
+            <motion.div
               key={i}
-              className="relative z-10 flex flex-col items-center text-center group"
+              className="relative z-10 flex flex-col items-center text-center group flex-1"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.1 }}
@@ -351,8 +379,8 @@ const EcosystemDiagram: React.FC = () => {
               <div className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-[#fbfbfb] border border-black/5 flex items-center justify-center text-brand mb-6 shadow-sm group-hover:scale-110 group-hover:bg-brand group-hover:text-white transition-all duration-500">
                 {node.icon}
               </div>
-              <p className="text-sm font-bold uppercase tracking-widest mb-2">{node.label}</p>
-              <p className="text-[10px] opacity-40 uppercase tracking-[0.2em]">{node.desc}</p>
+              <p className="text-xs md:text-sm font-bold uppercase tracking-widest mb-2">{node.label}</p>
+              <p className="text-[10px] opacity-50 tracking-wide max-w-[140px]">{node.desc}</p>
             </motion.div>
           ))}
         </div>
