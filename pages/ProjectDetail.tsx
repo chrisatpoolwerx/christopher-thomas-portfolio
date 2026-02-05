@@ -485,15 +485,71 @@ export const ProjectDetail: React.FC = () => {
 
       {/* Special Visuals Sections */}
       {isHealthyPool && (
-        <section className="mt-32 md:mt-80 px-6 md:px-8 max-w-screen-xl mx-auto">
-          <div className="mb-16 md:mb-24">
-            <h2 className="text-4xl md:text-6xl font-serif mb-8 md:mb-12 tracking-tighter">From Transactions → <span className="text-brand italic">Continuous Care</span></h2>
-            <p className="text-lg md:text-2xl opacity-60 max-w-3xl font-light">
-              Rather than designing isolated service moments, the experience was structured as an ongoing relationship — where diagnostics, treatment, and communication form a coherent narrative of water health.
-            </p>
-          </div>
-          <EcosystemDiagram />
-        </section>
+        <>
+          <section className="mt-32 md:mt-80 px-6 md:px-8 max-w-screen-xl mx-auto">
+            <div className="mb-16 md:mb-24">
+              <h2 className="text-4xl md:text-6xl font-serif mb-8 md:mb-12 tracking-tighter">From Transactions → <span className="text-brand italic">Continuous Care</span></h2>
+              <p className="text-lg md:text-2xl opacity-60 max-w-3xl font-light">
+                Rather than designing isolated service moments, the experience was structured as an ongoing relationship — where diagnostics, treatment, and communication form a coherent narrative of water health.
+              </p>
+            </div>
+            <EcosystemDiagram />
+          </section>
+
+          {/* Technician & Customer Experience */}
+          <section className="mt-32 md:mt-64 px-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+              <motion.div
+                className="aspect-[4/3] bg-gray-100 rounded-2xl md:rounded-[2rem] overflow-hidden"
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8 }}
+              >
+                <img
+                  src="/assets/projects/healthy-pool/technician-app.jpg"
+                  className="w-full h-full object-cover"
+                  alt="Technician assessment app"
+                />
+              </motion.div>
+              <motion.div
+                className="aspect-[4/3] bg-gray-100 rounded-2xl md:rounded-[2rem] overflow-hidden"
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.1 }}
+              >
+                <img
+                  src="/assets/projects/healthy-pool/customer-report.jpg"
+                  className="w-full h-full object-cover"
+                  alt="Customer-facing report"
+                />
+              </motion.div>
+            </div>
+            <div className="flex justify-between mt-6 px-2 text-sm opacity-40 uppercase tracking-widest">
+              <span>Technician Assessment</span>
+              <span>Customer Report</span>
+            </div>
+          </section>
+
+          {/* Full-width detail shot */}
+          <section className="mt-24 md:mt-40 px-4">
+            <motion.div
+              className="w-full aspect-[21/9] bg-gray-100 rounded-2xl md:rounded-[3rem] overflow-hidden"
+              initial={{ scale: 1.05, opacity: 0 }}
+              whileInView={{ scale: 1, opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1.2 }}
+            >
+              <img
+                src="/assets/projects/healthy-pool/report-detail.jpg"
+                className="w-full h-full object-cover"
+                alt="Report detail view"
+              />
+            </motion.div>
+            <p className="text-center text-sm opacity-40 mt-6 uppercase tracking-widest">Assessment findings translated into actionable insights</p>
+          </section>
+        </>
       )}
 
       {isAR && (

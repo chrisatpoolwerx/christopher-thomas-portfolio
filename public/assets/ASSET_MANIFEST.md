@@ -96,15 +96,15 @@ public/assets/
 | Filename | Size | Format | Description |
 |----------|------|--------|-------------|
 | `hero.jpg` | 2000x1250 | JPG | Hero image - ecosystem overview or service moment |
-| `craft-1.jpg` | 1200x750 | JPG | Craft section: Reassurance/status design |
-| `craft-2.jpg` | 1200x750 | JPG | Craft section: Information framing |
-| `craft-3.jpg` | 1200x750 | JPG | Craft section: Cross-touchpoint consistency |
+| `technician-app.jpg` | 1200x900 | JPG | Side-by-side: Technician mobile assessment interface (4:3) |
+| `customer-report.jpg` | 1200x900 | JPG | Side-by-side: Customer-facing health report (4:3) |
+| `report-detail.jpg` | 2400x1030 | JPG | Full-width: Detailed view of assessment findings (21:9) |
 
 **Content Direction:**
-- Hero: Customer app + technician tool side by side, or service journey
-- Craft 1: Status screens showing "protected" states
-- Craft 2: Simplified diagnostic communication
-- Craft 3: Digital + physical service touchpoint comparison
+- Hero: Service ecosystem or pool health journey overview
+- Technician App: Mobile assessment interface showing field capture workflow
+- Customer Report: Clean report presentation with health scores and recommendations
+- Report Detail: Close-up of insights translation - technical data → clear guidance
 
 ---
 
@@ -219,9 +219,9 @@ Update constants.tsx to use WebP with JPG fallback via `<picture>` element or mo
 
 ### Healthy Pool Plan
 - [ ] hero.jpg
-- [ ] craft-1.jpg
-- [ ] craft-2.jpg
-- [ ] craft-3.jpg
+- [ ] technician-app.jpg
+- [ ] customer-report.jpg
+- [ ] report-detail.jpg
 
 ### Domino's Global
 - [ ] hero.jpg
