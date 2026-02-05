@@ -616,52 +616,87 @@ export const ProjectDetail: React.FC = () => {
       </section>
 
       {/* Craft Details */}
-      <section className={`mt-32 md:mt-80 space-y-24 md:space-y-48 ${isAR ? 'bg-white py-32 md:py-64' : ''}`}>
-        {project.craft.map((c, i) => (
-          <div key={i} className="px-6 md:px-8 max-w-screen-xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-24 items-center">
-            <div className={`md:col-span-5 ${i % 2 !== 0 ? 'md:order-last' : ''}`}>
-              <div className="flex items-center gap-4 mb-6 md:mb-8">
-                 <span className="text-[10px] md:text-xs font-mono text-brand font-bold">CRAFT {i+1}</span>
-                 <div className="h-[1px] flex-grow bg-black/5" />
-              </div>
-              <h2 className="text-3xl md:text-4xl font-serif mb-6 md:mb-10 tracking-tight italic">{c.section}</h2>
-              <p className="text-lg md:text-2xl leading-relaxed opacity-60 font-light">{c.content}</p>
-            </div>
-            <div className="md:col-span-7">
-               <motion.div
-                 className={`aspect-[16/10] bg-gray-100 rounded-2xl md:rounded-[4rem] overflow-hidden ${isAR ? 'shadow-2xl' : ''}`}
-                 whileHover={{ scale: 1.02 }}
-                 transition={{ duration: 1 }}
-               >
-                 {(project.visuals[i] || '').match(/\.(m4v|mp4|webm|mov)$/i) ? (
-                   <video
-                     src={project.visuals[i]}
-                     className="w-full h-full object-cover"
-                     autoPlay
-                     loop
-                     muted
-                     playsInline
-                   />
-                 ) : (
-                   <img src={project.visuals[i] || project.heroImage} className="w-full h-full object-cover" alt={c.section || c.title} />
-                 )}
-               </motion.div>
-            </div>
+      {isHealthyPool ? (
+        /* Healthy Pool: Grid layout for 6 craft items */
+        <section className="mt-32 md:mt-80 px-6 md:px-8 max-w-screen-xl mx-auto">
+          <h2 className="text-xs uppercase tracking-[0.4em] text-brand font-bold mb-16 md:mb-24">Craft & Execution</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
+            {project.craft.map((c, i) => (
+              <motion.div
+                key={i}
+                className="p-8 md:p-10 bg-white border border-black/5 rounded-2xl md:rounded-3xl space-y-4 md:space-y-6 hover:-translate-y-1 transition-transform duration-300"
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1, duration: 0.6 }}
+              >
+                <span className="text-[10px] font-mono text-brand font-bold">0{i + 1}</span>
+                <h3 className="text-xl md:text-2xl font-serif italic">{c.title || c.section}</h3>
+                <p className="text-base md:text-lg opacity-60 leading-relaxed font-light">{c.description || c.content}</p>
+              </motion.div>
+            ))}
           </div>
-        ))}
-      </section>
+        </section>
+      ) : (
+        /* Default: Alternating image/text layout */
+        <section className={`mt-32 md:mt-80 space-y-24 md:space-y-48 ${isAR ? 'bg-white py-32 md:py-64' : ''}`}>
+          {project.craft.map((c, i) => (
+            <div key={i} className="px-6 md:px-8 max-w-screen-xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-24 items-center">
+              <div className={`md:col-span-5 ${i % 2 !== 0 ? 'md:order-last' : ''}`}>
+                <div className="flex items-center gap-4 mb-6 md:mb-8">
+                   <span className="text-[10px] md:text-xs font-mono text-brand font-bold">CRAFT {i+1}</span>
+                   <div className="h-[1px] flex-grow bg-black/5" />
+                </div>
+                <h2 className="text-3xl md:text-4xl font-serif mb-6 md:mb-10 tracking-tight italic">{c.section || c.title}</h2>
+                <p className="text-lg md:text-2xl leading-relaxed opacity-60 font-light">{c.content || c.description}</p>
+              </div>
+              <div className="md:col-span-7">
+                 <motion.div
+                   className={`aspect-[16/10] bg-gray-100 rounded-2xl md:rounded-[4rem] overflow-hidden ${isAR ? 'shadow-2xl' : ''}`}
+                   whileHover={{ scale: 1.02 }}
+                   transition={{ duration: 1 }}
+                 >
+                   {(project.visuals[i] || '').match(/\.(m4v|mp4|webm|mov)$/i) ? (
+                     <video
+                       src={project.visuals[i]}
+                       className="w-full h-full object-cover"
+                       autoPlay
+                       loop
+                       muted
+                       playsInline
+                     />
+                   ) : (
+                     <img src={project.visuals[i] || project.heroImage} className="w-full h-full object-cover" alt={c.section || c.title} />
+                   )}
+                 </motion.div>
+              </div>
+            </div>
+          ))}
+        </section>
+      )}
 
       {/* Outcome & Reflection */}
       <section className="mt-32 md:mt-80 px-6 md:px-8 max-w-screen-xl mx-auto flex flex-col items-center">
         <div className="max-w-4xl text-center space-y-16 md:space-y-24">
           <div>
-            <h2 className="text-xs uppercase tracking-[0.4em] text-brand font-bold mb-8 md:mb-12 font-bold">Outcome</h2>
-            <p className={`text-2xl md:text-6xl font-serif leading-tight tracking-tight ${isAR ? 'italic' : ''}`}>{project.outcome}</p>
+            <h2 className="text-xs uppercase tracking-[0.4em] text-brand font-bold mb-8 md:mb-12">Outcome{project.outcomes ? 's' : ''}</h2>
+            {project.outcomes ? (
+              <ul className="space-y-4 md:space-y-6 text-left max-w-2xl mx-auto">
+                {project.outcomes.map((outcome, i) => (
+                  <li key={i} className="flex gap-4 items-start text-lg md:text-xl opacity-80">
+                    <span className="mt-2 w-2 h-2 rounded-full bg-brand flex-shrink-0" />
+                    <span className="font-light">{outcome}</span>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p className={`text-2xl md:text-6xl font-serif leading-tight tracking-tight ${isAR ? 'italic' : ''}`}>{project.outcome}</p>
+            )}
           </div>
           <div className="pt-16 md:pt-24 border-t border-black/10">
             <h2 className="text-xs uppercase tracking-[0.4em] opacity-40 mb-8 md:mb-12 italic font-bold">Reflection</h2>
             <p className="text-lg md:text-2xl opacity-60 leading-relaxed max-w-3xl mx-auto font-light italic">
-              “{project.reflection}”
+              "{project.reflection}"
             </p>
           </div>
         </div>

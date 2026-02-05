@@ -12,7 +12,8 @@ export interface Project {
   modelDescription: string;
   principles: { title: string; description: string }[];
   craft: { section?: string; title?: string; content?: string; description?: string }[];
-  outcome: string;
+  outcome?: string;
+  outcomes?: string[];
   reflection: string;
   heroImage: string;
   visuals: string[];
