@@ -636,14 +636,14 @@ export const ProjectDetail: React.FC = () => {
                  {(project.visuals[i] || '').match(/\.(m4v|mp4|webm|mov)$/i) ? (
                    <video
                      src={project.visuals[i]}
-                     className={`w-full h-full object-cover ${isAR ? '' : 'grayscale hover:grayscale-0'} transition-all duration-1000`}
+                     className="w-full h-full object-cover"
                      autoPlay
                      loop
                      muted
                      playsInline
                    />
                  ) : (
-                   <img src={project.visuals[i] || project.heroImage} className={`w-full h-full object-cover transition-all duration-1000 ${isAR ? '' : 'grayscale hover:grayscale-0'}`} alt={c.section || c.title} />
+                   <img src={project.visuals[i] || project.heroImage} className="w-full h-full object-cover" alt={c.section || c.title} />
                  )}
                </motion.div>
             </div>
