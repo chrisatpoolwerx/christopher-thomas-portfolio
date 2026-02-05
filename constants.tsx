@@ -36,7 +36,7 @@ export const PROJECTS: Project[] = [
     ],
     outcome: 'Poolchex successfully launched as an AI-powered consumer platform, redefining how pool owners engage with water health. By replacing raw diagnostics with guided resolution, the product reduces uncertainty and empowers confident decision-making.',
     reflection: 'In future iterations, I would further compress diagnostic states to create an even greater sense of perceptual calm — particularly during high-attention problem scenarios.',
-    heroImage: 'public/assets/projects/poolchex/hero.jpg',
+    heroImage: '/assets/projects/poolchex/hero.jpg',
     visuals: [
       'https://images.unsplash.com/photo-1519781542704-957ff19eff00?auto=format&fit=crop&q=80&w=1200',
       'https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&q=80&w=1200'
@@ -89,7 +89,7 @@ export const PROJECTS: Project[] = [
     'Transformed one-time assessments into baseline documentation for ongoing pool health tracking'
   ],
   reflection: 'The real challenge wasn\'t designing forms or reports — it was creating a system that respects both technical rigor and customer comprehension. Technicians need tools that don\'t slow them down. Customers need information they can actually use. The assessment experience succeeds when both parties gain clarity: technicians document with confidence, and owners understand their pool\'s true condition for the first time.',
-    heroImage: 'public/assets/projects/healthy-pool/hero.jpg',
+    heroImage: '/assets/projects/healthy-pool/hero.jpg',
     visuals: [
       'https://images.unsplash.com/photo-1574672280600-4accfa5b6f98?auto=format&fit=crop&q=80&w=1200'
     ],
@@ -133,11 +133,11 @@ export const PROJECTS: Project[] = [
     ],
     outcome: 'The platform contributed to over $1B in digital revenue growth while significantly improving ordering efficiency. User engagement metrics showed a marked increase, and customer feedback highlighted the enhanced usability and speed of the new interface.',
     reflection: 'Designing at this scale reinforced the importance of restraint — the most impactful improvements were often the least visible, quietly removing friction from behaviors customers repeat every week.',
-    heroImage: 'public/assets/projects/dominos-global/hero.jpg',
+    heroImage: '/assets/projects/dominos-global/hero.jpg',
     visuals: [
-      'public/assets/projects/dominos-global/craft-hierarchy.jpg',
-      'public/assets/projects/dominos-global/craft-motion.jpg',
-      'public/assets/projects/dominos-global/craft-density.jpg'
+      '/assets/projects/dominos-global/craft-hierarchy.jpg',
+      '/assets/projects/dominos-global/craft-motion.jpg',
+      '/assets/projects/dominos-global/craft-density.jpg'
     ],
     tools: ['Sketch', 'Principle', 'Keynote', 'Pixelmator Pro', 'Zeplin']
   },

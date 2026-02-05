@@ -532,7 +532,7 @@ export const ProjectDetail: React.FC = () => {
               transition={{ duration: 1.2, ease: [0.33, 1, 0.68, 1] }}
             >
               <img
-                src="public/assets/projects/dominos-global/customization-flow.jpg"
+                src="/assets/projects/dominos-global/customization-flow.jpg"
                 className="w-full h-full object-cover"
                 alt="Customization flow redesign"
               />
@@ -561,7 +561,7 @@ export const ProjectDetail: React.FC = () => {
               transition={{ duration: 1.2, ease: [0.33, 1, 0.68, 1] }}
             >
               <img
-                src="public/assets/projects/dominos-global/multi-market.jpg"
+                src="/assets/projects/dominos-global/multi-market.jpg"
                 className="w-full h-full object-cover"
                 alt="Multi-market implementation"
               />
