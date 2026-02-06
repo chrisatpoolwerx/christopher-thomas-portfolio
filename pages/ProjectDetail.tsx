@@ -4,6 +4,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { PROJECTS } from '../constants';
 import { MagneticButton } from '../components/MagneticButton';
+import { CircularTextBadge } from '../components/CircularTextBadge';
 
 const IconSmartphone = () => (
   <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -829,7 +830,28 @@ export const ProjectDetail: React.FC = () => {
         <div className="max-w-4xl text-center space-y-16 md:space-y-24">
           <div>
             <h2 className="text-xs uppercase tracking-[0.4em] text-brand font-bold mb-8 md:mb-12">Outcome{project.outcomes ? 's' : ''}</h2>
-            {project.outcomes ? (
+
+            {/* AR Pizza Chef: Award badge with outcomes */}
+            {isAR && project.outcomes ? (
+              <div className="flex flex-col md:flex-row items-center gap-12 md:gap-16">
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.8, rotate: -10 }}
+                  whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1] }}
+                >
+                  <CircularTextBadge size={220} fontSize={9} spinDuration={25} />
+                </motion.div>
+                <ul className="space-y-4 md:space-y-6 text-left flex-1">
+                  {project.outcomes.map((outcome, i) => (
+                    <li key={i} className="flex gap-4 items-start text-lg md:text-xl opacity-80">
+                      <span className="mt-2 w-2 h-2 rounded-full bg-brand flex-shrink-0" />
+                      <span className="font-light">{outcome}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ) : project.outcomes ? (
               <ul className="space-y-4 md:space-y-6 text-left max-w-2xl mx-auto">
                 {project.outcomes.map((outcome, i) => (
                   <li key={i} className="flex gap-4 items-start text-lg md:text-xl opacity-80">
