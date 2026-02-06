@@ -753,7 +753,7 @@ export const ProjectDetail: React.FC = () => {
                   </div>
                   <div className="mx-auto h-8 md:h-12 w-[1px] bg-brand/50" />
                   <div className="p-8 md:p-10 border-2 border-brand rounded-full text-center text-brand font-bold text-xs md:text-sm tracking-widest scale-105 shadow-2xl shadow-brand/20">
-                     Intelligence Layer
+                     Foundation Models
                   </div>
                   <div className="mx-auto h-8 md:h-12 w-[1px] bg-brand/50" />
                   <div className="p-6 md:p-8 border border-white/10 rounded-2xl md:rounded-3xl bg-white/5 flex justify-between items-center group">
