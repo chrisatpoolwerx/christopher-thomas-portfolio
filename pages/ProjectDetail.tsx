@@ -429,9 +429,9 @@ export const ProjectDetail: React.FC = () => {
       <section className={`mt-16 md:mt-40 px-4 overflow-hidden ${isAR ? 'bg-[#121214] py-32 md:py-64' : ''}`}>
         <div className={`relative ${isAR ? 'max-w-6xl mx-auto' : ''}`}>
           <motion.div
-            className={`w-full aspect-video rounded-2xl md:rounded-[3rem] overflow-hidden ${isAR ? 'shadow-[0_50px_100px_rgba(0,0,0,0.5)] scale-110' : 'bg-gray-200'}`}
-            initial={{ scale: 1.1, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
+            className={`w-full aspect-video rounded-2xl md:rounded-[3rem] overflow-hidden ${isAR ? 'shadow-[0_50px_100px_rgba(0,0,0,0.5)] scale-[1.35]' : 'bg-gray-200'}`}
+            initial={{ scale: isAR ? 1.5 : 1.1, opacity: 0 }}
+            animate={{ scale: isAR ? 1.35 : 1, opacity: 1 }}
             transition={{ duration: 1.8, delay: 0.4, ease: [0.33, 1, 0.68, 1] }}
           >
             <img
@@ -443,7 +443,7 @@ export const ProjectDetail: React.FC = () => {
           {/* IDC Award Badge - AR Pizza only */}
           {isAR && (
             <motion.div
-              className="absolute -bottom-16 -right-8 md:-bottom-24 md:-right-16 z-20"
+              className="absolute -bottom-24 -right-12 md:-bottom-40 md:-right-24 z-20"
               initial={{ opacity: 0, scale: 0.8, rotate: -10 }}
               animate={{ opacity: 1, scale: 1, rotate: 0 }}
               transition={{ duration: 0.8, delay: 1.2, ease: [0.33, 1, 0.68, 1] }}
