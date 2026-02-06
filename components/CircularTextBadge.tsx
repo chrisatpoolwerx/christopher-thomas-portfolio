@@ -4,19 +4,25 @@ interface CircularTextBadgeProps {
   text?: string;
   size?: number;
   fontSize?: number;
-  textColor?: string;
   spinDuration?: number; // seconds per rotation
+  variant?: 'light' | 'dark'; // light = dark text on light bg, dark = light text on dark bg
   className?: string;
 }
 
 export const CircularTextBadge: React.FC<CircularTextBadgeProps> = ({
   text = "Omni-Experience Innovator ・ DTA Winner ・ 2019 ・ ",
   size = 300,
-  fontSize = 38,
-  textColor = "#121214",
+  fontSize = 20,
   spinDuration = 20,
+  variant = 'light',
   className = "",
 }) => {
+  // Colors based on variant
+  const isDark = variant === 'dark';
+  const textColor = isDark ? '#ffffff' : '#121214';
+  const circleClass = isDark ? 'text-white/10' : 'text-black/10';
+  const notchMajorClass = isDark ? 'text-white/30' : 'text-black/30';
+  const notchMinorClass = isDark ? 'text-white/15' : 'text-black/15';
   const radius = size / 2;
   const notchOuterRadius = radius - (size * 0.18); // Matches center badge padding
   const textRadius = notchOuterRadius + 20; // Text just outside the bezel notches
@@ -59,7 +65,7 @@ export const CircularTextBadge: React.FC<CircularTextBadgeProps> = ({
           fill="none"
           stroke="currentColor"
           strokeWidth="0.5"
-          className="text-black/10"
+          className={circleClass}
         />
 
         {/* Watch bezel notches - emanating outward from center badge */}
@@ -81,7 +87,7 @@ export const CircularTextBadge: React.FC<CircularTextBadgeProps> = ({
               y2={y2}
               stroke="currentColor"
               strokeWidth={notch.width}
-              className={notch.isMajor ? "text-black/30" : "text-black/15"}
+              className={notch.isMajor ? notchMajorClass : notchMinorClass}
               strokeLinecap="round"
             />
           );

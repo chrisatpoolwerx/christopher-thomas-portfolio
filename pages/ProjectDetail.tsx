@@ -448,8 +448,8 @@ export const ProjectDetail: React.FC = () => {
               animate={{ opacity: 1, scale: 1, rotate: 0 }}
               transition={{ duration: 0.8, delay: 1.2, ease: [0.33, 1, 0.68, 1] }}
             >
-              <CircularTextBadge size={200} className="md:hidden" />
-              <CircularTextBadge size={300} className="hidden md:block" />
+              <CircularTextBadge size={200} variant="dark" className="md:hidden" />
+              <CircularTextBadge size={300} variant="dark" className="hidden md:block" />
             </motion.div>
           )}
         </div>
