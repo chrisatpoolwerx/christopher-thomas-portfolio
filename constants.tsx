@@ -42,7 +42,7 @@ export const PROJECTS: Project[] = [
       '/assets/projects/poolchex/craft-2.jpg',
       '/assets/projects/poolchex/craft-3.jpg'
     ],
-    tools: ['Figma', 'Xcode', 'Principle', 'Keynote', 'Pixelmator Pro']
+    tools: ['Sketch', 'Xcode', 'Principle', 'Keynote', 'Pixelmator Pro']
   },
   {
   id: 'healthy-pool',
