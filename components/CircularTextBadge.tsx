@@ -62,11 +62,11 @@ export const CircularTextBadge: React.FC<CircularTextBadgeProps> = ({
           className="text-black/10"
         />
 
-        {/* Watch bezel notches - inward facing, inside the text ring */}
+        {/* Watch bezel notches - emanating outward from center badge */}
         {notches.map((notch, i) => {
           const angleRad = (notch.angle - 90) * (Math.PI / 180);
-          const outerR = notchOuterRadius;
-          const innerR = outerR - notch.length;
+          const innerR = notchOuterRadius;
+          const outerR = innerR + notch.length;
           const x1 = radius + outerR * Math.cos(angleRad);
           const y1 = radius + outerR * Math.sin(angleRad);
           const x2 = radius + innerR * Math.cos(angleRad);
