@@ -78,16 +78,16 @@ public/assets/
 
 | Filename | Size | Format | Description |
 |----------|------|--------|-------------|
-| `hero.jpg` | 2000x1250 | JPG | Hero image - app interface or pool context |
-| `craft-1.jpg` | 1200x750 | JPG | Craft section: UI clarity/visual system |
-| `craft-2.jpg` | 1200x750 | JPG | Craft section: Behavioral design/motion |
-| `craft-3.jpg` | 1200x750 | JPG | Craft section: Conversational interface |
+| `hero.jpg` | 2000x1250 | JPG | Hero image - iOS app showing water health score or scan flow |
+| `craft-1.jpg` | 1200x750 | JPG | Craft section: Card-based hierarchy and clear ranges |
+| `craft-2.jpg` | 1200x750 | JPG | Craft section: Scan alignment guidance and motion states |
+| `craft-3.jpg` | 1200x750 | JPG | Craft section: On-device AI assistant chat |
 
 **Content Direction:**
-- Hero: Full app mockup in context or clean interface shot
-- Craft 1: Detail of the minimal visual system, color usage
-- Craft 2: Motion/interaction state captures
-- Craft 3: Chat/conversational UI examples
+- Hero: iOS app interface showing scan-to-score workflow or water health dashboard with score
+- Craft 1: Card-based hierarchy, clear metric ranges, restrained typography showing what's out of range
+- Craft 2: Scan alignment guidance, matched transitions into metric detail, staged loading for AI summaries
+- Craft 3: AI-powered assistant chat with concise, grounded responses (on-device Apple Intelligence)
 
 ---
 
