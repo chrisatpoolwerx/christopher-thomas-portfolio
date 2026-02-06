@@ -427,18 +427,32 @@ export const ProjectDetail: React.FC = () => {
 
       {/* Hero Image */}
       <section className={`mt-16 md:mt-40 px-4 overflow-hidden ${isAR ? 'bg-[#121214] py-32 md:py-64' : ''}`}>
-        <motion.div
-          className={`w-full aspect-video rounded-2xl md:rounded-[3rem] overflow-hidden ${isAR ? 'max-w-6xl mx-auto shadow-[0_50px_100px_rgba(0,0,0,0.5)] scale-110' : 'bg-gray-200'}`}
-          initial={{ scale: 1.1, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 1.8, delay: 0.4, ease: [0.33, 1, 0.68, 1] }}
-        >
-          <img
-            src={project.heroImage}
-            className={`w-full h-full object-cover ${isAR ? 'brightness-75 contrast-125' : ''}`}
-            alt={project.title}
-          />
-        </motion.div>
+        <div className={`relative ${isAR ? 'max-w-6xl mx-auto' : ''}`}>
+          <motion.div
+            className={`w-full aspect-video rounded-2xl md:rounded-[3rem] overflow-hidden ${isAR ? 'shadow-[0_50px_100px_rgba(0,0,0,0.5)] scale-110' : 'bg-gray-200'}`}
+            initial={{ scale: 1.1, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 1.8, delay: 0.4, ease: [0.33, 1, 0.68, 1] }}
+          >
+            <img
+              src={project.heroImage}
+              className={`w-full h-full object-cover ${isAR ? 'brightness-75 contrast-125' : ''}`}
+              alt={project.title}
+            />
+          </motion.div>
+          {/* IDC Award Badge - AR Pizza only */}
+          {isAR && (
+            <motion.div
+              className="absolute -bottom-16 -right-8 md:-bottom-24 md:-right-16 z-20"
+              initial={{ opacity: 0, scale: 0.8, rotate: -10 }}
+              animate={{ opacity: 1, scale: 1, rotate: 0 }}
+              transition={{ duration: 0.8, delay: 1.2, ease: [0.33, 1, 0.68, 1] }}
+            >
+              <CircularTextBadge size={200} className="md:hidden" />
+              <CircularTextBadge size={300} className="hidden md:block" />
+            </motion.div>
+          )}
+        </div>
       </section>
 
       {/* Context & Role */}
@@ -831,27 +845,7 @@ export const ProjectDetail: React.FC = () => {
           <div>
             <h2 className="text-xs uppercase tracking-[0.4em] text-brand font-bold mb-8 md:mb-12">Outcome{project.outcomes ? 's' : ''}</h2>
 
-            {/* AR Pizza Chef: Award badge with outcomes */}
-            {isAR && project.outcomes ? (
-              <div className="flex flex-col md:flex-row items-center gap-12 md:gap-16">
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.8, rotate: -10 }}
-                  whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1] }}
-                >
-                  <CircularTextBadge size={280} fontSize={11} spinDuration={25} />
-                </motion.div>
-                <ul className="space-y-4 md:space-y-6 text-left flex-1">
-                  {project.outcomes.map((outcome, i) => (
-                    <li key={i} className="flex gap-4 items-start text-lg md:text-xl opacity-80">
-                      <span className="mt-2 w-2 h-2 rounded-full bg-brand flex-shrink-0" />
-                      <span className="font-light">{outcome}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ) : project.outcomes ? (
+            {project.outcomes ? (
               <ul className="space-y-4 md:space-y-6 text-left max-w-2xl mx-auto">
                 {project.outcomes.map((outcome, i) => (
                   <li key={i} className="flex gap-4 items-start text-lg md:text-xl opacity-80">
