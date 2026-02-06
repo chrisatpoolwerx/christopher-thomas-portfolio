@@ -11,8 +11,8 @@ interface CircularTextBadgeProps {
 
 export const CircularTextBadge: React.FC<CircularTextBadgeProps> = ({
   text = "Omni-Experience Innovator ・ DTA Winner ・ 2019 ・ ",
-  size = 300,
-  fontSize = 20,
+  size = 200,
+  fontSize = 18,
   spinDuration = 20,
   variant = 'light',
   className = "",
@@ -35,7 +35,7 @@ export const CircularTextBadge: React.FC<CircularTextBadgeProps> = ({
     const angle = (i * 360) / notchCount;
     const isMajor = i % 10 === 0;
     const notchLength = isMajor ? 8 : 4;
-    const notchWidth = isMajor ? 1.5 : 0.75;
+    const notchWidth = isMajor ? 2.5 : 1.5;
     return { angle, length: notchLength, width: notchWidth, isMajor };
   });
 
@@ -123,7 +123,7 @@ export const CircularTextBadge: React.FC<CircularTextBadgeProps> = ({
                 transform={`rotate(${angle + 90}, ${x}, ${y})`}
                 style={{
                   fontSize: `${fontSize}px`,
-                  fontWeight: 700,
+                  fontWeight: 300,
                   fontFamily: 'system-ui, -apple-system, sans-serif',
                   fontVariant: 'small-caps',
                   letterSpacing: '0.05em',

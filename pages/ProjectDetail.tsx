@@ -436,7 +436,7 @@ export const ProjectDetail: React.FC = () => {
           >
             <img
               src={project.heroImage}
-              className={`w-full h-full object-cover ${isAR ? 'brightness-75 contrast-125' : ''}`}
+              className="w-full h-full object-cover"
               alt={project.title}
             />
           </motion.div>
