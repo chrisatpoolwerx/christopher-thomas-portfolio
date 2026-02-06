@@ -1,9 +1,17 @@
 
-import React, { useState, memo } from 'react';
+import React, { useState, memo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { PROJECTS } from '../constants';
 import { Project } from '../types';
+
+// Preload all project hero images
+const preloadImages = () => {
+  PROJECTS.forEach((project) => {
+    const img = new Image();
+    img.src = project.heroImage;
+  });
+};
 
 // Custom easing for consistent animation curves
 const easeOutExpo = [0.33, 1, 0.68, 1];
@@ -85,7 +93,6 @@ const ProjectRow: React.FC<{ project: Project; index: number }> = memo(({ projec
               src={project.heroImage}
               className="w-full h-full object-cover"
               alt="Preview"
-              loading="lazy"
             />
             <div className="absolute inset-0 bg-gradient-to-r from-[#fbfbfb] to-transparent opacity-20" />
           </motion.div>
@@ -115,6 +122,11 @@ const ProjectRow: React.FC<{ project: Project; index: number }> = memo(({ projec
 });
 
 export const Home: React.FC = () => {
+  // Preload images on mount
+  useEffect(() => {
+    preloadImages();
+  }, []);
+
   return (
     <main className="min-h-screen bg-[#fbfbfb]">
       {/* Hero Section */}
