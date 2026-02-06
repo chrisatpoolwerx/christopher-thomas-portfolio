@@ -143,13 +143,11 @@ export const CircularTextBadge: React.FC<CircularTextBadgeProps> = ({
         className="absolute inset-0 flex items-center justify-center"
         style={{ padding: size * 0.18 }}
       >
-        <div className="w-full h-full rounded-full bg-white shadow-lg flex items-center justify-center overflow-hidden">
-          <img
-            src="/assets/icons/idcbadge.svg"
-            alt="IDC Digital Transformation Award"
-            className="w-[85%] h-[85%] object-contain"
-          />
-        </div>
+        <img
+          src="/assets/icons/idcbadge.svg"
+          alt="IDC Digital Transformation Award"
+          className="w-full h-full object-contain"
+        />
       </div>
     </div>
   );
