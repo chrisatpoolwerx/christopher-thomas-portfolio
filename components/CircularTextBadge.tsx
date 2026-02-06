@@ -13,7 +13,7 @@ interface CircularTextBadgeProps {
 export const CircularTextBadge: React.FC<CircularTextBadgeProps> = ({
   text = "Omni-Experience Innovator ・ Digital Transformation Awards Winner ・ 2019 ・ ",
   size = 200,
-  fontSize = 10,
+  fontSize = 12,
   textColor = "#121214",
   spinDuration = 20,
   className = "",
@@ -35,12 +35,13 @@ export const CircularTextBadge: React.FC<CircularTextBadgeProps> = ({
   }, [spinDuration, rotation]);
 
   const radius = size / 2;
-  const textRadius = radius - 20; // Inset for text
+  const textRadius = radius - 10; // Text near outer edge
   const characters = text.split('');
   const anglePerChar = 360 / characters.length;
 
-  // Watch bezel notches
+  // Watch bezel notches - positioned inside the text ring
   const notchCount = 120;
+  const notchOuterRadius = radius - 28; // Inside the text
   const notches = Array.from({ length: notchCount }, (_, i) => {
     const angle = (i * 360) / notchCount;
     const isMajor = i % 10 === 0;
@@ -61,21 +62,21 @@ export const CircularTextBadge: React.FC<CircularTextBadgeProps> = ({
         viewBox={`0 0 ${size} ${size}`}
         className="absolute inset-0"
       >
-        {/* Subtle outer circle */}
+        {/* Inner circle at notch ring */}
         <circle
           cx={radius}
           cy={radius}
-          r={radius - 2}
+          r={notchOuterRadius}
           fill="none"
           stroke="currentColor"
           strokeWidth="0.5"
           className="text-black/10"
         />
 
-        {/* Watch bezel notches - inward facing */}
+        {/* Watch bezel notches - inward facing, inside the text ring */}
         {notches.map((notch, i) => {
           const angleRad = (notch.angle - 90) * (Math.PI / 180);
-          const outerR = radius - 4;
+          const outerR = notchOuterRadius;
           const innerR = outerR - notch.length;
           const x1 = radius + outerR * Math.cos(angleRad);
           const y1 = radius + outerR * Math.sin(angleRad);
