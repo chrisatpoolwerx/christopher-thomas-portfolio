@@ -124,13 +124,14 @@ export const CircularTextBadge: React.FC<CircularTextBadgeProps> = ({
                 fontWeight="600"
                 textAnchor="middle"
                 dominantBaseline="middle"
+                transform={`rotate(${angle + 90}, ${x}, ${y})`}
                 style={{
                   fontFamily: 'system-ui, -apple-system, sans-serif',
+                  fontVariant: 'small-caps',
                   letterSpacing: '0.05em',
                 }}
-                transform={`rotate(${angle + 90}, ${x}, ${y})`}
               >
-                {char}
+                {char.toLowerCase()}
               </text>
             );
           })}
@@ -140,13 +141,13 @@ export const CircularTextBadge: React.FC<CircularTextBadgeProps> = ({
       {/* Center badge */}
       <div
         className="absolute inset-0 flex items-center justify-center"
-        style={{ padding: size * 0.25 }}
+        style={{ padding: size * 0.18 }}
       >
-        <div className="w-full h-full rounded-full bg-white shadow-lg flex items-center justify-center p-4">
+        <div className="w-full h-full rounded-full bg-white shadow-lg flex items-center justify-center overflow-hidden">
           <img
             src="/assets/icons/idcbadge.svg"
             alt="IDC Digital Transformation Award"
-            className="w-full h-full object-contain"
+            className="w-[85%] h-[85%] object-contain"
           />
         </div>
       </div>

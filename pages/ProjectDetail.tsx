@@ -840,7 +840,7 @@ export const ProjectDetail: React.FC = () => {
                   viewport={{ once: true }}
                   transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1] }}
                 >
-                  <CircularTextBadge size={220} fontSize={9} spinDuration={25} />
+                  <CircularTextBadge size={280} fontSize={11} spinDuration={25} />
                 </motion.div>
                 <ul className="space-y-4 md:space-y-6 text-left flex-1">
                   {project.outcomes.map((outcome, i) => (
