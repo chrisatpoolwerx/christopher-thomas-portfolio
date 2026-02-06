@@ -12,7 +12,7 @@ interface CircularTextBadgeProps {
 export const CircularTextBadge: React.FC<CircularTextBadgeProps> = ({
   text = "Omni-Experience Innovator ・ DTA Winner ・ 2019 ・ ",
   size = 200,
-  fontSize = 23,
+  fontSize = 32,
   textColor = "#121214",
   spinDuration = 20,
   className = "",
