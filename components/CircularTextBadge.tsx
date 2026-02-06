@@ -1,5 +1,4 @@
-import React, { useEffect, useRef } from 'react';
-import { motion, useMotionValue, animate } from 'framer-motion';
+import React from 'react';
 
 interface CircularTextBadgeProps {
   text?: string;
@@ -18,22 +17,6 @@ export const CircularTextBadge: React.FC<CircularTextBadgeProps> = ({
   spinDuration = 20,
   className = "",
 }) => {
-  const rotation = useMotionValue(0);
-  const controlsRef = useRef<ReturnType<typeof animate> | null>(null);
-
-  useEffect(() => {
-    controlsRef.current = animate(rotation, 360, {
-      duration: spinDuration,
-      ease: "linear",
-      repeat: Infinity,
-      repeatType: "loop",
-    });
-
-    return () => {
-      controlsRef.current?.stop();
-    };
-  }, [spinDuration, rotation]);
-
   const radius = size / 2;
   const textRadius = radius - 10; // Text near outer edge
   const characters = text.split('');
@@ -55,6 +38,12 @@ export const CircularTextBadge: React.FC<CircularTextBadgeProps> = ({
       className={`relative ${className}`}
       style={{ width: size, height: size }}
     >
+      <style>{`
+        @keyframes spin {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+      `}</style>
       {/* Outer ring with watch bezel notches */}
       <svg
         width={size}
@@ -99,10 +88,12 @@ export const CircularTextBadge: React.FC<CircularTextBadgeProps> = ({
         })}
       </svg>
 
-      {/* Rotating text */}
-      <motion.div
+      {/* Rotating text - CSS animation for smooth GPU-accelerated rotation */}
+      <div
         className="absolute inset-0"
-        style={{ rotate: rotation }}
+        style={{
+          animation: `spin ${spinDuration}s linear infinite`,
+        }}
       >
         <svg
           width={size}
@@ -137,7 +128,7 @@ export const CircularTextBadge: React.FC<CircularTextBadgeProps> = ({
             );
           })}
         </svg>
-      </motion.div>
+      </div>
 
       {/* Center badge */}
       <div
