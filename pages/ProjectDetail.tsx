@@ -110,6 +110,29 @@ const ToolIcons: Record<string, React.FC<{ className?: string }>> = {
       <path d="M14.5 2L4 12.5l3.5 3.5L19 4.5V2h-4.5z"/>
       <path d="M14.5 12L8 18.5 11.5 22l8-8v-2h-5z"/>
     </svg>
+  ),
+  'SwiftUI': ({ className }) => (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" fill="none" stroke="currentColor" strokeWidth="1.5"/>
+      <path d="M16 8c-2 2-4 4-6 5 1-2 2-4 2-6-2 2-4 4-5 6 0-2 1-4 2-6-3 3-4 6-3 8 2 0 5-1 8-4 0 2-1 4-2 5 3-2 5-5 4-8z" fill="currentColor"/>
+    </svg>
+  ),
+  'Core ML': ({ className }) => (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+      <rect x="3" y="6" width="18" height="12" rx="2" fill="none" stroke="currentColor" strokeWidth="1.5"/>
+      <circle cx="8" cy="12" r="2" fill="currentColor"/>
+      <circle cx="16" cy="12" r="2" fill="currentColor"/>
+      <path d="M10 12h4" stroke="currentColor" strokeWidth="1.5"/>
+      <path d="M12 3v3M12 18v3" stroke="currentColor" strokeWidth="1.5"/>
+    </svg>
+  ),
+  'Vision': ({ className }) => (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+      <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" strokeWidth="1.5"/>
+      <circle cx="12" cy="12" r="5" fill="none" stroke="currentColor" strokeWidth="1.5"/>
+      <circle cx="12" cy="12" r="2" fill="currentColor"/>
+      <path d="M12 3v2M12 19v2M3 12h2M19 12h2" stroke="currentColor" strokeWidth="1.5"/>
+    </svg>
   )
 };
 
@@ -390,6 +413,516 @@ const EcosystemDiagram: React.FC = () => {
   );
 };
 
+// ============================================
+// POOLCHEX DIAGRAMS
+// ============================================
+
+const WaterFieldDiagram: React.FC = () => {
+  return (
+    <div className="w-full py-24 md:py-40 px-8 bg-gradient-to-b from-[#0a1628] to-[#0d2847] rounded-[3rem] md:rounded-[5rem] overflow-hidden relative">
+      {/* Animated water simulation background */}
+      <div className="absolute inset-0 overflow-hidden">
+        <motion.div
+          className="absolute inset-0"
+          style={{
+            background: 'radial-gradient(ellipse at 50% 50%, rgba(56, 189, 248, 0.15) 0%, transparent 70%)',
+          }}
+          animate={{
+            scale: [1, 1.2, 1],
+            opacity: [0.3, 0.5, 0.3],
+          }}
+          transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+        />
+        {/* Wave layers */}
+        {[0, 1, 2].map((i) => (
+          <motion.div
+            key={i}
+            className="absolute inset-0"
+            style={{
+              background: `linear-gradient(${45 + i * 30}deg, transparent 40%, rgba(56, 189, 248, ${0.05 + i * 0.02}) 50%, transparent 60%)`,
+            }}
+            animate={{
+              x: [0, 100, 0],
+              y: [0, 50, 0],
+            }}
+            transition={{
+              duration: 10 + i * 3,
+              repeat: Infinity,
+              ease: 'easeInOut',
+              delay: i * 2,
+            }}
+          />
+        ))}
+      </div>
+
+      <div className="max-w-4xl mx-auto relative z-10">
+        <h4 className="text-xs uppercase tracking-[0.6em] text-cyan-400 font-bold mb-8 text-center">The Animated Water Field</h4>
+
+        <div className="text-center mb-16">
+          <p className="text-white/80 text-lg md:text-2xl font-light leading-relaxed max-w-2xl mx-auto">
+            Every screen is backed by a mathematically-generated water simulation — not video, not gradient — but a <span className="text-cyan-400 italic font-serif">live mesh driven by interfering wave equations.</span>
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16">
+          <motion.div
+            className="p-8 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-sm"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <div className="flex items-center gap-4 mb-6">
+              <motion.div
+                className="w-4 h-4 rounded-full bg-cyan-400"
+                animate={{ scale: [1, 1.3, 1] }}
+                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+              />
+              <span className="text-white text-sm font-bold uppercase tracking-widest">Slow Structural Swells</span>
+            </div>
+            <p className="text-white/50 font-light">Low-frequency waves create deep, organic movement that anchors the visual foundation.</p>
+          </motion.div>
+
+          <motion.div
+            className="p-8 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-sm"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+          >
+            <div className="flex items-center gap-4 mb-6">
+              <motion.div
+                className="w-4 h-4 rounded-full bg-cyan-300"
+                animate={{ scale: [1, 1.2, 1] }}
+                transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+              />
+              <span className="text-white text-sm font-bold uppercase tracking-widest">Surface Ripples</span>
+            </div>
+            <p className="text-white/50 font-light">Higher-frequency interference creates the shimmer of sunlight on water.</p>
+          </motion.div>
+        </div>
+
+        <motion.div
+          className="mt-16 p-8 md:p-12 rounded-3xl bg-white/5 border border-white/10 text-center"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+        >
+          <p className="text-white/60 text-sm md:text-base leading-relaxed max-w-xl mx-auto">
+            Pool owners have a deeply sensory relationship with water. The interface honors that relationship — replacing flat utility screens with something <span className="text-white">familiar, calm, and spatially resonant.</span>
+          </p>
+        </motion.div>
+      </div>
+    </div>
+  );
+};
+
+const TimeOfDayPalette: React.FC = () => {
+  const timeStates = [
+    { time: 'Dawn', color: 'from-rose-200 via-amber-100 to-sky-200', desc: 'Softened pastels', textColor: 'text-rose-600' },
+    { time: 'Noon', color: 'from-cyan-400 via-sky-300 to-blue-400', desc: 'Vivid cyan highlights', textColor: 'text-cyan-700' },
+    { time: 'Dusk', color: 'from-orange-300 via-rose-300 to-indigo-400', desc: 'Warm reflections', textColor: 'text-orange-600' },
+    { time: 'Night', color: 'from-slate-700 via-indigo-900 to-slate-900', desc: 'Moonlit silvers', textColor: 'text-slate-300' },
+  ];
+
+  return (
+    <div className="w-full py-20 md:py-32 px-8 bg-white border border-black/5 rounded-[3rem] md:rounded-[5rem] shadow-2xl shadow-black/5 overflow-hidden">
+      <div className="max-w-5xl mx-auto">
+        <h4 className="text-xs uppercase tracking-[0.5em] text-brand font-bold mb-6 text-center">Time as an Emotional Material</h4>
+        <p className="text-center text-lg md:text-2xl opacity-60 font-light max-w-2xl mx-auto mb-16">
+          The app looks different at breakfast than it does at midnight — creating a subtle emotional bond between the owner, their pool, and the passage of time.
+        </p>
+
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+          {timeStates.map((state, i) => (
+            <motion.div
+              key={i}
+              className="group"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+            >
+              <div className={`aspect-[3/4] rounded-2xl md:rounded-3xl bg-gradient-to-b ${state.color} mb-4 shadow-lg group-hover:scale-105 transition-transform duration-500 relative overflow-hidden`}>
+                {/* Subtle wave overlay */}
+                <div className="absolute inset-0 opacity-30">
+                  <motion.div
+                    className="absolute inset-0 bg-gradient-to-t from-white/20 to-transparent"
+                    animate={{ y: [0, -10, 0] }}
+                    transition={{ duration: 3 + i, repeat: Infinity, ease: 'easeInOut' }}
+                  />
+                </div>
+              </div>
+              <p className={`text-sm font-bold uppercase tracking-widest mb-1 ${state.textColor}`}>{state.time}</p>
+              <p className="text-xs opacity-50">{state.desc}</p>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const LiquidGlassSystem: React.FC = () => {
+  const materials = [
+    { tier: 'Ultra Thin', opacity: 0.05, desc: 'Navigational surfaces', blur: 'backdrop-blur-sm' },
+    { tier: 'Thin', opacity: 0.1, desc: 'Secondary content', blur: 'backdrop-blur' },
+    { tier: 'Regular', opacity: 0.2, desc: 'Primary information', blur: 'backdrop-blur-md' },
+    { tier: 'Thick', opacity: 0.4, desc: 'Moments requiring solidity', blur: 'backdrop-blur-lg' },
+  ];
+
+  return (
+    <div className="w-full py-20 md:py-32 px-8 bg-gradient-to-br from-slate-100 to-slate-200 rounded-[3rem] md:rounded-[5rem] overflow-hidden relative">
+      {/* Background gradient orbs */}
+      <div className="absolute top-20 left-20 w-64 h-64 bg-cyan-400/20 rounded-full blur-[100px]" />
+      <div className="absolute bottom-20 right-20 w-80 h-80 bg-brand/10 rounded-full blur-[100px]" />
+
+      <div className="max-w-5xl mx-auto relative z-10">
+        <h4 className="text-xs uppercase tracking-[0.5em] text-brand font-bold mb-6 text-center">Liquid Glass Design System</h4>
+        <p className="text-center text-lg md:text-2xl opacity-60 font-light max-w-2xl mx-auto mb-16">
+          Material tiers create perceptual hierarchy. Continuous 26pt curves were chosen over circular radii — softer, more organic, unmistakably Apple-native.
+        </p>
+
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+          {materials.map((mat, i) => (
+            <motion.div
+              key={i}
+              className={`p-6 md:p-8 rounded-[26px] border border-white/30 ${mat.blur} group hover:scale-105 transition-all duration-500`}
+              style={{ backgroundColor: `rgba(255, 255, 255, ${mat.opacity})` }}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+            >
+              <div className="h-24 flex items-center justify-center mb-6">
+                <div
+                  className="w-16 h-16 rounded-[13px] border border-black/10 shadow-sm"
+                  style={{ backgroundColor: `rgba(255, 255, 255, ${0.3 + mat.opacity})` }}
+                />
+              </div>
+              <p className="text-sm font-bold uppercase tracking-widest mb-2">{mat.tier}</p>
+              <p className="text-xs opacity-50">{mat.desc}</p>
+            </motion.div>
+          ))}
+        </div>
+
+        <motion.div
+          className="mt-16 flex flex-col md:flex-row items-center justify-center gap-8 p-8 rounded-[26px] bg-white/30 backdrop-blur-md border border-white/40"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+        >
+          <div className="flex items-center gap-4">
+            <div className="w-12 h-12 rounded-[26px] bg-brand shadow-lg shadow-brand/30" />
+            <div>
+              <p className="text-sm font-bold">PWXButton</p>
+              <p className="text-xs opacity-50">Spring physics + haptic feedback</p>
+            </div>
+          </div>
+          <div className="hidden md:block w-[1px] h-12 bg-black/10" />
+          <div className="flex items-center gap-4">
+            <div className="w-12 h-12 rounded-[26px] bg-white border border-black/5 shadow-sm" />
+            <div>
+              <p className="text-sm font-bold">PWXCard</p>
+              <p className="text-xs opacity-50">Layered transparency</p>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+    </div>
+  );
+};
+
+const ScanFlowDiagram: React.FC = () => {
+  const steps = [
+    { label: 'Detect', icon: '📷', desc: 'Vision detects strip in frame' },
+    { label: 'Align', icon: '⬜', desc: 'Guide rectangle coaches position' },
+    { label: 'Capture', icon: '⚡', desc: 'Flash capture at optimal moment' },
+    { label: 'Analyze', icon: '🎨', desc: 'Extract pad colors → LAB space' },
+    { label: 'Score', icon: '✓', desc: 'Match calibrated references' },
+  ];
+
+  return (
+    <div className="w-full py-20 md:py-32 px-8 bg-[#121214] rounded-[3rem] md:rounded-[5rem] overflow-hidden relative">
+      <div className="absolute inset-0 bg-gradient-to-br from-brand/5 to-cyan-500/5" />
+
+      <div className="max-w-5xl mx-auto relative z-10">
+        <h4 className="text-xs uppercase tracking-[0.6em] text-brand font-bold mb-6 text-center">Computer Vision Capture</h4>
+        <p className="text-center text-lg md:text-xl text-white/60 font-light max-w-2xl mx-auto mb-16">
+          The goal was not technical novelty — but <span className="text-white">eliminating interpretive effort entirely.</span>
+        </p>
+
+        <div className="relative">
+          {/* Connection line */}
+          <div className="hidden md:block absolute top-12 left-[10%] right-[10%] h-[2px] bg-gradient-to-r from-brand/0 via-brand/50 to-brand/0" />
+
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-6 md:gap-4">
+            {steps.map((step, i) => (
+              <motion.div
+                key={i}
+                className="flex flex-col items-center text-center group"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+              >
+                <motion.div
+                  className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-3xl mb-4 group-hover:bg-brand/20 group-hover:border-brand/50 transition-all duration-500"
+                  whileHover={{ scale: 1.1 }}
+                >
+                  {step.icon}
+                </motion.div>
+                <p className="text-white text-sm font-bold uppercase tracking-widest mb-2">{step.label}</p>
+                <p className="text-white/40 text-xs max-w-[120px]">{step.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        <motion.div
+          className="mt-16 p-8 rounded-3xl bg-white/5 border border-white/10"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+        >
+          <div className="flex flex-col md:flex-row items-center gap-8">
+            <div className="flex-1">
+              <p className="text-white/80 text-base leading-relaxed">
+                The guide rectangle <span className="text-brand">pulses while searching</span>, turns <span className="text-green-400">green when aligned</span>, and provides live instruction. Flash capture → review → confirm.
+              </p>
+            </div>
+            <div className="flex gap-4">
+              <motion.div
+                className="w-16 h-16 rounded-2xl border-2 border-brand/50"
+                animate={{ opacity: [0.5, 1, 0.5] }}
+                transition={{ duration: 1.5, repeat: Infinity }}
+              />
+              <motion.div
+                className="w-16 h-16 rounded-2xl border-2 border-green-400 bg-green-400/10"
+              />
+            </div>
+          </div>
+        </motion.div>
+      </div>
+    </div>
+  );
+};
+
+const OnDeviceAIDiagram: React.FC = () => {
+  return (
+    <div className="w-full py-20 md:py-32 px-8 bg-white border border-black/5 rounded-[3rem] md:rounded-[5rem] shadow-2xl shadow-black/5 overflow-hidden">
+      <div className="max-w-5xl mx-auto">
+        <h4 className="text-xs uppercase tracking-[0.5em] text-brand font-bold mb-6 text-center">Making Intelligence Feel Alive</h4>
+        <p className="text-center text-lg md:text-2xl opacity-60 font-light max-w-2xl mx-auto mb-16">
+          On-device Foundation Models generate summaries, risk assessments, and guidance — with zero data leaving the device.
+        </p>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <motion.div
+            className="p-8 rounded-3xl bg-[#fbfbfb] border border-black/5"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <div className="w-12 h-12 rounded-2xl bg-brand/10 flex items-center justify-center text-brand mb-6">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <rect x="5" y="2" width="14" height="20" rx="2" />
+                <path d="M12 18h.01" />
+              </svg>
+            </div>
+            <p className="text-lg font-bold mb-2">Privacy First</p>
+            <p className="text-sm opacity-50">All AI processing happens on-device. Sensitive pool data never leaves the iPhone.</p>
+          </motion.div>
+
+          <motion.div
+            className="p-8 rounded-3xl bg-[#fbfbfb] border border-black/5"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+          >
+            <div className="w-12 h-12 rounded-2xl bg-brand/10 flex items-center justify-center text-brand mb-6">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+              </svg>
+            </div>
+            <p className="text-lg font-bold mb-2">Instant Response</p>
+            <p className="text-sm opacity-50">No network latency. Analysis feels immediate even in areas with poor connectivity.</p>
+          </motion.div>
+
+          <motion.div
+            className="p-8 rounded-3xl bg-[#fbfbfb] border border-black/5"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+          >
+            <div className="w-12 h-12 rounded-2xl bg-brand/10 flex items-center justify-center text-brand mb-6">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
+              </svg>
+            </div>
+            <p className="text-lg font-bold mb-2">Offline Capable</p>
+            <p className="text-sm opacity-50">Full functionality by the pool, at the store, or anywhere without signal.</p>
+          </motion.div>
+        </div>
+
+        <motion.div
+          className="mt-12 p-8 md:p-12 rounded-3xl bg-[#121214] text-white"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+        >
+          <div className="flex flex-col md:flex-row items-center gap-8">
+            <div className="flex-1">
+              <p className="text-xs uppercase tracking-widest text-brand mb-4 font-bold">Streaming Responses</p>
+              <p className="text-white/70 leading-relaxed">
+                Instead of dumping text, responses stream progressively — signaling active reasoning, reducing perceived latency, and creating conversational presence. Subtle haptics every few words reinforce aliveness.
+              </p>
+            </div>
+            <div className="flex flex-col gap-2 w-full md:w-64">
+              {['Analyzing pH levels...', 'Chlorine is slightly low.', 'Recommendation ready.'].map((text, i) => (
+                <motion.div
+                  key={i}
+                  className="px-4 py-2 rounded-xl bg-white/5 text-sm text-white/60"
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.5 + i * 0.3 }}
+                >
+                  {text}
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </motion.div>
+      </div>
+    </div>
+  );
+};
+
+const ScoreCardDiagram: React.FC = () => {
+  return (
+    <div className="w-full py-20 md:py-32 px-8 bg-gradient-to-b from-cyan-50 to-white rounded-[3rem] md:rounded-[5rem] overflow-hidden">
+      <div className="max-w-4xl mx-auto">
+        <h4 className="text-xs uppercase tracking-[0.5em] text-brand font-bold mb-6 text-center">The Score Card</h4>
+        <p className="text-center text-lg md:text-2xl opacity-60 font-light max-w-2xl mx-auto mb-16">
+          A single health score transforms multi-variable chemistry into immediate comprehension. Color communicates urgency instantly.
+        </p>
+
+        <div className="flex justify-center mb-12">
+          <motion.div
+            className="relative"
+            initial={{ scale: 0.8, opacity: 0 }}
+            whileInView={{ scale: 1, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1] }}
+          >
+            <div className="w-48 h-48 md:w-64 md:h-64 rounded-full bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center shadow-2xl shadow-green-500/30">
+              <div className="text-center">
+                <motion.span
+                  className="text-6xl md:text-8xl font-serif text-white"
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.3 }}
+                >
+                  87
+                </motion.span>
+                <p className="text-white/80 text-sm uppercase tracking-widest mt-2">Healthy</p>
+              </div>
+            </div>
+            {/* Orbiting metrics */}
+            {[
+              { label: 'pH', value: '7.4', angle: 0 },
+              { label: 'Cl', value: '2.1', angle: 90 },
+              { label: 'Alk', value: '95', angle: 180 },
+              { label: 'CYA', value: '42', angle: 270 },
+            ].map((metric, i) => (
+              <motion.div
+                key={i}
+                className="absolute w-14 h-14 md:w-16 md:h-16 rounded-full bg-white shadow-lg flex flex-col items-center justify-center"
+                style={{
+                  top: `calc(50% + ${Math.sin(metric.angle * Math.PI / 180) * 140}px - 28px)`,
+                  left: `calc(50% + ${Math.cos(metric.angle * Math.PI / 180) * 140}px - 28px)`,
+                }}
+                initial={{ scale: 0, opacity: 0 }}
+                whileInView={{ scale: 1, opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.5 + i * 0.1 }}
+              >
+                <span className="text-xs text-brand font-bold">{metric.label}</span>
+                <span className="text-sm font-medium">{metric.value}</span>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+
+        <div className="grid grid-cols-3 gap-4 max-w-lg mx-auto">
+          {[
+            { range: '80-100', color: 'bg-green-500', label: 'Healthy' },
+            { range: '50-79', color: 'bg-amber-500', label: 'Attention' },
+            { range: '0-49', color: 'bg-red-500', label: 'Action Required' },
+          ].map((state, i) => (
+            <motion.div
+              key={i}
+              className="flex items-center gap-3 p-3 rounded-xl bg-white/50"
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.8 + i * 0.1 }}
+            >
+              <div className={`w-3 h-3 rounded-full ${state.color}`} />
+              <div>
+                <p className="text-xs font-bold">{state.range}</p>
+                <p className="text-[10px] opacity-50">{state.label}</p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const PerformanceDiagram: React.FC = () => {
+  const optimizations = [
+    { metric: '30→60', unit: 'fps', desc: 'Ramp animation framerate once stable' },
+    { metric: '1', unit: 'layer', desc: 'Render mesh as single cached layer' },
+    { metric: '0', unit: 'hit tests', desc: 'Disable unnecessary touch detection' },
+    { metric: '∞', unit: 'prefetch', desc: 'Lazy-load secondary tabs with skeletons' },
+  ];
+
+  return (
+    <div className="w-full py-20 md:py-32 px-8 bg-[#121214] rounded-[3rem] md:rounded-[5rem] overflow-hidden">
+      <div className="max-w-5xl mx-auto">
+        <h4 className="text-xs uppercase tracking-[0.6em] text-brand font-bold mb-6 text-center">Performance as Craft</h4>
+        <p className="text-center text-lg md:text-xl text-white/60 font-light max-w-2xl mx-auto mb-16">
+          Motion only delights when it remains invisible to the processor.
+        </p>
+
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          {optimizations.map((opt, i) => (
+            <motion.div
+              key={i}
+              className="p-6 rounded-3xl bg-white/5 border border-white/10 text-center group hover:bg-white/10 transition-colors"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+            >
+              <div className="mb-4">
+                <span className="text-4xl md:text-5xl font-serif text-brand">{opt.metric}</span>
+                <span className="text-lg text-white/40 ml-1">{opt.unit}</span>
+              </div>
+              <p className="text-xs text-white/50">{opt.desc}</p>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
 export const ProjectDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
@@ -401,6 +934,7 @@ export const ProjectDetail: React.FC = () => {
 
   if (!project) return <div>Project not found</div>;
 
+  const isPoolchex = project.id === 'poolchex';
   const isHealthyPool = project.id === 'healthy-pool';
   const isAR = project.id === 'ar-pizza';
   const isDominos = project.id === 'dominos-global';
@@ -527,6 +1061,75 @@ export const ProjectDetail: React.FC = () => {
       </section>
 
       {/* Special Visuals Sections */}
+      {isPoolchex && (
+        <>
+          {/* The Design Thesis */}
+          <section className="mt-32 md:mt-80 px-6 md:px-8 max-w-screen-xl mx-auto">
+            <motion.div
+              className="py-16 md:py-24 px-8 md:px-16 bg-[#121214] text-white rounded-[3rem] md:rounded-[5rem] text-center relative overflow-hidden"
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-brand/10 to-cyan-500/5" />
+              <div className="relative z-10">
+                <span className="text-xs uppercase tracking-[0.5em] text-brand font-bold block mb-8">The Design Thesis</span>
+                <h3 className="text-2xl md:text-5xl font-serif italic max-w-4xl mx-auto leading-tight">
+                  "Great utility software shouldn't feel mechanical — it should feel <span className="text-brand">alive</span>, <span className="text-cyan-400">contextual</span>, and quietly <span className="text-white">intelligent.</span>"
+                </h3>
+              </div>
+            </motion.div>
+          </section>
+
+          {/* Designing an Interface That Feels Like Water */}
+          <section className="mt-32 md:mt-64 px-6 md:px-8 max-w-screen-xl mx-auto">
+            <div className="mb-16 md:mb-24">
+              <h2 className="text-4xl md:text-6xl font-serif mb-8 md:mb-12 tracking-tighter">Designing an Interface That Feels Like <span className="text-brand italic">Water</span></h2>
+              <p className="text-lg md:text-2xl opacity-60 max-w-3xl font-light">
+                Pool owners have a deeply sensory relationship with water. The interface honors that relationship — replacing flat utility screens with something familiar, calm, and spatially resonant.
+              </p>
+            </div>
+            <WaterFieldDiagram />
+          </section>
+
+          {/* Time as Material */}
+          <section className="mt-32 md:mt-64 px-6 md:px-8 max-w-screen-xl mx-auto">
+            <TimeOfDayPalette />
+          </section>
+
+          {/* Computer Vision */}
+          <section className="mt-32 md:mt-64 px-6 md:px-8 max-w-screen-xl mx-auto">
+            <div className="mb-16 md:mb-24">
+              <h2 className="text-4xl md:text-6xl font-serif mb-8 md:mb-12 tracking-tighter">Removing Friction From <span className="text-brand italic">Reality</span></h2>
+              <p className="text-lg md:text-2xl opacity-60 max-w-3xl font-light">
+                Test strips require manual color comparison — error-prone and tedious. The goal was not technical novelty — but eliminating interpretive effort entirely.
+              </p>
+            </div>
+            <ScanFlowDiagram />
+          </section>
+
+          {/* The Score Card */}
+          <section className="mt-32 md:mt-64 px-6 md:px-8 max-w-screen-xl mx-auto">
+            <ScoreCardDiagram />
+          </section>
+
+          {/* Liquid Glass System */}
+          <section className="mt-32 md:mt-64 px-6 md:px-8 max-w-screen-xl mx-auto">
+            <LiquidGlassSystem />
+          </section>
+
+          {/* On-Device AI */}
+          <section className="mt-32 md:mt-64 px-6 md:px-8 max-w-screen-xl mx-auto">
+            <OnDeviceAIDiagram />
+          </section>
+
+          {/* Performance */}
+          <section className="mt-32 md:mt-64 px-6 md:px-8 max-w-screen-xl mx-auto">
+            <PerformanceDiagram />
+          </section>
+        </>
+      )}
+
       {isHealthyPool && (
         <>
           <section className="mt-32 md:mt-80 px-6 md:px-8 max-w-screen-xl mx-auto">

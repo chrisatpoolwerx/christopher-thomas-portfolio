@@ -74,20 +74,34 @@ public/assets/
 
 ## 4. Project Images
 
-### 4.1 Poolchex (`/assets/projects/poolchex/`)
+### 4.1 Poolchex (`/assets/projects/poolchex/`) — HERO PROJECT
 
 | Filename | Size | Format | Description |
 |----------|------|--------|-------------|
-| `hero.jpg` | 2000x1250 | JPG | Hero image - iOS app showing water health score or scan flow |
-| `craft-1.jpg` | 1200x750 | JPG | Craft section: Card-based hierarchy and clear ranges |
-| `craft-2.jpg` | 1200x750 | JPG | Craft section: Scan alignment guidance and motion states |
-| `craft-3.jpg` | 1200x750 | JPG | Craft section: On-device AI assistant chat |
+| `hero.jpg` | 2000x1250 | JPG | Hero image - iOS app with animated water field background |
+| `water-field.jpg` | 1200x750 | JPG | Craft: Animated water simulation with wave interference |
+| `time-palette.jpg` | 1200x750 | JPG | Craft: Time-of-day palette shifts (dawn/noon/dusk/night) |
+| `performance.jpg` | 1200x750 | JPG | Craft: Performance optimization / framerate details |
+| `scan-flow.jpg` | 2400x1030 | JPG | Full-width: Camera capture UX with alignment guide |
+| `score-card.jpg` | 1200x900 | JPG | Health score interface with metric breakdown |
+| `liquid-glass.jpg` | 1200x900 | JPG | Material tiers showing PWXCard transparency layers |
+| `ai-assistant.jpg` | 1200x900 | JPG | On-device AI chat with streaming responses |
 
 **Content Direction:**
-- Hero: iOS app interface showing scan-to-score workflow or water health dashboard with score
-- Craft 1: Card-based hierarchy, clear metric ranges, restrained typography showing what's out of range
-- Craft 2: Scan alignment guidance, matched transitions into metric detail, staged loading for AI summaries
-- Craft 3: AI-powered assistant chat with concise, grounded responses (on-device Apple Intelligence)
+- Hero: iOS app interface showing the animated water field with health score overlay — the signature visual
+- Water Field: Close-up of the mathematically-generated water simulation with wave interference patterns
+- Time Palette: Four-panel showing app at dawn, noon, dusk, and night with shifting color palettes
+- Performance: Technical diagram or dev mode showing 60fps rendering and single-layer mesh
+- Scan Flow: Camera capture screen with guide rectangle, alignment feedback, and confidence states
+- Score Card: Central health score (0-100) with orbiting metric indicators and color coding
+- Liquid Glass: Material tier demonstration showing Ultra Thin through Thick transparency levels
+- AI Assistant: Chat interface showing streaming AI response with contextual pool recommendations
+
+**Design Notes:**
+- This is the HERO project — assets should be highest quality and most polished
+- Emphasize the organic, water-like quality of the interface throughout
+- Show the depth of iOS-native craft: haptics callouts, spring physics, continuous curves
+- Consider including device frames for context but ensure the interface itself is hero
 
 ---
 
