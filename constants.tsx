@@ -23,7 +23,7 @@ export const PROJECTS: Project[] = [
       'Balancing on-device AI intelligence with deterministic safety constraints',
       'Designing haptic and motion systems that make glass feel physical'
     ],
-    insight: "Great utility software shouldn't feel mechanical — it should feel alive, contextual, and quietly intelligent.",
+    insight: "Users don’t want to understand pool chemistry — they want to understand what to do next.",
     modelDescription: 'Poolchex was guided by three principles: Reduce cognitive burden wherever possible. Make intelligence perceptible, not abstract. Create emotional resonance without sacrificing clarity.',
     principles: [
       { title: 'Reduce Cognitive Burden', description: 'Transform multi-variable chemistry into immediate comprehension through a single health score and AI-generated explanations.' },

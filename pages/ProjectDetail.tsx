@@ -518,10 +518,10 @@ const WaterFieldDiagram: React.FC = () => {
 
 const TimeOfDayPalette: React.FC = () => {
   const timeStates = [
-    { time: 'Dawn', color: 'from-rose-200 via-amber-100 to-sky-200', desc: 'Softened pastels', textColor: 'text-rose-600' },
-    { time: 'Noon', color: 'from-cyan-400 via-sky-300 to-blue-400', desc: 'Vivid cyan highlights', textColor: 'text-cyan-700' },
-    { time: 'Dusk', color: 'from-orange-300 via-rose-300 to-indigo-400', desc: 'Warm reflections', textColor: 'text-orange-600' },
-    { time: 'Night', color: 'from-slate-700 via-indigo-900 to-slate-900', desc: 'Moonlit silvers', textColor: 'text-slate-300' },
+    { time: 'Dawn', image: '/assets/projects/poolchex/dawn-screenshot.png', desc: 'Softened pastels', textColor: 'text-rose-600' },
+    { time: 'Noon', image: '/assets/projects/poolchex/noon-screenshot.png', desc: 'Vivid cyan highlights', textColor: 'text-cyan-700' },
+    { time: 'Dusk', image: '/assets/projects/poolchex/dusk-screenshot.png', desc: 'Warm reflections', textColor: 'text-orange-600' },
+    { time: 'Night', image: '/assets/projects/poolchex/night-screenshot.png', desc: 'Moonlit silvers', textColor: 'text-slate-500' },
   ];
 
   return (
@@ -542,15 +542,12 @@ const TimeOfDayPalette: React.FC = () => {
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
             >
-              <div className={`aspect-[3/4] rounded-2xl md:rounded-3xl bg-gradient-to-b ${state.color} mb-4 shadow-lg group-hover:scale-105 transition-transform duration-500 relative overflow-hidden`}>
-                {/* Subtle wave overlay */}
-                <div className="absolute inset-0 opacity-30">
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-t from-white/20 to-transparent"
-                    animate={{ y: [0, -10, 0] }}
-                    transition={{ duration: 3 + i, repeat: Infinity, ease: 'easeInOut' }}
-                  />
-                </div>
+              <div className="aspect-[9/19] rounded-2xl md:rounded-3xl mb-4 shadow-lg group-hover:scale-105 transition-transform duration-500 overflow-hidden bg-gray-100">
+                <img
+                  src={state.image}
+                  alt={`${state.time} palette`}
+                  className="w-full h-full object-cover"
+                />
               </div>
               <p className={`text-sm font-bold uppercase tracking-widest mb-1 ${state.textColor}`}>{state.time}</p>
               <p className="text-xs opacity-50">{state.desc}</p>
