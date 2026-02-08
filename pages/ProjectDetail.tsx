@@ -1573,14 +1573,21 @@ When glass materials layer above the surface, the effect becomes architectural: 
           </section>
 
           {/* Systems Thinking */}
-          <section className="mt-32 md:mt-80 px-6 md:px-8 max-w-screen-xl mx-auto">
-            <div className="mb-16 md:mb-24">
-              <h2 className="text-4xl md:text-6xl font-serif mb-8 md:mb-12 tracking-tighter">Design System <span className="text-brand italic">Evolution</span></h2>
-              <p className="text-lg md:text-2xl opacity-60 max-w-3xl font-light">
-                To support global consistency while enabling regional flexibility, we evolved a modular design system — allowing teams to scale improvements without fragmenting the experience.
-              </p>
+          <section className="mt-32 md:mt-80 relative">
+            <div
+              className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+              style={{ backgroundImage: 'url(/assets/projects/dominos-global/component-bg.png)' }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-white via-white/80 to-white" />
+            <div className="relative px-6 md:px-8 py-24 md:py-40 max-w-screen-xl mx-auto">
+              <div className="mb-16 md:mb-24">
+                <h2 className="text-4xl md:text-6xl font-serif mb-8 md:mb-12 tracking-tighter">Design System <span className="text-brand italic">Evolution</span></h2>
+                <p className="text-lg md:text-2xl opacity-60 max-w-3xl font-light">
+                  To support global consistency while enabling regional flexibility, we evolved a modular design system — allowing teams to scale improvements without fragmenting the experience.
+                </p>
+              </div>
+              <DesignSystemDiagram />
             </div>
-            <DesignSystemDiagram />
           </section>
 
           {/* Image Placeholder: Multi-market showcase */}
