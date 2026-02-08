@@ -36,15 +36,10 @@ export const About: React.FC = () => {
                 I'm drawn to problems where thoughtful design doesn't just improve interaction — it reshapes behavior.
               </p>
 
-              <div className="pt-8 flex flex-wrap gap-6">
-                <MagneticButton onClick={() => navigate('/perspective')}>
-                  <span className="text-sm uppercase tracking-[0.4em] text-brand font-bold border-b border-brand/20 pb-2 hover:border-brand transition-all">
-                    Design Perspective
-                  </span>
-                </MagneticButton>
+              <div className="pt-8">
                 <MagneticButton onClick={() => navigate('/resume')}>
-                  <span className="text-sm uppercase tracking-[0.4em] opacity-50 font-bold border-b border-black/10 pb-2 hover:border-black/30 hover:opacity-80 transition-all">
-                    View Resume
+                  <span className="text-sm uppercase tracking-[0.4em] text-brand font-bold border-b border-brand/20 pb-2 hover:border-brand transition-all">
+                    View Full Resume
                   </span>
                 </MagneticButton>
               </div>
@@ -53,29 +48,18 @@ export const About: React.FC = () => {
 
           <div className="md:col-span-4 flex flex-col gap-16 md:gap-24 pt-6 md:pt-12">
             <div className="space-y-6 md:space-y-8">
-              <span className="text-xs uppercase tracking-[0.4em] text-brand font-bold">Areas of Focus</span>
-              <ul className="text-lg md:text-xl space-y-4 md:space-y-5 font-light">
-                <li className="hover:translate-x-3 transition-transform duration-500">
-                  <span className="font-serif italic text-xl md:text-2xl block">Clarity in Complex Systems</span>
-                  <span className="text-sm opacity-50 mt-1 block">Synthesizing dense information into confident action</span>
-                </li>
-                <li className="hover:translate-x-3 transition-transform duration-500">
-                  <span className="font-serif italic text-xl md:text-2xl block text-brand">Intelligence Made Perceptible</span>
-                  <span className="text-sm opacity-50 mt-1 block">AI experiences that feel assistive, not opaque</span>
-                </li>
-                <li className="hover:translate-x-3 transition-transform duration-500">
-                  <span className="font-serif italic text-xl md:text-2xl block">Behavioral Design</span>
-                  <span className="text-sm opacity-50 mt-1 block">Interactions that quietly shift how people operate</span>
-                </li>
-                <li className="hover:translate-x-3 transition-transform duration-500">
-                  <span className="font-serif italic text-xl md:text-2xl block">Platform-Native Craft</span>
-                  <span className="text-sm opacity-50 mt-1 block">Software that feels at home on its device</span>
-                </li>
+              <span className="text-xs uppercase tracking-[0.4em] text-brand font-bold">Expertise</span>
+              <ul className="text-xl md:text-2xl space-y-3 md:space-y-4 font-serif italic">
+                <li className="hover:translate-x-4 transition-transform duration-500">Product Design</li>
+                <li className="hover:translate-x-4 transition-transform duration-500 text-brand">AI-Native Systems</li>
+                <li className="hover:translate-x-4 transition-transform duration-500">Design Systems</li>
+                <li className="hover:translate-x-4 transition-transform duration-500">Design Engineering</li>
+                <li className="hover:translate-x-4 transition-transform duration-500">Apple Ecosystem</li>
               </ul>
             </div>
             <div className="space-y-6 md:space-y-8">
               <span className="text-xs uppercase tracking-[0.4em] opacity-30">Recognition</span>
-              <ul className="text-base md:text-lg space-y-3 md:space-y-4 font-light opacity-50">
+              <ul className="text-lg md:text-xl space-y-3 md:space-y-4 font-light opacity-60">
                 <li>IDC Digital Transformation Award</li>
                 <li>Apple Park Presenter</li>
                 <li>Telstra Vantage Speaker</li>
@@ -83,6 +67,25 @@ export const About: React.FC = () => {
             </div>
           </div>
         </div>
+
+        {/* Design Perspective */}
+        <motion.section
+          className="mt-24 md:mt-40 border-t border-black/5 pt-20 md:pt-32 max-w-4xl"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+        >
+          <p className="text-2xl md:text-4xl font-serif leading-[1.3] tracking-tight mb-8 md:mb-12">
+            I'm most energized by problems where technology risks overwhelming the people it serves.
+          </p>
+          <p className="text-lg md:text-2xl leading-[1.6] opacity-60 font-light mb-6 md:mb-8">
+            My work focuses on restoring legibility — ensuring powerful systems feel navigable, intelligence feels supportive, and complexity resolves into clarity.
+          </p>
+          <p className="text-lg md:text-xl leading-[1.6] opacity-40 font-light italic">
+            I believe the highest form of craft is quiet: experiences that feel so natural they disappear into use.
+          </p>
+        </motion.section>
 
         <section className="mt-24 md:mt-40 border-t border-black/5 pt-20 md:pt-32">
           <h2 className="text-xs uppercase tracking-[0.4em] text-brand font-bold mb-16 md:mb-24">Core Principles</h2>
