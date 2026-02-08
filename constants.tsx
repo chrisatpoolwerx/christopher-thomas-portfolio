@@ -7,7 +7,8 @@ export const PROJECTS: Project[] = [
     title: 'Poolchex',
     subtitle: 'Intelligent Pool Care Assistant',
     oneLine: 'Designing an AI-native pool care assistant that transforms complex chemistry into calm, guided action — wrapped in an interface that feels intrinsically connected to water.',
-    context: "Pool maintenance is information-dense, technical, and often reactive. Most tools present raw measurements — pH, chlorine, alkalinity — leaving homeowners to interpret specialist data without expertise. Poolchex reimagines this relationship entirely. Rather than visualizing chemistry, the product behaves like an expert: interpreting readings, generating treatment plans on-device, and guiding owners toward resolution with clarity and confidence. The ambition was not to build a better utility — but to design an experience that felt contextual, intelligent, and deeply native to iOS.",
+    throughLine: 'This project reflects an ongoing interest in designing intelligent systems that replace interpretation with guidance.',
+    context: "Pool maintenance is information-dense, technical, and often reactive. Most tools present raw measurements — pH, chlorine, alkalinity — leaving homeowners to interpret specialist data without expertise.\n\nPoolchex reimagines this relationship entirely. Rather than visualizing chemistry, the product behaves like an expert: interpreting readings, generating treatment plans on-device, and guiding owners toward resolution with clarity and confidence. The ambition was not to build a better utility — but to design an experience that felt contextual, intelligent, and deeply native to iOS.",
     role: 'Lead Product Designer',
     scope: [
       'Led product design from concept through build',
@@ -23,7 +24,7 @@ export const PROJECTS: Project[] = [
       'Balancing on-device AI intelligence with deterministic safety constraints',
       'Designing haptic and motion systems that make glass feel physical'
     ],
-    insight: "Users don’t want to understand pool chemistry — they want to understand what to do next.",
+    insight: "Users don’t want to understand pool chemistry - they want to understand what to do next, confidently.",
     modelDescription: 'Poolchex was guided by three principles: Reduce cognitive burden wherever possible. Make intelligence perceptible, not abstract. Create emotional resonance without sacrificing clarity.',
     principles: [
       { title: 'Reduce Cognitive Burden', description: 'Transform multi-variable chemistry into immediate comprehension through a single health score and AI-generated explanations.' },
@@ -50,6 +51,7 @@ export const PROJECTS: Project[] = [
   title: 'Healthy Pool Plan',
   subtitle: 'Comprehensive Pool Assessment System',
   oneLine: 'Designing a systematic assessment experience that transforms complex pool diagnostics into clear, actionable insights for pool owners.',
+  throughLine: 'This project extended my focus on behavioral design — shaping services that build confidence through continuity rather than reaction.',
   context: 'Traditional pool service is transactional — technicians fix immediate problems, but owners rarely understand the full picture of their pool\'s health. Healthy Pool Plan reimagined this interaction entirely: transforming a routine service visit into a comprehensive diagnostic experience that documents current conditions, identifies emerging issues, and provides clear guidance on what matters most.',
   role: 'Lead Product Designer',
   scope: [
@@ -102,6 +104,7 @@ export const PROJECTS: Project[] = [
     title: "Domino's Global App",
     subtitle: 'Designing at Planetary Scale',
     oneLine: 'Reimagining a global ordering platform to deliver faster, more intuitive experiences for millions worldwide.',
+    throughLine: 'This work explored how thoughtful systems design can preserve user momentum even within high-frequency, high-complexity environments.',
     context: "Domino's digital ordering platform is central to its global operations, handling millions of transactions daily across diverse markets. The DPE NextGen initiative aimed to modernize this platform, enhancing user experience, operational efficiency, and scalability.",
     role: 'Lead Product Designer, Global Platform',
     scope: [
@@ -148,6 +151,7 @@ export const PROJECTS: Project[] = [
     title: 'AR Pizza Chef',
     subtitle: 'Spatial Commerce Experience',
     oneLine: 'Turning pizza customization into a joyful, high-conversion spatial experience — integrated directly into ordering.',
+    throughLine: 'This exploration examined how spatial interaction can make abstract configuration feel instinctive.',
     context: "Customising a pizza is typically a necessary but tedious step — dense with options, low delight, and easy to rush. We explored how AR could transform that moment into something tactile and expressive without breaking the ordering flow.",
     role: 'Lead Product Designer, Ordering Platform / Next Gen UI',
     scope: [

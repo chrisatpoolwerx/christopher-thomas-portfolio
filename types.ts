@@ -4,6 +4,7 @@ export interface Project {
   title: string;
   subtitle: string;
   oneLine: string;
+  throughLine?: string;
   context: string;
   role: string;
   scope: string[];

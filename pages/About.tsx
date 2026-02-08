@@ -18,29 +18,33 @@ export const About: React.FC = () => {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1.2, ease: [0.33, 1, 0.68, 1] }}
             >
-              <h1 className="text-4xl md:text-[8rem] font-serif leading-[0.9] tracking-tighter mb-12 md:mb-20">
-                Clarity <br />
-                <span className="text-brand italic">is</span> Craft.
+              <h1 className="text-3xl md:text-[5.5rem] font-serif leading-[1.05] tracking-tighter mb-12 md:mb-20">
+                I design intelligent systems that make complex domains feel <span className="text-brand italic">clear, calm, and naturally understood.</span>
               </h1>
             </motion.div>
 
             <motion.div
-              className="mt-12 md:mt-20 text-xl md:text-4xl leading-[1.4] opacity-80 space-y-10 md:space-y-16 font-light"
+              className="mt-12 md:mt-20 text-xl md:text-3xl leading-[1.5] opacity-70 space-y-8 md:space-y-12 font-light"
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.2, delay: 0.3, ease: [0.33, 1, 0.68, 1] }}
             >
               <p>
-                My work sits at the intersection of advanced technology and human usability: translating powerful capability into experiences that feel <span className="text-brand">inevitable</span>.
+                Across AI-native tools, global commerce platforms, spatial interfaces, and predictive service ecosystems, my work focuses on reducing cognitive burden while revealing powerful capability progressively.
               </p>
-              <p className="text-lg md:text-2xl opacity-60">
-                With 15+ years crafting software for millions, I've led design for global category leaders like Domino's and innovated at the frontier of AI and AR. My connection to the Apple ecosystem is longstanding - from 5 years in retail to being an invited guest at Apple Park.
+              <p className="text-lg md:text-2xl opacity-70">
+                I'm drawn to problems where thoughtful design doesn't just improve interaction — it reshapes behavior.
               </p>
 
-              <div className="pt-8">
-                <MagneticButton onClick={() => navigate('/resume')}>
+              <div className="pt-8 flex flex-wrap gap-6">
+                <MagneticButton onClick={() => navigate('/perspective')}>
                   <span className="text-sm uppercase tracking-[0.4em] text-brand font-bold border-b border-brand/20 pb-2 hover:border-brand transition-all">
-                    View Full Resume
+                    Design Perspective
+                  </span>
+                </MagneticButton>
+                <MagneticButton onClick={() => navigate('/resume')}>
+                  <span className="text-sm uppercase tracking-[0.4em] opacity-50 font-bold border-b border-black/10 pb-2 hover:border-black/30 hover:opacity-80 transition-all">
+                    View Resume
                   </span>
                 </MagneticButton>
               </div>
@@ -49,21 +53,32 @@ export const About: React.FC = () => {
 
           <div className="md:col-span-4 flex flex-col gap-16 md:gap-24 pt-6 md:pt-12">
             <div className="space-y-6 md:space-y-8">
-              <span className="text-xs uppercase tracking-[0.4em] text-brand font-bold">Expertise</span>
-              <ul className="text-xl md:text-2xl space-y-3 md:space-y-4 font-serif italic">
-                <li className="hover:translate-x-4 transition-transform duration-500">Product Design</li>
-                <li className="hover:translate-x-4 transition-transform duration-500 text-brand">AI/Native Systems</li>
-                <li className="hover:translate-x-4 transition-transform duration-500">Design Systems</li>
-                <li className="hover:translate-x-4 transition-transform duration-500">Design Engineering</li>
-                <li className="hover:translate-x-4 transition-transform duration-500">Apple Ecosystem</li>
+              <span className="text-xs uppercase tracking-[0.4em] text-brand font-bold">Areas of Focus</span>
+              <ul className="text-lg md:text-xl space-y-4 md:space-y-5 font-light">
+                <li className="hover:translate-x-3 transition-transform duration-500">
+                  <span className="font-serif italic text-xl md:text-2xl block">Clarity in Complex Systems</span>
+                  <span className="text-sm opacity-50 mt-1 block">Synthesizing dense information into confident action</span>
+                </li>
+                <li className="hover:translate-x-3 transition-transform duration-500">
+                  <span className="font-serif italic text-xl md:text-2xl block text-brand">Intelligence Made Perceptible</span>
+                  <span className="text-sm opacity-50 mt-1 block">AI experiences that feel assistive, not opaque</span>
+                </li>
+                <li className="hover:translate-x-3 transition-transform duration-500">
+                  <span className="font-serif italic text-xl md:text-2xl block">Behavioral Design</span>
+                  <span className="text-sm opacity-50 mt-1 block">Interactions that quietly shift how people operate</span>
+                </li>
+                <li className="hover:translate-x-3 transition-transform duration-500">
+                  <span className="font-serif italic text-xl md:text-2xl block">Platform-Native Craft</span>
+                  <span className="text-sm opacity-50 mt-1 block">Software that feels at home on its device</span>
+                </li>
               </ul>
             </div>
             <div className="space-y-6 md:space-y-8">
               <span className="text-xs uppercase tracking-[0.4em] opacity-30">Recognition</span>
-              <ul className="text-lg md:text-xl space-y-3 md:space-y-4 font-light opacity-60">
-                <li>IDX Innovation Award</li>
+              <ul className="text-base md:text-lg space-y-3 md:space-y-4 font-light opacity-50">
+                <li>IDC Digital Transformation Award</li>
                 <li>Apple Park Presenter</li>
-                <li>Telstra Vantage Thought Leader</li>
+                <li>Telstra Vantage Speaker</li>
               </ul>
             </div>
           </div>

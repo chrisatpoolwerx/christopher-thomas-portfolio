@@ -882,6 +882,11 @@ export const ProjectDetail: React.FC = () => {
           <p className="text-lg md:text-4xl leading-[1.2] opacity-90 max-w-5xl font-light">
             {project.oneLine}
           </p>
+          {project.throughLine && (
+            <p className="mt-8 md:mt-12 text-base md:text-xl text-black/40 italic max-w-3xl">
+              {project.throughLine}
+            </p>
+          )}
         </motion.div>
       </section>
 
