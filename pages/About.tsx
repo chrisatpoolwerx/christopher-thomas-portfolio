@@ -70,16 +70,16 @@ export const About: React.FC = () => {
 
         {/* Design Perspective */}
         <motion.section
-          className="mt-24 md:mt-40 border-t border-black/5 pt-20 md:pt-32 max-w-4xl"
+          className="mt-16 md:mt-24 border-t border-black/5 pt-12 md:pt-20 max-w-4xl"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-          <p className="text-2xl md:text-4xl font-serif leading-[1.3] tracking-tight mb-8 md:mb-12">
+          <p className="text-2xl md:text-4xl font-serif leading-[1.3] tracking-tight mb-6 md:mb-8">
             I'm most energized by problems where technology risks overwhelming the people it serves.
           </p>
-          <p className="text-lg md:text-2xl leading-[1.6] opacity-60 font-light mb-6 md:mb-8">
+          <p className="text-lg md:text-2xl leading-[1.6] opacity-60 font-light mb-4 md:mb-6">
             My work focuses on restoring legibility — ensuring powerful systems feel navigable, intelligence feels supportive, and complexity resolves into clarity.
           </p>
           <p className="text-lg md:text-xl leading-[1.6] opacity-40 font-light italic">
@@ -87,9 +87,9 @@ export const About: React.FC = () => {
           </p>
         </motion.section>
 
-        <section className="mt-24 md:mt-40 border-t border-black/5 pt-20 md:pt-32">
-          <h2 className="text-xs uppercase tracking-[0.4em] text-brand font-bold mb-16 md:mb-24">Core Principles</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-32">
+        <section className="mt-16 md:mt-24 border-t border-black/5 pt-12 md:pt-20">
+          <h2 className="text-xs uppercase tracking-[0.4em] text-brand font-bold mb-12 md:mb-16">Core Principles</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-20">
             <motion.div
               className="space-y-6 md:space-y-10 group"
               whileHover={{ y: -20 }}
@@ -122,7 +122,7 @@ export const About: React.FC = () => {
       </div>
 
       {/* Footer Call to Action - Full width */}
-      <section className="mt-40 md:mt-64 px-6 md:px-8 py-40 md:py-80 bg-[#121214] text-white flex flex-col items-center text-center relative overflow-hidden">
+      <section className="mt-24 md:mt-40 px-6 md:px-8 py-32 md:py-48 bg-[#121214] text-white flex flex-col items-center text-center relative overflow-hidden">
         {/* Glow orb */}
         <motion.div
           className="absolute -top-64 -right-64 w-[40rem] h-[40rem] bg-brand/10 blur-[180px] rounded-full"
@@ -145,14 +145,14 @@ export const About: React.FC = () => {
           Let's build the <span className="text-brand italic">inevitable.</span>
         </motion.h3>
 
-        <div className="mt-20 md:mt-32 group relative z-10">
+        <div className="mt-12 md:mt-20 group relative z-10">
           <a href="mailto:chris@christhomas.co" className="text-xl md:text-4xl border-b border-white/10 pb-3 md:pb-4 group-hover:border-brand transition-all duration-700 font-serif italic text-white/60 hover:text-white">
             chris@christhomas.co
           </a>
         </div>
 
         <motion.div
-          className="mt-32 md:mt-48 flex flex-col md:flex-row gap-8 md:gap-12 text-xs uppercase tracking-[0.5em] opacity-30 font-bold"
+          className="mt-20 md:mt-32 flex flex-col md:flex-row gap-8 md:gap-12 text-xs uppercase tracking-[0.5em] opacity-30 font-bold"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
