@@ -1,7 +1,7 @@
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { PROJECTS } from '../constants';
 import { MagneticButton } from '../components/MagneticButton';
 import { CircularTextBadge } from '../components/CircularTextBadge';
@@ -500,17 +500,6 @@ const WaterFieldDiagram: React.FC = () => {
             <p className="text-white/50 font-light">Higher-frequency interference creates the shimmer of sunlight on water.</p>
           </motion.div>
         </div>
-
-        <motion.div
-          className="mt-16 p-8 md:p-12 rounded-3xl bg-white/5 border border-white/10 text-center"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-        >
-          <p className="text-white/60 text-sm md:text-base leading-relaxed max-w-xl mx-auto">
-            Pool owners have a deeply sensory relationship with water. The interface honors that relationship — replacing flat utility screens with something <span className="text-white">familiar, calm, and spatially resonant.</span>
-          </p>
-        </motion.div>
       </div>
     </div>
   );
@@ -554,76 +543,6 @@ const TimeOfDayPalette: React.FC = () => {
             </motion.div>
           ))}
         </div>
-      </div>
-    </div>
-  );
-};
-
-const LiquidGlassSystem: React.FC = () => {
-  const materials = [
-    { tier: 'Ultra Thin', opacity: 0.05, desc: 'Navigational surfaces', blur: 'backdrop-blur-sm' },
-    { tier: 'Thin', opacity: 0.1, desc: 'Secondary content', blur: 'backdrop-blur' },
-    { tier: 'Regular', opacity: 0.2, desc: 'Primary information', blur: 'backdrop-blur-md' },
-    { tier: 'Thick', opacity: 0.4, desc: 'Moments requiring solidity', blur: 'backdrop-blur-lg' },
-  ];
-
-  return (
-    <div className="w-full py-20 md:py-32 px-8 bg-gradient-to-br from-slate-100 to-slate-200 rounded-[3rem] md:rounded-[5rem] overflow-hidden relative">
-      {/* Background gradient orbs */}
-      <div className="absolute top-20 left-20 w-64 h-64 bg-cyan-400/20 rounded-full blur-[100px]" />
-      <div className="absolute bottom-20 right-20 w-80 h-80 bg-brand/10 rounded-full blur-[100px]" />
-
-      <div className="max-w-5xl mx-auto relative z-10">
-        <h4 className="text-xs uppercase tracking-[0.5em] text-brand font-bold mb-6 text-center">Liquid Glass Design System</h4>
-        <p className="text-center text-lg md:text-2xl opacity-60 font-light max-w-2xl mx-auto mb-16">
-          Material tiers create perceptual hierarchy. Continuous 26pt curves were chosen over circular radii — softer, more organic, unmistakably Apple-native.
-        </p>
-
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-          {materials.map((mat, i) => (
-            <motion.div
-              key={i}
-              className={`p-6 md:p-8 rounded-[26px] border border-white/30 ${mat.blur} group hover:scale-105 transition-all duration-500`}
-              style={{ backgroundColor: `rgba(255, 255, 255, ${mat.opacity})` }}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-            >
-              <div className="h-24 flex items-center justify-center mb-6">
-                <div
-                  className="w-16 h-16 rounded-[13px] border border-black/10 shadow-sm"
-                  style={{ backgroundColor: `rgba(255, 255, 255, ${0.3 + mat.opacity})` }}
-                />
-              </div>
-              <p className="text-sm font-bold uppercase tracking-widest mb-2">{mat.tier}</p>
-              <p className="text-xs opacity-50">{mat.desc}</p>
-            </motion.div>
-          ))}
-        </div>
-
-        <motion.div
-          className="mt-16 flex flex-col md:flex-row items-center justify-center gap-8 p-8 rounded-[26px] bg-white/30 backdrop-blur-md border border-white/40"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-        >
-          <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-[26px] bg-brand shadow-lg shadow-brand/30" />
-            <div>
-              <p className="text-sm font-bold">PWXButton</p>
-              <p className="text-xs opacity-50">Spring physics + haptic feedback</p>
-            </div>
-          </div>
-          <div className="hidden md:block w-[1px] h-12 bg-black/10" />
-          <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-[26px] bg-white border border-black/5 shadow-sm" />
-            <div>
-              <p className="text-sm font-bold">PWXCard</p>
-              <p className="text-xs opacity-50">Layered transparency</p>
-            </div>
-          </div>
-        </motion.div>
       </div>
     </div>
   );
@@ -692,7 +611,7 @@ const ScanFlowDiagram: React.FC = () => {
       <div className="max-w-5xl mx-auto relative z-10">
         <h4 className="text-xs uppercase tracking-[0.6em] text-brand font-bold mb-6 text-center">Computer Vision Capture</h4>
         <p className="text-center text-lg md:text-xl text-white/60 font-light max-w-2xl mx-auto mb-16">
-          The goal was not technical novelty — but <span className="text-white">eliminating interpretive effort entirely.</span>
+          Built to make strip scanning feel effortless and trustworthy — even for first-time pool owners.
         </p>
 
         <div className="relative">
@@ -928,49 +847,12 @@ const ScoreCardDiagram: React.FC = () => {
   );
 };
 
-const PerformanceDiagram: React.FC = () => {
-  const optimizations = [
-    { metric: '30→60', unit: 'fps', desc: 'Ramp animation framerate once stable' },
-    { metric: '1', unit: 'layer', desc: 'Render mesh as single cached layer' },
-    { metric: '0', unit: 'hit tests', desc: 'Disable unnecessary touch detection' },
-    { metric: '∞', unit: 'prefetch', desc: 'Lazy-load secondary tabs with skeletons' },
-  ];
-
-  return (
-    <div className="w-full py-20 md:py-32 px-8 bg-[#121214] rounded-[3rem] md:rounded-[5rem] overflow-hidden">
-      <div className="max-w-5xl mx-auto">
-        <h4 className="text-xs uppercase tracking-[0.6em] text-brand font-bold mb-6 text-center">Performance as Craft</h4>
-        <p className="text-center text-lg md:text-xl text-white/60 font-light max-w-2xl mx-auto mb-16">
-          Motion only delights when it remains invisible to the processor.
-        </p>
-
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-          {optimizations.map((opt, i) => (
-            <motion.div
-              key={i}
-              className="p-6 rounded-3xl bg-white/5 border border-white/10 text-center group hover:bg-white/10 transition-colors"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-            >
-              <div className="mb-4">
-                <span className="text-4xl md:text-5xl font-serif text-brand">{opt.metric}</span>
-                <span className="text-lg text-white/40 ml-1">{opt.unit}</span>
-              </div>
-              <p className="text-xs text-white/50">{opt.desc}</p>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-};
-
 export const ProjectDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const project = PROJECTS.find(p => p.id === id);
+  const shouldReduceMotion = useReducedMotion();
+  const [isPretotypingOpen, setIsPretotypingOpen] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -1040,7 +922,7 @@ export const ProjectDetail: React.FC = () => {
             <span className="w-1.5 h-1.5 rounded-full bg-brand" />
             {isAR ? 'A Visionary Shift' : 'Opening Context'}
           </h2>
-          <p className="text-xl md:text-3xl leading-relaxed opacity-80 font-serif italic">
+          <p className="text-xl md:text-3xl leading-relaxed opacity-80 font-serif italic whitespace-pre-line">
             {project.context}
           </p>
         </div>
@@ -1110,18 +992,15 @@ export const ProjectDetail: React.FC = () => {
           {/* The Design Thesis */}
           <section className="mt-32 md:mt-80 px-6 md:px-8 max-w-screen-xl mx-auto">
             <motion.div
-              className="py-16 md:py-24 px-8 md:px-16 bg-[#121214] text-white rounded-[3rem] md:rounded-[5rem] text-center relative overflow-hidden"
+              className="py-16 md:py-24 px-8 md:px-16 bg-white border border-black/5 rounded-[3rem] md:rounded-[5rem] text-center shadow-2xl shadow-black/5"
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-brand/10 to-cyan-500/5" />
-              <div className="relative z-10">
-                <span className="text-xs uppercase tracking-[0.5em] text-brand font-bold block mb-8">The Design Thesis</span>
-                <h3 className="text-2xl md:text-5xl font-serif italic max-w-4xl mx-auto leading-tight">
-                  "Great utility software shouldn't feel mechanical — it should feel <span className="text-brand">alive</span>, <span className="text-cyan-400">contextual</span>, and quietly <span className="text-white">intelligent.</span>"
-                </h3>
-              </div>
+              <span className="text-xs uppercase tracking-[0.5em] text-brand font-bold block mb-8">Design Thesis</span>
+              <h3 className="text-2xl md:text-5xl font-serif italic max-w-4xl mx-auto leading-tight">
+                If users want to know what to do next, the interface must act like a guide — <span className="text-brand">alive</span>, <span className="text-cyan-600">contextual</span>, and quietly <span className="text-[#121214]">intelligent.</span>
+              </h3>
             </motion.div>
           </section>
 
@@ -1130,15 +1009,151 @@ export const ProjectDetail: React.FC = () => {
             <div className="mb-16 md:mb-24">
               <h2 className="text-4xl md:text-6xl font-serif mb-8 md:mb-12 tracking-tighter">Designing an Interface That Feels Like <span className="text-brand italic">Water</span></h2>
               <p className="text-lg md:text-2xl opacity-60 max-w-3xl font-light">
-                Pool owners have a deeply sensory relationship with water. The interface honors that relationship — replacing flat utility screens with something familiar, calm, and spatially resonant.
+                Pool owners have a deeply sensory relationship with water.
+The interface honors that relationship — replacing flat utility screens with something familiar, calm, and spatially resonant.
+<br /><br />
+When glass materials layer above the surface, the effect becomes architectural: the user is no longer looking at a screen, <i>but through it.</i>
               </p>
             </div>
+            {/* Design Evidence (Placeholders) */}
+            <motion.div
+              className="mb-16 md:mb-24"
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.8, ease: [0.33, 1, 0.68, 1] }}
+            >
+              <div className="flex items-center gap-4 mb-6 md:mb-8">
+                <span className="text-[10px] md:text-xs uppercase tracking-[0.4em] text-brand font-bold">Design Evidence</span>
+                <div className="h-[1px] flex-grow bg-black/10" />
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8">
+                <motion.div
+                  className="md:col-span-12 aspect-[16/9] rounded-3xl md:rounded-[3rem] border border-black/10 bg-white shadow-2xl shadow-black/5 overflow-hidden relative"
+                  whileHover={shouldReduceMotion ? {} : { y: -4 }}
+                  transition={{ duration: 0.2, ease: 'easeOut' }}
+                >
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,79,0,0.08),transparent_45%),radial-gradient(circle_at_80%_30%,rgba(14,116,144,0.08),transparent_45%)]" />
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <span className="text-xs uppercase tracking-[0.4em] text-black/40">Hero UI Screenshot</span>
+                  </div>
+                </motion.div>
+
+                {[
+                  { label: 'Water Field Detail', tone: 'bg-cyan-50' },
+                  { label: 'Glass Layers', tone: 'bg-white' },
+                  { label: 'Score Card Screen', tone: 'bg-slate-50' },
+                ].map((item, i) => (
+                  <motion.div
+                    key={item.label}
+                    className={`md:col-span-6 aspect-[4/3] rounded-2xl md:rounded-[2.5rem] border border-black/10 ${item.tone} shadow-xl shadow-black/5 overflow-hidden relative`}
+                    initial={{ opacity: 0, y: 16 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-80px" }}
+                    whileHover={shouldReduceMotion ? {} : { y: -3 }}
+                    transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.5, delay: i * 0.05 }}
+                  >
+                    <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(0,0,0,0.04),transparent)]" />
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <span className="text-[10px] md:text-xs uppercase tracking-[0.35em] text-black/40">{item.label}</span>
+                    </div>
+                  </motion.div>
+                ))}
+
+                <motion.div
+                  className="md:col-span-6 aspect-[4/3] rounded-2xl md:rounded-[2.5rem] border border-black/10 bg-black shadow-xl shadow-black/5 overflow-hidden relative"
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-80px" }}
+                  whileHover={shouldReduceMotion ? {} : { y: -3 }}
+                  transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.5, delay: 0.2 }}
+                >
+                  <video
+                    src="/assets/projects/poolchex/guided-treatment.mp4"
+                    className="w-full h-full object-cover"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                  />
+                  <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(0,0,0,0.2),transparent)]" />
+                  <div className="absolute bottom-4 left-4">
+                    <span className="text-[10px] md:text-xs uppercase tracking-[0.35em] text-white/70">Guided Treatment</span>
+                  </div>
+                </motion.div>
+              </div>
+              <p className="text-xs md:text-sm opacity-40 mt-6 uppercase tracking-[0.4em]">
+                Placeholder frames for final UI screenshots
+              </p>
+            </motion.div>
             <WaterFieldDiagram />
           </section>
 
           {/* Time as Material */}
           <section className="mt-32 md:mt-64 px-6 md:px-8 max-w-screen-xl mx-auto">
             <TimeOfDayPalette />
+          </section>
+
+          {/* Performance as Craft */}
+          <section className="mt-32 md:mt-64 px-6 md:px-8 max-w-screen-xl mx-auto">
+            <div className="mb-16 md:mb-24">
+              <h2 className="text-4xl md:text-6xl font-serif mb-8 md:mb-12 tracking-tighter">Performance as a <span className="text-brand italic">Design Feature</span></h2>
+              <p className="text-lg md:text-2xl opacity-60 max-w-3xl font-light">
+                Motion only delights when it remains invisible to the processor.
+              </p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <motion.div
+                className="p-8 rounded-3xl bg-black/[0.02] border border-black/5"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+              >
+                <svg className="w-8 h-8 text-brand mb-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="12" cy="12" r="10"/>
+                  <path d="M12 6v6l4 2"/>
+                </svg>
+                <p className="text-lg md:text-xl">Begin animation at 30fps → ramp to 60fps once stable</p>
+              </motion.div>
+              <motion.div
+                className="p-8 rounded-3xl bg-black/[0.02] border border-black/5"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.1 }}
+              >
+                <svg className="w-8 h-8 text-brand mb-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="3" y="3" width="18" height="18" rx="2"/>
+                  <path d="M3 9h18M3 15h18"/>
+                </svg>
+                <p className="text-lg md:text-xl">Render mesh as a single cached layer</p>
+              </motion.div>
+              <motion.div
+                className="p-8 rounded-3xl bg-black/[0.02] border border-black/5"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+              >
+                <svg className="w-8 h-8 text-brand mb-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
+                </svg>
+                <p className="text-lg md:text-xl">Scale beyond bounds to hide artifacts</p>
+              </motion.div>
+              <motion.div
+                className="p-8 rounded-3xl bg-black/[0.02] border border-black/5"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.3 }}
+              >
+                <svg className="w-8 h-8 text-brand mb-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M18 8a3 3 0 0 0-3-3H5a3 3 0 0 0-3 3v8a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3"/>
+                  <line x1="1" y1="1" x2="23" y2="23"/>
+                </svg>
+                <p className="text-lg md:text-xl">Disable unnecessary hit testing</p>
+              </motion.div>
+            </div>
           </section>
 
           {/* Computer Vision */}
@@ -1157,20 +1172,11 @@ export const ProjectDetail: React.FC = () => {
             <ScoreCardDiagram />
           </section>
 
-          {/* Liquid Glass System */}
-          <section className="mt-32 md:mt-64 px-6 md:px-8 max-w-screen-xl mx-auto">
-            <LiquidGlassSystem />
-          </section>
-
           {/* On-Device AI */}
           <section className="mt-32 md:mt-64 px-6 md:px-8 max-w-screen-xl mx-auto">
             <OnDeviceAIDiagram />
           </section>
 
-          {/* Performance */}
-          <section className="mt-32 md:mt-64 px-6 md:px-8 max-w-screen-xl mx-auto">
-            <PerformanceDiagram />
-          </section>
         </>
       )}
 
@@ -1184,6 +1190,215 @@ export const ProjectDetail: React.FC = () => {
               </p>
             </div>
             <EcosystemDiagram />
+          </section>
+
+          {/* Pretotyping at Scale */}
+          <section className="mt-32 md:mt-64 px-6 md:px-8 max-w-screen-xl mx-auto">
+            <motion.div
+              className="mb-16 md:mb-24"
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.6, ease: [0.33, 1, 0.68, 1] }}
+            >
+              <h2 className="text-4xl md:text-6xl font-serif mb-8 md:mb-12 tracking-tighter">Build to Learn, <span className="text-brand italic">Then Build to Last</span></h2>
+              <p className="text-lg md:text-2xl opacity-60 max-w-3xl font-light">
+                Before committing to native, we shipped a cross-platform layer designed to validate behaviors at speed — then migrated deliberately once patterns stabilized.
+              </p>
+            </motion.div>
+
+            {/* Phase Journey Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-16 md:mb-24">
+              <motion.div
+                className="p-6 md:p-8 rounded-3xl bg-black/[0.02] border border-black/5 relative overflow-hidden"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+              >
+                <div className="absolute top-6 right-6 md:top-8 md:right-8 text-[10px] uppercase tracking-[0.3em] text-black/30 font-bold">Phase 1</div>
+                <svg className="w-8 h-8 text-brand mb-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                </svg>
+                <h3 className="text-xl md:text-2xl font-serif mb-3">Ship Fast</h3>
+                <p className="text-base text-black/60">Flutter-based mobile and web layer. Real users, real data, rapid iteration across technician tools and dashboards.</p>
+              </motion.div>
+              <motion.div
+                className="p-6 md:p-8 rounded-3xl bg-black/[0.02] border border-black/5 relative overflow-hidden"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.1 }}
+              >
+                <div className="absolute top-6 right-6 md:top-8 md:right-8 text-[10px] uppercase tracking-[0.3em] text-black/30 font-bold">Phase 2</div>
+                <svg className="w-8 h-8 text-brand mb-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="12" cy="12" r="10"/>
+                  <path d="M12 16v-4M12 8h.01"/>
+                </svg>
+                <h3 className="text-xl md:text-2xl font-serif mb-3">Observe Patterns</h3>
+                <p className="text-base text-black/60">Field testing revealed where cross-platform fell short: offline reliability, background uploads, memory on constrained devices.</p>
+              </motion.div>
+              <motion.div
+                className="p-6 md:p-8 rounded-3xl bg-black/[0.02] border border-black/5 relative overflow-hidden"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+              >
+                <div className="absolute top-6 right-6 md:top-8 md:right-8 text-[10px] uppercase tracking-[0.3em] text-black/30 font-bold">Phase 3</div>
+                <svg className="w-8 h-8 text-brand mb-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                  <path d="M2 17l10 5 10-5"/>
+                  <path d="M2 12l10 5 10-5"/>
+                </svg>
+                <h3 className="text-xl md:text-2xl font-serif mb-3">Go Native</h3>
+                <p className="text-base text-black/60">Migrated to SwiftUI and Kotlin with evidence in hand. The architecture was designed to make this transition low-risk.</p>
+              </motion.div>
+            </div>
+
+            {/* Architecture Philosophy */}
+            <motion.div
+              className="relative"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.7, ease: [0.33, 1, 0.68, 1] }}
+            >
+              <div className="flex items-center gap-4 text-[10px] md:text-xs uppercase tracking-[0.4em] text-black/50 font-bold mb-10 md:mb-12">
+                <span className="w-10 h-[1px] bg-brand" />
+                <span>Architecture Decisions</span>
+              </div>
+
+              <motion.div
+                id="pretotyping-content"
+                className="relative overflow-hidden"
+                animate={{ maxHeight: isPretotypingOpen ? 1800 : 320 }}
+                transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.45, ease: [0.33, 1, 0.68, 1] }}
+                style={{ willChange: 'max-height' }}
+              >
+                {/* Key Decisions Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-12 md:mb-16">
+                  <div className="p-6 md:p-8 rounded-3xl bg-black/[0.02] border border-black/5">
+                    <svg className="w-8 h-8 text-brand mb-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                      <rect x="2" y="3" width="20" height="14" rx="2"/>
+                      <path d="M8 21h8M12 17v4"/>
+                    </svg>
+                    <h4 className="text-lg md:text-xl font-serif mb-2">Thin Clients, Thick Edge</h4>
+                    <p className="text-base text-black/60">Business logic and AI orchestration live server-side. The mobile layer focuses purely on presentation and interaction.</p>
+                  </div>
+                  <div className="p-6 md:p-8 rounded-3xl bg-black/[0.02] border border-black/5">
+                    <svg className="w-8 h-8 text-brand mb-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                      <polyline points="7.5 4.21 12 6.81 16.5 4.21"/>
+                      <polyline points="7.5 19.79 7.5 14.6 3 12"/>
+                      <polyline points="21 12 16.5 14.6 16.5 19.79"/>
+                      <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+                      <line x1="12" y1="22.08" x2="12" y2="12"/>
+                    </svg>
+                    <h4 className="text-lg md:text-xl font-serif mb-2">Platform-Appropriate Surfaces</h4>
+                    <p className="text-base text-black/60">Native mobile for field reliability. React web for operational dashboards. Edge functions for intelligence. Each excels in its context.</p>
+                  </div>
+                  <div className="p-6 md:p-8 rounded-3xl bg-black/[0.02] border border-black/5">
+                    <svg className="w-8 h-8 text-brand mb-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+                    </svg>
+                    <h4 className="text-lg md:text-xl font-serif mb-2">Migration by Design</h4>
+                    <p className="text-base text-black/60">Every architectural choice assumed eventual platform specialization. When the time came, we swapped the presentation layer without touching the system.</p>
+                  </div>
+                  <div className="p-6 md:p-8 rounded-3xl bg-black/[0.02] border border-black/5">
+                    <svg className="w-8 h-8 text-brand mb-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                    </svg>
+                    <h4 className="text-lg md:text-xl font-serif mb-2">Performance as Experience</h4>
+                    <p className="text-base text-black/60">Heavy compute stays off-device. Interfaces stay responsive. In service environments, speed isn't a metric — it's trust.</p>
+                  </div>
+                </div>
+
+                {/* Deeper Context */}
+                <div className="space-y-8 md:space-y-10 text-lg md:text-xl leading-relaxed font-light text-black/80 max-w-3xl">
+                  <div className="space-y-4">
+                    <h3 className="text-2xl md:text-3xl font-serif tracking-tight">Why Start Cross-Platform?</h3>
+                    <p>Prototyping asks <em>"is this usable?"</em> — pretotyping asks <em>"should this exist, and in what form?"</em></p>
+                    <p>We needed to validate technician workflows, service orchestration, and dashboard requirements across two markets before locking into platform-specific builds. Flutter let us test assumptions in production without over-committing.</p>
+                  </div>
+
+                  <div className="space-y-4">
+                    <h3 className="text-2xl md:text-3xl font-serif tracking-tight">The Moment to Migrate</h3>
+                    <p>Field testing made the limits tangible. Technicians working in full sun with poor connectivity needed background upload queues, aggressive memory management, and offline-first resilience that cross-platform couldn't reliably deliver.</p>
+                    <p>The decision wasn't ideological. It was evidence-driven. Native became necessary when reliability became the user experience.</p>
+                  </div>
+
+                  <div className="space-y-4">
+                    <h3 className="text-2xl md:text-3xl font-serif tracking-tight">What This Enabled</h3>
+                    <ul className="space-y-3 text-base md:text-lg text-black/70">
+                      <li className="flex items-start gap-3"><span className="w-1.5 h-1.5 rounded-full bg-brand mt-2.5 shrink-0" />Validated behavioral assumptions before scaling investment</li>
+                      <li className="flex items-start gap-3"><span className="w-1.5 h-1.5 rounded-full bg-brand mt-2.5 shrink-0" />De-risked the transition to native with real-world data</li>
+                      <li className="flex items-start gap-3"><span className="w-1.5 h-1.5 rounded-full bg-brand mt-2.5 shrink-0" />Kept learning cycles fast during the ambiguous early phase</li>
+                      <li className="flex items-start gap-3"><span className="w-1.5 h-1.5 rounded-full bg-brand mt-2.5 shrink-0" />Preserved flexibility until the architecture earned its constraints</li>
+                    </ul>
+                  </div>
+
+                  <div className="pt-4 md:pt-6 border-t border-black/10">
+                    <p className="text-base md:text-lg italic text-black/50">The most resilient systems aren't designed to be correct from day one — they're designed to become correct over time.</p>
+                  </div>
+                </div>
+
+                {!isPretotypingOpen && (
+                  <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-white to-transparent" />
+                )}
+              </motion.div>
+
+              {!isPretotypingOpen && (
+                <div className="relative z-10 mt-8 flex justify-end">
+                  <motion.button
+                    type="button"
+                    className="inline-flex items-center gap-4 rounded-full bg-brand px-6 md:px-8 py-3 md:py-4 text-[11px] md:text-xs uppercase tracking-[0.45em] font-bold text-white shadow-[0_20px_50px_-20px_rgba(255,79,0,0.7)]"
+                    onClick={() => setIsPretotypingOpen(true)}
+                    aria-expanded={isPretotypingOpen}
+                    aria-controls="pretotyping-content"
+                    whileHover={shouldReduceMotion ? {} : { y: -3, scale: 1.01 }}
+                    whileTap={shouldReduceMotion ? {} : { scale: 0.98 }}
+                    transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.2 }}
+                  >
+                    Read Full Story
+                    <motion.span
+                      className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-white/15"
+                      animate={{ rotate: isPretotypingOpen ? 180 : 0 }}
+                      transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.25, ease: [0.33, 1, 0.68, 1] }}
+                    >
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M6 9l6 6 6-6" />
+                      </svg>
+                    </motion.span>
+                  </motion.button>
+                </div>
+              )}
+
+              {isPretotypingOpen && (
+                <div className="mt-10 md:mt-12 flex justify-end">
+                  <motion.button
+                    type="button"
+                    className="inline-flex items-center gap-4 rounded-full bg-brand px-6 md:px-8 py-3 md:py-4 text-[11px] md:text-xs uppercase tracking-[0.45em] font-bold text-white shadow-[0_20px_50px_-20px_rgba(255,79,0,0.7)]"
+                    onClick={() => setIsPretotypingOpen(false)}
+                    aria-expanded={isPretotypingOpen}
+                    aria-controls="pretotyping-content"
+                    whileHover={shouldReduceMotion ? {} : { y: -3, scale: 1.01 }}
+                    whileTap={shouldReduceMotion ? {} : { scale: 0.98 }}
+                    transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.2 }}
+                  >
+                    Collapse
+                    <motion.span
+                      className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-white/15"
+                      animate={{ rotate: isPretotypingOpen ? 180 : 0 }}
+                      transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.25, ease: [0.33, 1, 0.68, 1] }}
+                    >
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M6 9l6 6 6-6" />
+                      </svg>
+                    </motion.span>
+                  </motion.button>
+                </div>
+              )}
+            </motion.div>
           </section>
 
           {/* Technician & Customer Experience */}
@@ -1448,7 +1663,7 @@ export const ProjectDetail: React.FC = () => {
             ))}
           </div>
         </section>
-      ) : (
+      ) : !isPoolchex ? (
         /* Default: Alternating image/text layout */
         <section className={`mt-32 md:mt-80 space-y-24 md:space-y-48 ${isAR ? 'bg-white py-32 md:py-64' : ''}`}>
           {project.craft.map((c, i) => (
@@ -1484,7 +1699,7 @@ export const ProjectDetail: React.FC = () => {
             </div>
           ))}
         </section>
-      )}
+      ) : null}
 
       {/* Outcome & Reflection */}
       <section className="mt-32 md:mt-80 px-6 md:px-8 max-w-screen-xl mx-auto flex flex-col items-center">
