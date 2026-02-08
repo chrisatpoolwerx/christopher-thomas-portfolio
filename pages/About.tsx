@@ -2,7 +2,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { MagneticButton } from '../components/MagneticButton';
 
 export const About: React.FC = () => {
   const navigate = useNavigate();
@@ -32,17 +31,26 @@ export const About: React.FC = () => {
               <p>
                 Across AI-native tools, global commerce platforms, spatial interfaces, and predictive service ecosystems, my work focuses on reducing cognitive burden while revealing powerful capability progressively.
               </p>
+
+              <motion.button
+                type="button"
+                onClick={() => navigate('/resume')}
+                className="inline-flex items-center gap-4 rounded-full bg-brand px-6 md:px-8 py-3 md:py-4 text-[11px] md:text-xs uppercase tracking-[0.45em] font-bold text-white shadow-[0_20px_50px_-20px_rgba(255,79,0,0.7)]"
+                whileHover={{ y: -3, scale: 1.01 }}
+                whileTap={{ scale: 0.98 }}
+                transition={{ duration: 0.2 }}
+              >
+                View Full Resume
+                <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-white/15">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                  </svg>
+                </span>
+              </motion.button>
+
               <p className="text-lg md:text-2xl opacity-70">
                 I'm drawn to problems where thoughtful design doesn't just improve interaction — it reshapes behavior.
               </p>
-
-              <div className="pt-8">
-                <MagneticButton onClick={() => navigate('/resume')}>
-                  <span className="text-sm uppercase tracking-[0.4em] text-brand font-bold border-b border-brand/20 pb-2 hover:border-brand transition-all">
-                    View Full Resume
-                  </span>
-                </MagneticButton>
-              </div>
             </motion.div>
           </div>
 
