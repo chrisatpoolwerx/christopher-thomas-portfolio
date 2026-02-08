@@ -1578,7 +1578,7 @@ When glass materials layer above the surface, the effect becomes architectural: 
               className="absolute inset-0 bg-cover bg-center bg-no-repeat"
               style={{ backgroundImage: 'url(/assets/projects/dominos-global/component-bg.png)' }}
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-white via-white/60 to-white" />
+            <div className="absolute inset-0 bg-gradient-to-b from-white via-white/70 to-white" />
             <div className="relative px-6 md:px-8 py-24 md:py-40 max-w-screen-xl mx-auto">
               <div className="mb-16 md:mb-24">
                 <h2 className="text-4xl md:text-6xl font-serif mb-8 md:mb-12 tracking-tighter">Design System <span className="text-brand italic">Evolution</span></h2>
