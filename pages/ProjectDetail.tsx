@@ -882,11 +882,6 @@ export const ProjectDetail: React.FC = () => {
           <p className="text-lg md:text-4xl leading-[1.2] opacity-90 max-w-5xl font-light">
             {project.oneLine}
           </p>
-          {project.throughLine && (
-            <p className="mt-8 md:mt-12 text-base md:text-xl text-black/40 italic max-w-3xl">
-              {project.throughLine}
-            </p>
-          )}
         </motion.div>
       </section>
 
@@ -955,6 +950,12 @@ export const ProjectDetail: React.FC = () => {
               ))}
             </div>
           </div>
+          {project.throughLine && (
+            <div>
+              <h2 className="text-xs uppercase tracking-widest opacity-40 mb-4 md:mb-6 font-bold">TLDR</h2>
+              <p className="text-base md:text-lg opacity-70 italic">{project.throughLine}</p>
+            </div>
+          )}
         </div>
       </section>
 
