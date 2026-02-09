@@ -49,7 +49,7 @@ export const About: React.FC = () => {
               </motion.button>
 
               <p className="text-lg md:text-2xl opacity-70">
-                I'm drawn to problems where thoughtful design doesn't just improve interaction — it reshapes behavior.
+                I'm drawn to problems where thoughtful design reshapes behavior.
               </p>
             </motion.div>
           </div>
@@ -88,7 +88,7 @@ export const About: React.FC = () => {
             I'm most energized by problems where technology risks overwhelming the people it serves.
           </p>
           <p className="text-lg md:text-2xl leading-[1.6] opacity-60 font-light mb-4 md:mb-6">
-            My work focuses on restoring legibility — ensuring powerful systems feel navigable, intelligence feels supportive, and complexity resolves into clarity.
+            My work focuses on restoring legibility, ensuring powerful systems feel navigable, intelligence feels supportive, and complexity resolves into clarity.
           </p>
           <p className="text-lg md:text-xl leading-[1.6] opacity-40 font-light italic">
             I believe the highest form of craft is quiet: experiences that feel so natural they disappear into use.
@@ -105,7 +105,7 @@ export const About: React.FC = () => {
             >
               <span className="text-5xl md:text-6xl font-serif text-brand group-hover:italic transition-all">01</span>
               <h3 className="text-2xl md:text-3xl font-serif leading-tight">Clarity is the highest form of craft.</h3>
-              <p className="text-lg md:text-xl opacity-60 leading-relaxed font-light">Minimalism isn't just aesthetic; it's the elimination of cognitive friction. If it's confusing, it's not finished.</p>
+              <p className="text-lg md:text-xl opacity-60 leading-relaxed font-light">Minimalism eliminates cognitive friction. If it's confusing, it's not finished.</p>
             </motion.div>
             <motion.div
               className="space-y-6 md:space-y-10 group"
@@ -123,7 +123,7 @@ export const About: React.FC = () => {
             >
               <span className="text-5xl md:text-6xl font-serif text-brand group-hover:italic transition-all">03</span>
               <h3 className="text-2xl md:text-3xl font-serif leading-tight">Details are <br />comprehension.</h3>
-              <p className="text-lg md:text-xl opacity-60 leading-relaxed font-light">The nuance of motion and typography isn't just beauty; it's how we signal causality and hierarchy to the mind.</p>
+              <p className="text-lg md:text-xl opacity-60 leading-relaxed font-light">The nuance of motion and typography signals causality and hierarchy to the mind.</p>
             </motion.div>
           </div>
         </section>

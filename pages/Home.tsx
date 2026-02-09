@@ -174,7 +174,7 @@ export const Home: React.FC = () => {
             </div>
             <span className="text-xs uppercase tracking-[0.4em] opacity-40 font-bold">Selected Works</span>
           </div>
-          <span className="hidden md:block text-xs uppercase tracking-[0.4em] opacity-40 font-bold">Volume 01 — 2026</span>
+          <span className="hidden md:block text-xs uppercase tracking-[0.4em] opacity-40 font-bold">Volume 01 / 2026</span>
         </motion.div>
       </section>
 

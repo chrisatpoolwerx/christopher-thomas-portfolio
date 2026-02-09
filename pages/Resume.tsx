@@ -165,7 +165,7 @@ export const Resume: React.FC = () => {
               Christopher <br /> <span className="text-brand">Thomas</span>
             </h1>
             <p className="text-lg md:text-xl opacity-60 uppercase tracking-[0.3em] font-medium">
-              Product Designer — AI-Driven Experiences
+              Product Designer, AI-Driven Experiences
             </p>
           </div>
           <div className="text-right space-y-1">
@@ -185,7 +185,7 @@ export const Resume: React.FC = () => {
       >
         <h2 className="text-[10px] uppercase tracking-[0.5em] text-brand font-bold mb-8">Executive Summary</h2>
         <p className="text-xl md:text-3xl font-light leading-relaxed opacity-80">
-          Product designer with 15+ years crafting elegant, high-impact consumer software used by millions globally. Proven record shipping category-defining digital products across mobile, web, voice, AR, and AI — including platforms responsible for over <span className="font-serif italic">$1B in revenue growth.</span>
+          Product designer with 15+ years crafting elegant, high-impact consumer software used by millions globally. Proven record shipping category-defining digital products across mobile, web, voice, AR, and AI, including platforms responsible for over <span className="font-serif italic">$1B in revenue growth.</span>
         </p>
       </motion.section>
 
@@ -290,7 +290,7 @@ export const Resume: React.FC = () => {
             className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12"
             variants={experienceItemVariants}
           >
-            <div className="md:col-span-3 opacity-40 font-mono text-sm">2024 — Present</div>
+            <div className="md:col-span-3 opacity-40 font-mono text-sm">2024 to Present</div>
             <div className="md:col-span-9 space-y-8">
               <div className="space-y-2">
                 <h3 className="text-3xl md:text-4xl font-serif">Poolwerx</h3>
@@ -310,7 +310,7 @@ export const Resume: React.FC = () => {
             className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12"
             variants={experienceItemVariants}
           >
-            <div className="md:col-span-3 opacity-40 font-mono text-sm">2018 — 2024</div>
+            <div className="md:col-span-3 opacity-40 font-mono text-sm">2018 to 2024</div>
             <div className="md:col-span-9 space-y-8">
               <div className="space-y-2">
                 <h3 className="text-3xl md:text-4xl font-serif">Domino's Pizza Enterprises</h3>
@@ -332,7 +332,7 @@ export const Resume: React.FC = () => {
             className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 opacity-70"
             variants={experienceItemVariants}
           >
-            <div className="md:col-span-3 opacity-40 font-mono text-sm">2016 — 2018</div>
+            <div className="md:col-span-3 opacity-40 font-mono text-sm">2016 to 2018</div>
             <div className="md:col-span-9 space-y-6">
               <div className="space-y-1">
                 <h3 className="text-2xl font-serif">Domino's Pizza Enterprises</h3>
@@ -347,7 +347,7 @@ export const Resume: React.FC = () => {
             className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 opacity-50"
             variants={experienceItemVariants}
           >
-            <div className="md:col-span-3 opacity-40 font-mono text-sm">2013 — 2016</div>
+            <div className="md:col-span-3 opacity-40 font-mono text-sm">2013 to 2016</div>
             <div className="md:col-span-9 space-y-6">
               <div className="space-y-1">
                 <h3 className="text-2xl font-serif">Thomas Trieb</h3>
@@ -371,13 +371,13 @@ export const Resume: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-8">
           {[
             { venue: 'Apple Park, 2022', topic: 'Invited to Present on Digital Innovation' },
-            { venue: 'Telstra Vantage 2022', topic: 'Main Stage Panel — Value of Great User Experience' },
-            { venue: 'Telstra Vantage 2022', topic: 'Invitation-Only Panel — Apple Experience with Telstra Purple' },
+            { venue: 'Telstra Vantage 2022', topic: 'Main Stage Panel: Value of Great User Experience' },
+            { venue: 'Telstra Vantage 2022', topic: 'Invitation-Only Panel: Apple Experience with Telstra Purple' },
             { venue: 'Meta, 2022', topic: 'High-level Metaverse Integration Briefing' },
-            { venue: 'Microsoft, 2022', topic: 'Partnership Guidance — Digital Innovation Roadmapping' },
+            { venue: 'Microsoft, 2022', topic: 'Partnership Guidance: Digital Innovation Roadmapping' },
             { venue: 'IDC DX Awards, 2019', topic: 'Panel Discussion & Presentation' },
             { venue: 'Immerse™ Australia AR/VR Meetup, 2020', topic: 'What Makes Great AR Experiences?' },
-            { venue: 'The Smith Family, 2020–24', topic: 'Youth Mentor — Teaching Design Thinking' },
+            { venue: 'The Smith Family, 2020–24', topic: 'Youth Mentor: Teaching Design Thinking' },
           ].map((item, i) => (
             <motion.div
               key={i}
@@ -411,8 +411,8 @@ export const Resume: React.FC = () => {
         >
           <h2 className="text-[10px] uppercase tracking-[0.5em] text-brand font-bold">Recognition</h2>
           <ul className="space-y-6 font-serif text-2xl italic">
-            <li>IDX Innovation Award — AR Product Design</li>
-            <li>Telstra Vantage — UX Thought Leadership</li>
+            <li>IDX Innovation Award: AR Product Design</li>
+            <li>Telstra Vantage: UX Thought Leadership</li>
           </ul>
         </motion.div>
         <motion.div
@@ -439,7 +439,7 @@ export const Resume: React.FC = () => {
         viewport={{ once: true }}
         transition={{ duration: 1, ease: easeOutExpo }}
       >
-        <span>Christopher Thomas — 2026</span>
+        <span>Christopher Thomas / 2026</span>
       </motion.footer>
     </main>
   );
