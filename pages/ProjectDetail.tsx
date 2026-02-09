@@ -1619,7 +1619,7 @@ When glass materials layer above the surface, the effect becomes architectural: 
           {/* Image Placeholder: Customization Flow */}
           <section className="mt-32 md:mt-64 px-4">
             <motion.div
-              className="w-full aspect-[21/9] bg-black rounded-2xl md:rounded-[3rem] overflow-hidden"
+              className="w-full aspect-square md:aspect-[21/9] bg-black rounded-2xl md:rounded-[3rem] overflow-hidden"
               initial={{ scale: 1.05, opacity: 0 }}
               whileInView={{ scale: 1, opacity: 1 }}
               viewport={{ once: true }}
@@ -1627,7 +1627,7 @@ When glass materials layer above the surface, the effect becomes architectural: 
             >
               <PingPongVideo
                 src="/assets/projects/dominos-global/customisation-flow-redesign.mp4"
-                className="w-full h-full object-cover scale-x-[3] md:scale-x-100"
+                className="w-full h-full object-cover"
               />
             </motion.div>
             <p className="text-center text-sm opacity-40 mt-6 uppercase tracking-widest">Progressive customization interface</p>
