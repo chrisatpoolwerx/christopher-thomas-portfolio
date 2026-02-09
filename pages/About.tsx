@@ -127,6 +127,68 @@ export const About: React.FC = () => {
             </motion.div>
           </div>
         </section>
+
+        {/* Areas of Focus */}
+        <section className="mt-16 md:mt-24 border-t border-black/5 pt-12 md:pt-20">
+          <h2 className="text-xs uppercase tracking-[0.4em] text-brand font-bold mb-12 md:mb-16">Areas of Focus</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+            <motion.div
+              className="p-6 md:p-8 rounded-3xl bg-black/[0.02] border border-black/5"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              <svg className="w-8 h-8 text-brand mb-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M12 6v6l4 2"/>
+              </svg>
+              <h3 className="text-xl md:text-2xl font-serif mb-3">Clarity in Complex Systems</h3>
+              <p className="text-base text-black/60">Designing products that synthesize dense information into confident action.</p>
+            </motion.div>
+            <motion.div
+              className="p-6 md:p-8 rounded-3xl bg-black/[0.02] border border-black/5"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+            >
+              <svg className="w-8 h-8 text-brand mb-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M12 2a4 4 0 0 1 4 4c0 1.95-1.4 3.58-3.25 3.93L12 22l-.75-12.07A4.001 4.001 0 0 1 12 2z"/>
+                <circle cx="12" cy="6" r="1"/>
+              </svg>
+              <h3 className="text-xl md:text-2xl font-serif mb-3">Intelligence Made Perceptible</h3>
+              <p className="text-base text-black/60">Shaping AI-driven experiences that feel assistive rather than opaque.</p>
+            </motion.div>
+            <motion.div
+              className="p-6 md:p-8 rounded-3xl bg-black/[0.02] border border-black/5"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+            >
+              <svg className="w-8 h-8 text-brand mb-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/>
+                <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+              </svg>
+              <h3 className="text-xl md:text-2xl font-serif mb-3">Behavioral Design</h3>
+              <p className="text-base text-black/60">Creating interactions that quietly shift how people operate in the world.</p>
+            </motion.div>
+            <motion.div
+              className="p-6 md:p-8 rounded-3xl bg-black/[0.02] border border-black/5"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 }}
+            >
+              <svg className="w-8 h-8 text-brand mb-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
+                <line x1="12" y1="18" x2="12.01" y2="18"/>
+              </svg>
+              <h3 className="text-xl md:text-2xl font-serif mb-3">Platform-Native Craft</h3>
+              <p className="text-base text-black/60">Building software that feels deeply at home on the devices it inhabits.</p>
+            </motion.div>
+          </div>
+        </section>
       </div>
 
       {/* Footer Call to Action - Full width */}
