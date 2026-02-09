@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion, useReducedMotion } from 'framer-motion';
 import { PROJECTS } from '../constants';
@@ -307,6 +307,56 @@ const MomentumDiagram: React.FC = () => {
   );
 };
 
+const PingPongVideo: React.FC<{ src: string; className?: string }> = ({ src, className }) => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isReversing, setIsReversing] = useState(false);
+  const animationRef = useRef<number>();
+
+  const reversePlay = useCallback(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const step = () => {
+      if (video.currentTime <= 0) {
+        setIsReversing(false);
+        video.play();
+        return;
+      }
+      video.currentTime = Math.max(0, video.currentTime - 0.033);
+      animationRef.current = requestAnimationFrame(step);
+    };
+    animationRef.current = requestAnimationFrame(step);
+  }, []);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const handleEnded = () => {
+      video.pause();
+      setIsReversing(true);
+      reversePlay();
+    };
+
+    video.addEventListener('ended', handleEnded);
+    return () => {
+      video.removeEventListener('ended', handleEnded);
+      if (animationRef.current) cancelAnimationFrame(animationRef.current);
+    };
+  }, [reversePlay]);
+
+  return (
+    <video
+      ref={videoRef}
+      src={src}
+      className={className}
+      autoPlay
+      muted
+      playsInline
+    />
+  );
+};
+
 const DesignSystemDiagram: React.FC = () => {
   return (
     <div className="w-full py-16 md:py-24 px-8 bg-white border border-black/5 rounded-[3rem] md:rounded-[5rem] shadow-2xl shadow-black/5 overflow-hidden">
@@ -460,7 +510,7 @@ const WaterFieldDiagram: React.FC = () => {
 
         <div className="text-center mb-16">
           <p className="text-white/80 text-lg md:text-2xl font-light leading-relaxed max-w-2xl mx-auto">
-            Every screen is backed by a mathematically-generated water simulation — not video, not gradient — but a <span className="text-cyan-400 italic font-serif">live mesh driven by interfering wave equations.</span>
+            Every screen is backed by a mathematically generated water simulation, a <span className="text-cyan-400 italic font-serif">live mesh driven by interfering wave equations.</span>
           </p>
         </div>
 
@@ -518,7 +568,7 @@ const TimeOfDayPalette: React.FC = () => {
       <div className="max-w-5xl mx-auto">
         <h4 className="text-xs uppercase tracking-[0.5em] text-brand font-bold mb-6 text-center">Time as an Emotional Material</h4>
         <p className="text-center text-lg md:text-2xl opacity-60 font-light max-w-2xl mx-auto mb-16">
-          The app looks different at breakfast than it does at midnight — creating a subtle emotional bond between the owner, their pool, and the passage of time.
+          The app looks different at breakfast than it does at midnight, creating a subtle emotional bond between the owner, their pool, and the passage of time.
         </p>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
@@ -611,7 +661,7 @@ const ScanFlowDiagram: React.FC = () => {
       <div className="max-w-5xl mx-auto relative z-10">
         <h4 className="text-xs uppercase tracking-[0.6em] text-brand font-bold mb-6 text-center">Computer Vision Capture</h4>
         <p className="text-center text-lg md:text-xl text-white/60 font-light max-w-2xl mx-auto mb-16">
-          Built to make strip scanning feel effortless and trustworthy — even for first-time pool owners.
+          Built to make strip scanning feel effortless and trustworthy, even for first-time pool owners.
         </p>
 
         <div className="relative">
@@ -676,7 +726,7 @@ const OnDeviceAIDiagram: React.FC = () => {
       <div className="max-w-5xl mx-auto">
         <h4 className="text-xs uppercase tracking-[0.5em] text-brand font-bold mb-6 text-center">Making Intelligence Feel Alive</h4>
         <p className="text-center text-lg md:text-2xl opacity-60 font-light max-w-2xl mx-auto mb-16">
-          On-device Foundation Models generate summaries, risk assessments, and guidance — with zero data leaving the device.
+          On-device Foundation Models generate summaries, risk assessments, and guidance, with zero data leaving the device.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -739,7 +789,7 @@ const OnDeviceAIDiagram: React.FC = () => {
             <div className="flex-1">
               <p className="text-xs uppercase tracking-widest text-brand mb-4 font-bold">Streaming Responses</p>
               <p className="text-white/70 leading-relaxed">
-                Instead of dumping text, responses stream progressively — signaling active reasoning, reducing perceived latency, and creating conversational presence. Subtle haptics every few words reinforce aliveness.
+                Responses stream progressively, signaling active reasoning, reducing perceived latency, and creating conversational presence. Subtle haptics every few words reinforce aliveness.
               </p>
             </div>
             <div className="flex flex-col gap-2 w-full md:w-64">
@@ -1005,7 +1055,7 @@ export const ProjectDetail: React.FC = () => {
             >
               <span className="text-xs uppercase tracking-[0.5em] text-brand font-bold block mb-8">Design Thesis</span>
               <h3 className="text-2xl md:text-5xl font-serif italic max-w-4xl mx-auto leading-tight">
-                If users want to know what to do next, the interface must act like a guide — <span className="text-brand">alive</span>, <span className="text-cyan-600">contextual</span>, and quietly <span className="text-[#121214]">intelligent.</span>
+                If users want to know what to do next, the interface must act like a guide: <span className="text-brand">alive</span>, <span className="text-cyan-600">contextual</span>, and quietly <span className="text-[#121214]">intelligent.</span>
               </h3>
             </motion.div>
           </section>
@@ -1016,7 +1066,7 @@ export const ProjectDetail: React.FC = () => {
               <h2 className="text-4xl md:text-6xl font-serif mb-8 md:mb-12 tracking-tighter">Designing an Interface That Feels Like <span className="text-brand italic">Water</span></h2>
               <p className="text-lg md:text-2xl opacity-60 max-w-3xl font-light">
                 Pool owners have a deeply sensory relationship with water.
-The interface honors that relationship — replacing flat utility screens with something familiar, calm, and spatially resonant.
+The interface honors that relationship, replacing flat utility screens with something familiar, calm, and spatially resonant.
 <br /><br />
 When glass materials layer above the surface, the effect becomes architectural: the user is no longer looking at a screen, <i>but through it.</i>
               </p>
@@ -1047,7 +1097,7 @@ When glass materials layer above the surface, the effect becomes architectural: 
 
                 {[
                   { label: 'Water Field Detail', tone: 'bg-cyan-50' },
-                  { label: 'Glass Layers', tone: 'bg-white' },
+                  { label: 'Glass Layers', tone: 'bg-white', image: '/assets/projects/poolchex/liquid-glass.jpg' },
                   { label: 'Score Card Screen', tone: 'bg-slate-50' },
                 ].map((item, i) => (
                   <motion.div
@@ -1059,10 +1109,22 @@ When glass materials layer above the surface, the effect becomes architectural: 
                     whileHover={shouldReduceMotion ? {} : { y: -3 }}
                     transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.5, delay: i * 0.05 }}
                   >
-                    <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(0,0,0,0.04),transparent)]" />
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <span className="text-[10px] md:text-xs uppercase tracking-[0.35em] text-black/40">{item.label}</span>
-                    </div>
+                    {item.image ? (
+                      <>
+                        <img src={item.image} className="absolute inset-0 w-full h-full object-cover" alt={item.label} />
+                        <div className="absolute inset-0 bg-gradient-to-tr from-black/10 via-transparent to-white/10" />
+                        <div className="absolute left-6 bottom-6">
+                          <span className="text-[10px] md:text-xs uppercase tracking-[0.35em] text-white/80">{item.label}</span>
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(0,0,0,0.04),transparent)]" />
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <span className="text-[10px] md:text-xs uppercase tracking-[0.35em] text-black/40">{item.label}</span>
+                        </div>
+                      </>
+                    )}
                   </motion.div>
                 ))}
 
@@ -1167,7 +1229,7 @@ When glass materials layer above the surface, the effect becomes architectural: 
             <div className="mb-16 md:mb-24">
               <h2 className="text-4xl md:text-6xl font-serif mb-8 md:mb-12 tracking-tighter">Removing Friction From <span className="text-brand italic">Reality</span></h2>
               <p className="text-lg md:text-2xl opacity-60 max-w-3xl font-light">
-                Test strips require manual color comparison — error-prone and tedious. The goal was not technical novelty — but eliminating interpretive effort entirely.
+                Test strips require manual color comparison, which is error-prone and tedious. The goal was to eliminate interpretive effort entirely.
               </p>
             </div>
             <ScanFlowDiagram />
@@ -1192,7 +1254,7 @@ When glass materials layer above the surface, the effect becomes architectural: 
             <div className="mb-16 md:mb-24">
               <h2 className="text-4xl md:text-6xl font-serif mb-8 md:mb-12 tracking-tighter">From Transactions → <span className="text-brand italic">Continuous Care</span></h2>
               <p className="text-lg md:text-2xl opacity-60 max-w-3xl font-light">
-                Rather than designing isolated service moments, the experience was structured as an ongoing relationship — where diagnostics, treatment, and communication form a coherent narrative of water health.
+                The experience was structured as an ongoing relationship, where diagnostics, treatment, and communication form a coherent narrative of water health.
               </p>
             </div>
             <EcosystemDiagram />
@@ -1209,7 +1271,7 @@ When glass materials layer above the surface, the effect becomes architectural: 
             >
               <h2 className="text-4xl md:text-6xl font-serif mb-8 md:mb-12 tracking-tighter">Build to Learn, <span className="text-brand italic">Then Build to Last</span></h2>
               <p className="text-lg md:text-2xl opacity-60 max-w-3xl font-light">
-                Before committing to native, we shipped a cross-platform layer designed to validate behaviors at speed — then migrated deliberately once patterns stabilized.
+                Before committing to native, we shipped a cross-platform layer to validate behaviors at speed, then migrated deliberately once patterns stabilized.
               </p>
             </motion.div>
 
@@ -1315,7 +1377,7 @@ When glass materials layer above the surface, the effect becomes architectural: 
                       <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
                     </svg>
                     <h4 className="text-lg md:text-xl font-serif mb-2">Performance as Experience</h4>
-                    <p className="text-base text-black/60">Heavy compute stays off-device. Interfaces stay responsive. In service environments, speed isn't a metric — it's trust.</p>
+                    <p className="text-base text-black/60">Heavy compute stays off-device. Interfaces stay responsive. In service environments, speed is trust.</p>
                   </div>
                 </div>
 
@@ -1323,7 +1385,7 @@ When glass materials layer above the surface, the effect becomes architectural: 
                 <div className="space-y-8 md:space-y-10 text-lg md:text-xl leading-relaxed font-light text-black/80 max-w-3xl">
                   <div className="space-y-4">
                     <h3 className="text-2xl md:text-3xl font-serif tracking-tight">Why Start Cross-Platform?</h3>
-                    <p>Prototyping asks <em>"is this usable?"</em> — pretotyping asks <em>"should this exist, and in what form?"</em></p>
+                    <p>Prototyping asks <em>"is this usable?"</em>. Pretotyping asks <em>"should this exist, and in what form?"</em>.</p>
                     <p>We needed to validate technician workflows, service orchestration, and dashboard requirements across two markets before locking into platform-specific builds. Flutter let us test assumptions in production without over-committing.</p>
                   </div>
 
@@ -1344,7 +1406,7 @@ When glass materials layer above the surface, the effect becomes architectural: 
                   </div>
 
                   <div className="pt-4 md:pt-6 border-t border-black/10">
-                    <p className="text-base md:text-lg italic text-black/50">The most resilient systems aren't designed to be correct from day one — they're designed to become correct over time.</p>
+                    <p className="text-base md:text-lg italic text-black/50">The most resilient systems are built to become correct over time.</p>
                   </div>
                 </div>
 
@@ -1492,7 +1554,7 @@ When glass materials layer above the surface, the effect becomes architectural: 
               >
                 <h3 className="text-2xl md:text-3xl font-serif italic">"AR Optional" by design</h3>
                 <p className="text-lg md:text-xl opacity-60 leading-relaxed font-light">
-                  For devices without ARKit — or users who simply didn't want to place a pizza on the floor — we added a camera-off toggle and rendered the pizza against a neutral background.
+                  For devices without ARKit, or users who preferred not to place a pizza on the floor, we added a camera-off toggle and rendered the pizza against a neutral background.
                 </p>
               </motion.div>
             </div>
@@ -1548,7 +1610,7 @@ When glass materials layer above the surface, the effect becomes architectural: 
             <div className="mb-16 md:mb-24">
               <h2 className="text-4xl md:text-6xl font-serif mb-8 md:mb-12 tracking-tighter">Designing for <span className="text-brand italic">Momentum</span></h2>
               <p className="text-lg md:text-2xl opacity-60 max-w-3xl font-light">
-                Removing friction from the path to purchase — reducing decision fatigue, compressing steps, and making progress continuously visible.
+                Removing friction from the path to purchase by reducing decision fatigue, compressing steps, and making progress continuously visible.
               </p>
             </div>
             <MomentumDiagram />
@@ -1557,16 +1619,15 @@ When glass materials layer above the surface, the effect becomes architectural: 
           {/* Image Placeholder: Customization Flow */}
           <section className="mt-32 md:mt-64 px-4">
             <motion.div
-              className="w-full aspect-[21/9] bg-gray-100 rounded-2xl md:rounded-[3rem] overflow-hidden"
+              className="w-full aspect-[21/9] bg-black rounded-2xl md:rounded-[3rem] overflow-hidden"
               initial={{ scale: 1.05, opacity: 0 }}
               whileInView={{ scale: 1, opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 1.2, ease: [0.33, 1, 0.68, 1] }}
             >
-              <img
-                src="/assets/projects/dominos-global/customization-flow.jpg"
+              <PingPongVideo
+                src="/assets/projects/dominos-global/customisation-flow-redesign.mp4"
                 className="w-full h-full object-cover"
-                alt="Customization flow redesign"
               />
             </motion.div>
             <p className="text-center text-sm opacity-40 mt-6 uppercase tracking-widest">Progressive customization interface</p>
@@ -1583,7 +1644,7 @@ When glass materials layer above the surface, the effect becomes architectural: 
               <div className="mb-16 md:mb-24">
                 <h2 className="text-4xl md:text-6xl font-serif mb-8 md:mb-12 tracking-tighter">Design System <span className="text-brand italic">Evolution</span></h2>
                 <p className="text-lg md:text-2xl opacity-60 max-w-3xl font-light">
-                  To support global consistency while enabling regional flexibility, we evolved a modular design system — allowing teams to scale improvements without fragmenting the experience.
+                  To support global consistency while enabling regional flexibility, we evolved a modular design system, allowing teams to scale improvements without fragmenting the experience.
                 </p>
               </div>
               <DesignSystemDiagram />
