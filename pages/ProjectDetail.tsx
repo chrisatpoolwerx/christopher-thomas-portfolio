@@ -1564,15 +1564,18 @@ When glass materials layer above the surface, the effect becomes architectural: 
           <section className="mt-24 md:mt-40 px-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
               <motion.div
-                className="aspect-[4/3] bg-gray-100 rounded-2xl md:rounded-[2rem] overflow-hidden"
+                className="aspect-[4/3] bg-black rounded-2xl md:rounded-[2rem] overflow-hidden"
                 initial={{ opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
               >
-                <img
-                  src="/assets/projects/ar-pizza/ar-mode.jpg"
+                <video
+                  src="/assets/projects/ar-pizza/ar-mode.mp4"
                   className="w-full h-full object-cover"
-                  alt="AR mode with pizza placement"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
                 />
               </motion.div>
               <motion.div
