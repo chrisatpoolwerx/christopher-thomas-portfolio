@@ -39,11 +39,7 @@ export const PROJECTS: Project[] = [
     outcome: 'Poolchex transformed pool care from interpretive guesswork into guided action, combining computer vision, on-device intelligence, and a cohesive design system into a single calm experience. The product feels like a knowledgeable companion.',
     reflection: 'Designing Poolchex reinforced a belief I return to often: The best intelligent products express it their intelligence through clarity.',
     heroImage: '/assets/projects/poolchex/hero.jpg',
-    visuals: [
-      '/assets/projects/poolchex/water-field.jpg',
-      '/assets/projects/poolchex/time-palette.jpg',
-      '/assets/projects/poolchex/performance.jpg'
-    ],
+    visuals: [],
     tools: ['Sketch', 'Xcode', 'Principle', 'SwiftUI', 'Core ML', 'Vision']
   },
   {
@@ -141,8 +137,7 @@ export const PROJECTS: Project[] = [
     heroImage: '/assets/projects/dominos-global/hero.jpg',
     visuals: [
       '/assets/projects/dominos-global/craft-hierarchy.jpg',
-      '/assets/projects/dominos-global/craft-motion.m4v',
-      '/assets/projects/dominos-global/craft-density.jpg'
+      '/assets/projects/dominos-global/craft-motion.m4v'
     ],
     tools: ['Sketch', 'Principle', 'Keynote', 'Pixelmator Pro', 'Zeplin']
   },
