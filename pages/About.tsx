@@ -139,8 +139,8 @@ export const About: React.FC = () => {
               viewport={{ once: true }}
             >
               <svg className="w-8 h-8 text-brand mb-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="12" cy="12" r="10"/>
-                <path d="M12 6v6l4 2"/>
+                <circle cx="11" cy="11" r="8"/>
+                <path d="M21 21l-4.35-4.35"/>
               </svg>
               <h3 className="text-xl md:text-2xl font-serif mb-3">Clarity in Complex Systems</h3>
               <p className="text-base text-black/60">Designing products that synthesize dense information into confident action.</p>
