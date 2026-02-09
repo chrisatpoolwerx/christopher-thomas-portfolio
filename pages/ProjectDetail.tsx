@@ -1150,9 +1150,6 @@ When glass materials layer above the surface, the effect becomes architectural: 
                   </div>
                 </motion.div>
               </div>
-              <p className="text-xs md:text-sm opacity-40 mt-6 uppercase tracking-[0.4em]">
-                Placeholder frames for final UI screenshots
-              </p>
             </motion.div>
             <WaterFieldDiagram />
           </section>
