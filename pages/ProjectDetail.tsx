@@ -1627,7 +1627,7 @@ When glass materials layer above the surface, the effect becomes architectural: 
             >
               <PingPongVideo
                 src="/assets/projects/dominos-global/customisation-flow-redesign.mp4"
-                className="w-full h-full object-cover scale-[3] md:scale-100"
+                className="w-full h-full object-cover scale-x-[3] md:scale-x-100"
               />
             </motion.div>
             <p className="text-center text-sm opacity-40 mt-6 uppercase tracking-widest">Progressive customization interface</p>
