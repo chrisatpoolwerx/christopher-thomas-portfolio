@@ -154,13 +154,15 @@ export const Home: React.FC = () => {
           </motion.p>
         </motion.div>
         
-        <motion.div 
-          className="mt-24 md:mt-48 flex justify-between items-end border-b border-black/10 pb-12"
-          initial={{ scaleX: 0 }}
-          animate={{ scaleX: 1 }}
-          transition={{ delay: 1, duration: 1.8, ease: [0.33, 1, 0.68, 1] }}
-          style={{ originX: 0 }}
+        <motion.div
+          className="mt-24 md:mt-48 flex justify-between items-end border-b border-black/10 pb-12 overflow-hidden"
         >
+          <motion.div
+            className="flex justify-between items-end w-full"
+            initial={{ y: 40, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 1, duration: 1.8, ease: [0.33, 1, 0.68, 1] }}
+          >
           <div className="flex gap-6 items-center">
             <div className="flex gap-1">
                {/* Use Framer Motion for pulse - pauses when off-screen unlike CSS animation */}
@@ -175,6 +177,7 @@ export const Home: React.FC = () => {
             <span className="text-xs uppercase tracking-[0.4em] opacity-40 font-bold">Selected Works</span>
           </div>
           <span className="hidden md:block text-xs uppercase tracking-[0.4em] opacity-40 font-bold">Volume 01 / 2026</span>
+          </motion.div>
         </motion.div>
       </section>
 
