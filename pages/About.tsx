@@ -165,10 +165,6 @@ export const About: React.FC = () => {
                   )}
                 </AnimatePresence>
               </motion.div>
-
-              <p className="text-lg md:text-2xl opacity-70">
-                I'm drawn to problems where thoughtful design reshapes behavior.
-              </p>
             </motion.div>
           </div>
 
