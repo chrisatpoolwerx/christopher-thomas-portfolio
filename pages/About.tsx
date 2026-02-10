@@ -1,10 +1,11 @@
 
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 
 export const About: React.FC = () => {
   const navigate = useNavigate();
+  const [isVisaOpen, setIsVisaOpen] = useState(false);
 
   return (
     <main className="min-h-screen bg-[#fbfbfb]">
@@ -47,6 +48,123 @@ export const About: React.FC = () => {
                   </svg>
                 </span>
               </motion.button>
+
+              {/* E-3 Visa Card */}
+              <motion.div
+                className="rounded-2xl md:rounded-3xl bg-brand text-white overflow-hidden shadow-[0_20px_60px_-20px_rgba(255,79,0,0.5)]"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.5 }}
+              >
+                <motion.button
+                  type="button"
+                  onClick={() => setIsVisaOpen(!isVisaOpen)}
+                  className="w-full p-5 md:p-6 flex items-center justify-between gap-4 text-left"
+                  whileHover={{ backgroundColor: 'rgba(255,255,255,0.05)' }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <div className="flex items-center gap-4">
+                    <motion.div
+                      className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/15 flex items-center justify-center"
+                      animate={{ rotate: isVisaOpen ? 0 : [0, -10, 10, -5, 5, 0] }}
+                      transition={{ duration: 0.6, delay: isVisaOpen ? 0 : 2, repeat: isVisaOpen ? 0 : Infinity, repeatDelay: 4 }}
+                    >
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                        <polyline points="22 4 12 14.01 9 11.01"/>
+                      </svg>
+                    </motion.div>
+                    <div>
+                      <p className="text-sm md:text-base font-bold tracking-wide">U.S. Work Authorization</p>
+                      <p className="text-xs md:text-sm text-white/70">E-3 Visa — No H-1B Required</p>
+                    </div>
+                  </div>
+                  <motion.span
+                    className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center shrink-0"
+                    animate={{ rotate: isVisaOpen ? 180 : 0 }}
+                    transition={{ duration: 0.3, ease: [0.33, 1, 0.68, 1] }}
+                  >
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M6 9l6 6 6-6" />
+                    </svg>
+                  </motion.span>
+                </motion.button>
+
+                <AnimatePresence>
+                  {isVisaOpen && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.4, ease: [0.33, 1, 0.68, 1] }}
+                      className="overflow-hidden"
+                    >
+                      <div className="px-5 md:px-6 pb-6 md:pb-8 space-y-6">
+                        <div className="h-[1px] bg-white/20" />
+
+                        <p className="text-sm md:text-base text-white/80 leading-relaxed">
+                          As an Australian citizen, I'm eligible for the E-3 visa — a U.S. work visa exclusively available to Australians. No H-1B sponsorship required.
+                        </p>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
+                          {[
+                            { icon: 'check-circle', title: 'No lottery', desc: '10,500 annual quota never reached' },
+                            { icon: 'refresh', title: 'Renewable indefinitely', desc: 'Two-year increments' },
+                            { icon: 'users', title: 'Spousal work rights', desc: 'Partner can work unrestricted' },
+                            { icon: 'zap', title: 'Fast & streamlined', desc: 'Quicker than H-1B process' },
+                          ].map((item, i) => (
+                            <motion.div
+                              key={i}
+                              className="flex items-start gap-3 p-3 rounded-xl bg-white/10"
+                              initial={{ opacity: 0, y: 10 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              transition={{ delay: 0.1 + i * 0.05 }}
+                            >
+                              <div className="w-8 h-8 rounded-full bg-white/15 flex items-center justify-center shrink-0 mt-0.5">
+                                {item.icon === 'check-circle' && (
+                                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                  </svg>
+                                )}
+                                {item.icon === 'refresh' && (
+                                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                    <polyline points="23 4 23 10 17 10"/>
+                                    <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
+                                  </svg>
+                                )}
+                                {item.icon === 'users' && (
+                                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                                    <circle cx="9" cy="7" r="4"/>
+                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                                    <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                                  </svg>
+                                )}
+                                {item.icon === 'zap' && (
+                                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                                  </svg>
+                                )}
+                              </div>
+                              <div>
+                                <p className="text-sm font-bold">{item.title}</p>
+                                <p className="text-xs text-white/60">{item.desc}</p>
+                              </div>
+                            </motion.div>
+                          ))}
+                        </div>
+
+                        <div className="p-4 rounded-xl bg-white/10 border border-white/10">
+                          <p className="text-xs md:text-sm text-white/70 leading-relaxed">
+                            <span className="font-bold text-white">For employers:</span> Hiring under E-3 is straightforward — no lottery uncertainty, faster onboarding, and reduced administrative complexity compared to H-1B.
+                          </p>
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
 
               <p className="text-lg md:text-2xl opacity-70">
                 I'm drawn to problems where thoughtful design reshapes behavior.
