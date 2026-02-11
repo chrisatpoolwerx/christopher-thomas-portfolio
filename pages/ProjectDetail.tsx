@@ -1085,14 +1085,18 @@ When glass materials layer above the surface, the effect becomes architectural: 
               </div>
               <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8">
                 <motion.div
-                  className="md:col-span-12 aspect-[16/9] rounded-3xl md:rounded-[3rem] border border-black/10 bg-white shadow-2xl shadow-black/5 overflow-hidden relative"
+                  className="md:col-span-12 aspect-[16/9] rounded-3xl md:rounded-[3rem] border border-black/10 bg-black shadow-2xl shadow-black/5 overflow-hidden relative"
                   whileHover={shouldReduceMotion ? {} : { y: -4 }}
                   transition={{ duration: 0.2, ease: 'easeOut' }}
                 >
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,79,0,0.08),transparent_45%),radial-gradient(circle_at_80%_30%,rgba(14,116,144,0.08),transparent_45%)]" />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="text-xs uppercase tracking-[0.4em] text-black/40">Hero UI Screenshot</span>
-                  </div>
+                  <video
+                    src="/assets/projects/poolchex/hero-ui-glass.mp4"
+                    className="w-full h-full object-cover"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                  />
                 </motion.div>
 
                 {[
@@ -1489,16 +1493,19 @@ When glass materials layer above the surface, the effect becomes architectural: 
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: 0.1 }}
               >
-                <img
-                  src="/assets/projects/healthy-pool/customer-report.jpg"
+                <video
+                  src="/assets/projects/healthy-pool/progressive-disclosure.mp4"
                   className="w-full h-full object-cover"
-                  alt="Customer-facing report"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
                 />
               </motion.div>
             </div>
             <div className="flex justify-between mt-6 px-2 text-sm opacity-40 uppercase tracking-widest">
               <span>Technician Assessment</span>
-              <span>Customer Report</span>
+              <span>Progressive Disclosure UI</span>
             </div>
           </section>
 
