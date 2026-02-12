@@ -581,7 +581,7 @@ const TimeOfDayPalette: React.FC = () => {
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
             >
-              <div className="aspect-[9/19] rounded-2xl md:rounded-3xl mb-4 shadow-lg group-hover:scale-105 transition-transform duration-500 overflow-hidden bg-gray-100">
+              <div className="aspect-[9/19] mb-4 group-hover:scale-105 transition-transform duration-500 overflow-hidden">
                 <img
                   src={state.image}
                   alt={`${state.time} palette`}
@@ -1101,19 +1101,44 @@ When glass materials layer above the surface, the effect becomes architectural: 
 
                 {[
                   { label: 'Water Field Detail', tone: 'bg-cyan-50' },
-                  { label: 'Glass Layers', tone: 'bg-white', image: '/assets/projects/poolchex/liquid-glass.jpg' },
-                  { label: 'Score Card Screen', tone: 'bg-slate-50' },
+                  { label: 'Glass Layers', tone: 'bg-white', video: '/assets/projects/poolchex/liquid-glass.mp4', loop: true },
+                  { label: 'Score Card Screen', tone: 'bg-slate-50', video: '/assets/projects/poolchex/score-card.mp4', loop: false, replayOnTap: true },
                 ].map((item, i) => (
                   <motion.div
                     key={item.label}
-                    className={`md:col-span-6 aspect-[4/3] rounded-2xl md:rounded-[2.5rem] border border-black/10 ${item.tone} shadow-xl shadow-black/5 overflow-hidden relative`}
+                    className={`md:col-span-6 aspect-[4/3] rounded-2xl md:rounded-[2.5rem] border border-black/10 ${item.tone} shadow-xl shadow-black/5 overflow-hidden relative ${item.replayOnTap ? 'cursor-pointer' : ''}`}
                     initial={{ opacity: 0, y: 16 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-80px" }}
                     whileHover={shouldReduceMotion ? {} : { y: -3 }}
                     transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.5, delay: i * 0.05 }}
+                    onClick={
+                      item.replayOnTap
+                        ? (event) => {
+                            const video = event.currentTarget.querySelector('video') as HTMLVideoElement | null;
+                            if (!video) return;
+                            video.currentTime = 0;
+                            void video.play();
+                          }
+                        : undefined
+                    }
                   >
-                    {item.image ? (
+                    {item.video ? (
+                      <>
+                        <video
+                          src={item.video}
+                          className="absolute inset-0 w-full h-full object-cover"
+                          autoPlay
+                          loop={item.loop}
+                          muted
+                          playsInline
+                        />
+                        <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-black/10 via-transparent to-white/10" />
+                        <div className="pointer-events-none absolute left-6 bottom-6">
+                          <span className="text-[10px] md:text-xs uppercase tracking-[0.35em] text-white/80">{item.label}</span>
+                        </div>
+                      </>
+                    ) : item.image ? (
                       <>
                         <img src={item.image} className="absolute inset-0 w-full h-full object-cover" alt={item.label} />
                         <div className="absolute inset-0 bg-gradient-to-tr from-black/10 via-transparent to-white/10" />
@@ -1133,7 +1158,7 @@ When glass materials layer above the surface, the effect becomes architectural: 
                 ))}
 
                 <motion.div
-                  className="md:col-span-6 aspect-[4/3] rounded-2xl md:rounded-[2.5rem] border border-black/10 bg-black shadow-xl shadow-black/5 overflow-hidden relative"
+                  className="md:col-span-6 aspect-[4/3] rounded-2xl md:rounded-[2.5rem] shadow-xl shadow-black/5 overflow-hidden relative"
                   initial={{ opacity: 0, y: 16 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-80px" }}
@@ -1142,13 +1167,12 @@ When glass materials layer above the surface, the effect becomes architectural: 
                 >
                   <video
                     src="/assets/projects/poolchex/guided-treatment.mp4"
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover scale-[1.01]"
                     autoPlay
                     loop
                     muted
                     playsInline
                   />
-                  <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(0,0,0,0.2),transparent)]" />
                   <div className="absolute bottom-4 left-4">
                     <span className="text-[10px] md:text-xs uppercase tracking-[0.35em] text-white/70">Guided Treatment</span>
                   </div>
