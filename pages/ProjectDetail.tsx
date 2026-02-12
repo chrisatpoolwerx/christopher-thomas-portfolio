@@ -1085,13 +1085,13 @@ When glass materials layer above the surface, the effect becomes architectural: 
               </div>
               <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8">
                 <motion.div
-                  className="md:col-span-12 aspect-[16/9] rounded-3xl md:rounded-[3rem] bg-black shadow-2xl shadow-black/5 overflow-hidden relative"
+                  className="md:col-span-12 aspect-[16/9] rounded-3xl md:rounded-[3rem] shadow-2xl shadow-black/5 overflow-hidden relative"
                   whileHover={shouldReduceMotion ? {} : { y: -4 }}
                   transition={{ duration: 0.2, ease: 'easeOut' }}
                 >
                   <video
                     src="/assets/projects/poolchex/hero-ui-glass.mp4"
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover scale-[1.01]"
                     autoPlay
                     loop
                     muted
