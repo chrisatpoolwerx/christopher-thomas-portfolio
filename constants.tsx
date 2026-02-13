@@ -40,7 +40,7 @@ export const PROJECTS: Project[] = [
     reflection: 'Designing Poolchex reinforced a belief I return to often: The best intelligent products express it their intelligence through clarity.',
     heroImage: '/assets/projects/poolchex/hero.jpg',
     visuals: [],
-    tools: ['Sketch', 'Xcode', 'Principle', 'SwiftUI', 'Core ML', 'Vision']
+    tools: ['Sketch', 'Xcode', 'Principle', 'SwiftUI', 'Core ML', 'Vision', 'Foundation Models', 'Prompt Engineering']
   },
   {
   id: 'healthy-pool',
@@ -93,7 +93,7 @@ export const PROJECTS: Project[] = [
     visuals: [
       'https://images.unsplash.com/photo-1574672280600-4accfa5b6f98?auto=format&fit=crop&q=80&w=1200'
     ],
-    tools: ['Sketch', 'Principle', 'Keynote', 'Pixelmator Pro', 'Figma', 'Flutter', 'Gemini']
+    tools: ['Sketch', 'Principle', 'Keynote', 'Pixelmator Pro', 'Figma', 'Flutter', 'Gemini', 'Prompt Engineering']
   },
   {
     id: 'dominos-global',

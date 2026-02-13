@@ -150,7 +150,7 @@ export const Home: React.FC = () => {
             animate={{ opacity: 0.8, y: 0 }}
             transition={{ duration: 1.2, delay: 0.6, ease: [0.33, 1, 0.68, 1] }}
           >
-            Building intelligent, high-fidelity software that translates powerful technology into <span className="text-brand italic font-serif">human inevitability.</span>
+            Building intelligent, high-fidelity software that translates powerful technology into <span className="text-brand italic font-serif">natural clarity.</span>
           </motion.p>
         </motion.div>
         
@@ -212,12 +212,12 @@ export const Home: React.FC = () => {
         />
         
         <motion.h3
-          className="text-3xl md:text-[6.3rem] font-serif max-w-6xl leading-[0.9] tracking-tighter relative z-10"
+          className="text-xl md:text-[4.1rem] font-serif max-w-6xl leading-[0.9] tracking-tighter relative z-10"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          Let’s build the <span className="text-brand italic">inevitable.</span>
+          Let's build what's <span className="text-brand italic">next.</span>
         </motion.h3>
         
         <div className="mt-20 md:mt-32 group relative z-10">

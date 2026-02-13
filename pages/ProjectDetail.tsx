@@ -133,6 +133,22 @@ const ToolIcons: Record<string, React.FC<{ className?: string }>> = {
       <circle cx="12" cy="12" r="2" fill="currentColor"/>
       <path d="M12 3v2M12 19v2M3 12h2M19 12h2" stroke="currentColor" strokeWidth="1.5"/>
     </svg>
+  ),
+  'Foundation Models': ({ className }) => (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+      <rect x="4" y="14" width="16" height="6" rx="1" fill="none" stroke="currentColor" strokeWidth="1.5"/>
+      <rect x="6" y="8" width="12" height="5" rx="1" fill="none" stroke="currentColor" strokeWidth="1.5"/>
+      <rect x="8" y="3" width="8" height="4" rx="1" fill="none" stroke="currentColor" strokeWidth="1.5"/>
+      <circle cx="8" cy="17" r="1" fill="currentColor"/>
+      <circle cx="12" cy="17" r="1" fill="currentColor"/>
+      <circle cx="16" cy="17" r="1" fill="currentColor"/>
+    </svg>
+  ),
+  'Prompt Engineering': ({ className }) => (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+      <path d="M4 6h16M4 12h12M4 18h8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+      <path d="M18 14l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+    </svg>
   )
 };
 
@@ -1702,40 +1718,9 @@ When glass materials layer above the surface, the effect becomes architectural: 
         </>
       )}
 
-      {/* Generic Mental Model for other projects */}
-      {!isHealthyPool && !isAR && !isDominos && (
-        <section className="mt-32 md:mt-80 px-6 md:px-8 max-w-screen-xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-32 items-center">
-            <div>
-              <h2 className="text-3xl md:text-4xl font-serif mb-8 md:mb-10 tracking-tight">The <span className="text-brand italic">Mental Model</span></h2>
-              <p className="text-lg md:text-2xl leading-relaxed opacity-60 font-light">
-                {project.modelDescription}
-              </p>
-            </div>
-            <div className="bg-[#1d1d1f] p-8 md:p-16 rounded-3xl md:rounded-[4rem] shadow-3xl text-white relative">
-               <div className="flex flex-col gap-6 md:gap-8 text-[10px] md:text-xs font-medium uppercase tracking-[0.4em]">
-                  <div className="p-6 md:p-8 border border-white/10 rounded-2xl md:rounded-3xl bg-white/5 flex justify-between items-center group">
-                     <span className="text-white/40">Input</span>
-                     <span>Technical Complexity</span>
-                  </div>
-                  <div className="mx-auto h-8 md:h-12 w-[1px] bg-brand/50" />
-                  <div className="p-8 md:p-10 border-2 border-brand rounded-full text-center text-brand font-bold text-xs md:text-sm tracking-widest scale-105 shadow-2xl shadow-brand/20">
-                     Foundation Models
-                  </div>
-                  <div className="mx-auto h-8 md:h-12 w-[1px] bg-brand/50" />
-                  <div className="p-6 md:p-8 border border-white/10 rounded-2xl md:rounded-3xl bg-white/5 flex justify-between items-center group">
-                     <span className="text-white/40">Output</span>
-                     <span>Human Clarity</span>
-                  </div>
-               </div>
-            </div>
-          </div>
-        </section>
-      )}
-
       {/* Experience Principles */}
       <section className="mt-32 md:mt-80 px-6 md:px-8 max-w-screen-xl mx-auto">
-        <h2 className="text-xs uppercase tracking-[0.4em] text-brand font-bold mb-16 md:mb-24 font-bold">Experience Principles</h2>
+        <h2 className="text-4xl md:text-6xl font-serif mb-12 md:mb-16 tracking-tighter">Experience <span className="text-brand italic">Principles</span></h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 md:gap-16">
           {project.principles.map((principle, i) => (
             <div key={i} className="space-y-4">

@@ -321,12 +321,12 @@ export const About: React.FC = () => {
         />
 
         <motion.h3
-          className="text-3xl md:text-[6.3rem] font-serif max-w-6xl leading-[0.9] tracking-tighter relative z-10"
+          className="text-xl md:text-[4.1rem] font-serif max-w-6xl leading-[0.9] tracking-tighter relative z-10"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          Let's build the <span className="text-brand italic">inevitable.</span>
+          Let's build what's <span className="text-brand italic">next.</span>
         </motion.h3>
 
         <div className="mt-12 md:mt-20 group relative z-10">
