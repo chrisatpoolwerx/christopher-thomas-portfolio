@@ -1115,8 +1115,26 @@ When glass materials layer above the surface, the effect becomes architectural: 
                   />
                 </motion.div>
 
+                <motion.div
+                  className="md:col-span-12 aspect-[16/9] rounded-3xl md:rounded-[3rem] shadow-2xl shadow-black/5 overflow-hidden relative"
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-80px" }}
+                  whileHover={shouldReduceMotion ? {} : { y: -4 }}
+                  transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.5 }}
+                >
+                  <video
+                    src="/assets/projects/poolchex/hero-3up.mp4"
+                    className="w-full h-full object-cover scale-[1.01]"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                  />
+                </motion.div>
+
                 {[
-                  { label: 'Water Field Detail', tone: 'bg-cyan-50' },
+                  { label: 'Platform Integrations', tone: 'bg-cyan-50', video: '/assets/projects/poolchex/widgets-animation.mp4', loop: false, replayOnTap: true },
                   { label: 'Glass Layers', tone: 'bg-white', video: '/assets/projects/poolchex/liquid-glass.mp4', loop: true },
                   { label: 'Score Card Screen', tone: 'bg-slate-50', video: '/assets/projects/poolchex/score-card.mp4', loop: false, replayOnTap: true },
                 ].map((item, i) => (
@@ -1150,25 +1168,14 @@ When glass materials layer above the surface, the effect becomes architectural: 
                           playsInline
                         />
                         <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-black/10 via-transparent to-white/10" />
-                        <div className="pointer-events-none absolute left-6 bottom-6">
-                          <span className="text-[10px] md:text-xs uppercase tracking-[0.35em] text-white/80">{item.label}</span>
-                        </div>
                       </>
                     ) : item.image ? (
                       <>
                         <img src={item.image} className="absolute inset-0 w-full h-full object-cover" alt={item.label} />
                         <div className="absolute inset-0 bg-gradient-to-tr from-black/10 via-transparent to-white/10" />
-                        <div className="absolute left-6 bottom-6">
-                          <span className="text-[10px] md:text-xs uppercase tracking-[0.35em] text-white/80">{item.label}</span>
-                        </div>
                       </>
                     ) : (
-                      <>
-                        <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(0,0,0,0.04),transparent)]" />
-                        <div className="absolute inset-0 flex items-center justify-center">
-                          <span className="text-[10px] md:text-xs uppercase tracking-[0.35em] text-black/40">{item.label}</span>
-                        </div>
-                      </>
+                      <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(0,0,0,0.04),transparent)]" />
                     )}
                   </motion.div>
                 ))}
@@ -1189,9 +1196,6 @@ When glass materials layer above the surface, the effect becomes architectural: 
                     muted
                     playsInline
                   />
-                  <div className="absolute bottom-4 left-4">
-                    <span className="text-[10px] md:text-xs uppercase tracking-[0.35em] text-white/70">Guided Treatment</span>
-                  </div>
                 </motion.div>
               </div>
             </motion.div>
