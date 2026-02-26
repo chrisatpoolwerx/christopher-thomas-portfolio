@@ -2,6 +2,7 @@
 import React from 'react';
 import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
+import { Analytics } from '@vercel/analytics/react';
 import { Navigation } from './components/Navigation';
 import { Home } from './pages/Home';
 import { About } from './pages/About';
@@ -25,10 +26,13 @@ const AnimatedRoutes = () => {
 
 const App: React.FC = () => {
   return (
-    <Router>
-      <Navigation />
-      <AnimatedRoutes />
-    </Router>
+    <>
+      <Router>
+        <Navigation />
+        <AnimatedRoutes />
+      </Router>
+      <Analytics />
+    </>
   );
 };
 
