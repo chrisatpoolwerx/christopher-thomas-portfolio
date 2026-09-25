@@ -958,7 +958,7 @@ export const ProjectDetail: React.FC = () => {
       </section>
 
       {/* Hero Image */}
-      <section className={`mt-16 md:mt-40 px-4 overflow-hidden ${isAR ? 'bg-[#121214] py-32 md:py-64' : ''} ${isHealthyPool ? 'pb-28 md:pb-40' : ''}`}>
+      <section className={`mt-16 md:mt-40 px-4 ${isHealthyPool ? 'overflow-x-clip' : 'overflow-hidden'} ${isAR ? 'bg-[#121214] py-32 md:py-64' : ''}`}>
         <div className={`relative ${isAR ? 'max-w-6xl mx-auto' : ''}`}>
           <motion.div
             className={`w-full aspect-video rounded-2xl md:rounded-[3rem] overflow-hidden ${isAR ? 'shadow-[0_50px_100px_rgba(0,0,0,0.5)] scale-[1.2]' : 'bg-gray-200'}`}
@@ -987,12 +987,12 @@ export const ProjectDetail: React.FC = () => {
           {/* FIA Award Badge - Healthy Pool only */}
           {isHealthyPool && (
             <motion.div
-              className="absolute -bottom-16 right-4 md:-bottom-28 md:right-16 z-20 rounded-full bg-[#fbfbfb] shadow-[0_20px_40px_-15px_rgba(0,0,0,0.3)]"
+              className="absolute -bottom-[124px] right-4 md:-bottom-28 md:right-16 z-20"
               initial={{ opacity: 0, scale: 0.8, rotate: -10 }}
               animate={{ opacity: 1, scale: 1, rotate: 0 }}
               transition={{ duration: 0.8, delay: 1.2, ease: [0.33, 1, 0.68, 1] }}
             >
-              <CircularTextBadge {...fiaBadgeProps} size={200} className="md:hidden" />
+              <CircularTextBadge {...fiaBadgeProps} size={160} fontSize={13} className="md:hidden" />
               <CircularTextBadge {...fiaBadgeProps} size={300} className="hidden md:block" />
             </motion.div>
           )}
