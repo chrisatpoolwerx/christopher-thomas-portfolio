@@ -37,7 +37,7 @@ export const PROJECTS: Project[] = [
       { section: 'Performance as Craft', content: 'Motion only delights when it remains invisible to the processor. Animation begins at 30fps and ramps to 60fps once stable. The mesh renders as a single cached layer with hit testing disabled.' }
     ],
     outcome: 'Poolchex transformed pool care from interpretive guesswork into guided action, combining computer vision, on-device intelligence, and a cohesive design system into a single calm experience. The product feels like a knowledgeable companion.',
-    reflection: 'Designing Poolchex reinforced a belief I return to often: The best intelligent products express it their intelligence through clarity.',
+    reflection: 'Designing Poolchex reinforced a belief I return to often: The best intelligent products express their intelligence through clarity.',
     heroImage: '/assets/projects/poolchex/hero.jpg',
     visuals: [],
     tools: ['Sketch', 'Xcode', 'Principle', 'SwiftUI', 'Core ML', 'Vision', 'Foundation Models', 'Prompt Engineering']
