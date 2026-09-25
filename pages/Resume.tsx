@@ -119,7 +119,7 @@ const EXPERIENCE = [
   {
     dates: '2024 – Present',
     company: 'Poolwerx',
-    role: 'Head of Innovation & Global User Experience',
+    role: 'Global Head of Client Experience & Innovation',
     points: [
       <>Designed and launched <span className="text-brand font-medium">Poolchex</span>, an AI-powered mobile experience translating complex water chemistry into conversational guidance.</>,
       <>Created the end-to-end experience for Healthy Pool Plan, transforming a reactive service model into a proactive subscription product.</>,
