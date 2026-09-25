@@ -36,7 +36,7 @@ export const About: React.FC = () => {
               <motion.button
                 type="button"
                 onClick={() => navigate('/resume')}
-                className="inline-flex items-center gap-4 rounded-full bg-brand px-6 md:px-8 py-3 md:py-4 text-[11px] md:text-xs uppercase tracking-[0.45em] font-bold text-white shadow-[0_20px_50px_-20px_rgba(255,79,0,0.7)]"
+                className="inline-flex items-center gap-4 rounded-full bg-brand px-6 md:px-8 py-3 md:py-4 text-[11px] md:text-xs uppercase tracking-[0.45em] font-bold text-white shadow-[0_20px_50px_-20px_rgba(255,92,52,0.7)]"
                 whileHover={{ y: -3, scale: 1.01 }}
                 whileTap={{ scale: 0.98 }}
                 transition={{ duration: 0.2 }}
@@ -51,7 +51,7 @@ export const About: React.FC = () => {
 
               {/* E-3 Visa Card */}
               <motion.div
-                className="rounded-2xl md:rounded-3xl bg-brand text-white overflow-hidden shadow-[0_20px_60px_-20px_rgba(255,79,0,0.5)]"
+                className="rounded-2xl md:rounded-3xl bg-brand text-white overflow-hidden shadow-[0_20px_60px_-20px_rgba(255,92,52,0.5)]"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.5 }}

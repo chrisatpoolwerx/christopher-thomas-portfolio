@@ -31,7 +31,7 @@ public/assets/
 | `icon-512.png` | 512x512 | PNG | PWA splash/install icon |
 
 **Design Notes:**
-- Use the brand color (#FF4F00) as accent
+- Use the brand color (#FF5C34) as accent
 - Simple, recognizable mark (initials "CT" or abstract symbol)
 - Ensure legibility at 16x16 for smallest favicon render
 

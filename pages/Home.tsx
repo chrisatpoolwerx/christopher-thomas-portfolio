@@ -54,7 +54,7 @@ const ProjectRow: React.FC<{ project: Project; index: number }> = memo(({ projec
           className="mt-4 md:mt-6 text-xs uppercase tracking-[0.4em] font-bold"
           animate={{
             opacity: isHovered ? 1 : 0.3,
-            color: isHovered ? '#FF4F00' : '#1d1d1f'
+            color: isHovered ? '#FF5C34' : '#1d1d1f'
           }}
           transition={{ duration: 0.4 }}
         >
