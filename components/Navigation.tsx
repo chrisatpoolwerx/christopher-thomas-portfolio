@@ -74,7 +74,7 @@ export const Navigation: React.FC = () => {
                 }
               }}
             >
-              <div className="w-2 h-2 rounded-full bg-brand shadow-[0_0_15px_rgba(255,79,0,0.8)]" />
+              <div className="w-2 h-2 rounded-full bg-brand shadow-[0_0_15px_rgba(255,92,52,0.8)]" />
               <span className="text-[10px] md:text-xs uppercase font-bold tracking-[0.4em]">Christopher Thomas</span>
             </motion.div>
           )}

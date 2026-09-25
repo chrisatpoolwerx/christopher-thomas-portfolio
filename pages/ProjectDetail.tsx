@@ -212,7 +212,7 @@ const SpatialDiagram: React.FC = () => {
           >
             <div className="relative w-40 h-40 flex items-center justify-center mb-8">
               <div className="absolute inset-0 border-2 border-brand/20 rounded-full animate-[spin_10s_linear_infinite]" />
-              <div className="w-24 h-24 rounded-full bg-brand shadow-[0_0_50px_rgba(255,79,0,0.4)] flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
+              <div className="w-24 h-24 rounded-full bg-brand shadow-[0_0_50px_rgba(255,92,52,0.4)] flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
                 <IconSmartphone />
               </div>
               {/* Floating particles - only animate when in viewport for performance */}
@@ -1482,7 +1482,7 @@ When glass materials layer above the surface, the effect becomes architectural: 
                 <div className="relative z-10 mt-8 flex justify-end">
                   <motion.button
                     type="button"
-                    className="inline-flex items-center gap-4 rounded-full bg-brand px-6 md:px-8 py-3 md:py-4 text-[11px] md:text-xs uppercase tracking-[0.45em] font-bold text-white shadow-[0_20px_50px_-20px_rgba(255,79,0,0.7)]"
+                    className="inline-flex items-center gap-4 rounded-full bg-brand px-6 md:px-8 py-3 md:py-4 text-[11px] md:text-xs uppercase tracking-[0.45em] font-bold text-white shadow-[0_20px_50px_-20px_rgba(255,92,52,0.7)]"
                     onClick={() => setIsPretotypingOpen(true)}
                     aria-expanded={isPretotypingOpen}
                     aria-controls="pretotyping-content"
@@ -1508,7 +1508,7 @@ When glass materials layer above the surface, the effect becomes architectural: 
                 <div className="mt-10 md:mt-12 flex justify-end">
                   <motion.button
                     type="button"
-                    className="inline-flex items-center gap-4 rounded-full bg-brand px-6 md:px-8 py-3 md:py-4 text-[11px] md:text-xs uppercase tracking-[0.45em] font-bold text-white shadow-[0_20px_50px_-20px_rgba(255,79,0,0.7)]"
+                    className="inline-flex items-center gap-4 rounded-full bg-brand px-6 md:px-8 py-3 md:py-4 text-[11px] md:text-xs uppercase tracking-[0.45em] font-bold text-white shadow-[0_20px_50px_-20px_rgba(255,92,52,0.7)]"
                     onClick={() => setIsPretotypingOpen(false)}
                     aria-expanded={isPretotypingOpen}
                     aria-controls="pretotyping-content"
