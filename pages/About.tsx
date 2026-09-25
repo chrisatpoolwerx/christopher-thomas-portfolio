@@ -182,6 +182,7 @@ export const About: React.FC = () => {
             <div className="space-y-6 md:space-y-8">
               <span className="text-xs uppercase tracking-[0.4em] opacity-30">Recognition</span>
               <ul className="text-lg md:text-xl space-y-3 md:space-y-4 font-light opacity-60">
+                <li>FIA Excellence in Franchise Innovation</li>
                 <li>IDC Digital Transformation Award</li>
                 <li>Apple Park Presenter</li>
                 <li>Telstra Vantage Speaker</li>
