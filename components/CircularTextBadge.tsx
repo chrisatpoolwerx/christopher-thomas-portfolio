@@ -6,6 +6,8 @@ interface CircularTextBadgeProps {
   fontSize?: number;
   spinDuration?: number; // seconds per rotation
   variant?: 'light' | 'dark'; // light = dark text on light bg, dark = light text on dark bg
+  imageSrc?: string;
+  imageAlt?: string;
   className?: string;
 }
 
@@ -15,6 +17,8 @@ export const CircularTextBadge: React.FC<CircularTextBadgeProps> = ({
   fontSize = 18,
   spinDuration = 20,
   variant = 'light',
+  imageSrc = "/assets/icons/idcbadge.svg",
+  imageAlt = "IDC Digital Transformation Award",
   className = "",
 }) => {
   // Colors based on variant
@@ -142,8 +146,8 @@ export const CircularTextBadge: React.FC<CircularTextBadgeProps> = ({
         style={{ padding: size * 0.18 }}
       >
         <img
-          src="/assets/icons/idcbadge.svg"
-          alt="IDC Digital Transformation Award"
+          src={imageSrc}
+          alt={imageAlt}
           className="w-full h-full object-contain"
         />
       </div>
