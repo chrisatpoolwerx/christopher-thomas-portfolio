@@ -82,6 +82,7 @@ export const PROJECTS: Project[] = [
     { title: 'Cross-Platform Continuity', description: 'Ensured the experience feels cohesive from mobile assessment capture to web-based report viewing, with consistent visual language and information architecture.' }
   ],
   outcomes: [
+    'Recognised at the Franchise Industry Awards 2026 with the FIA Excellence in Franchise Innovation award',
     'Created a systematic assessment approach that works across diverse pool configurations',
     'Enabled technicians to capture comprehensive pool data efficiently during service visits',
     'Established a scalable schema that supports both Australian and US market requirements',

@@ -411,6 +411,7 @@ export const Resume: React.FC = () => {
         >
           <h2 className="text-[10px] uppercase tracking-[0.5em] text-brand font-bold">Recognition</h2>
           <ul className="space-y-6 font-serif text-2xl italic">
+            <li>FIA Excellence in Franchise Innovation 2026: Healthy Pool Plan</li>
             <li>IDX Innovation Award: AR Product Design</li>
             <li>Telstra Vantage: UX Thought Leadership</li>
           </ul>
