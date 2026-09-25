@@ -5,6 +5,7 @@ import { motion, useReducedMotion } from 'framer-motion';
 import { PROJECTS } from '../constants';
 import { MagneticButton } from '../components/MagneticButton';
 import { CircularTextBadge } from '../components/CircularTextBadge';
+import { ReadingProgress } from '../components/ReadingProgress';
 
 const IconSmartphone = () => (
   <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -939,6 +940,7 @@ export const ProjectDetail: React.FC = () => {
 
   return (
     <main className="bg-[#fbfbfb] min-h-screen pb-32 md:pb-64">
+      <ReadingProgress />
       {/* Hero */}
       <section className="pt-32 md:pt-64 px-6 md:px-8 max-w-screen-xl mx-auto">
         <motion.div
