@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { PROJECTS } from '../constants';
 import { CircularTextBadge } from '../components/CircularTextBadge';
 import { ReadingProgress } from '../components/ReadingProgress';
+import { PoolchexScanStory } from '../components/poolchex/ScanStory';
 import { TransitionLink, didArriveViaViewTransition, projectTransitionStyle } from '../components/transitions';
 import { DURATION, fadeUp, transition } from '../components/motion';
 import {
@@ -260,60 +261,6 @@ const PingPongVideo: React.FC<{ src: string; className?: string }> = ({ src, cla
   );
 };
 
-const SCAN_STEPS = [
-    {
-      label: 'Detect',
-      icon: (
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
-          <circle cx="12" cy="13" r="4"/>
-        </svg>
-      ),
-      desc: 'Vision detects strip in frame'
-    },
-    {
-      label: 'Align',
-      icon: (
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-          <rect x="3" y="3" width="18" height="18" rx="2"/>
-          <path d="M3 9h18M3 15h18M9 3v18M15 3v18"/>
-        </svg>
-      ),
-      desc: 'Guide rectangle coaches position'
-    },
-    {
-      label: 'Capture',
-      icon: (
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-          <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
-        </svg>
-      ),
-      desc: 'Flash capture at optimal moment'
-    },
-    {
-      label: 'Analyze',
-      icon: (
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-          <circle cx="13.5" cy="6.5" r="2.5"/>
-          <circle cx="6" cy="12" r="2.5"/>
-          <circle cx="18" cy="12" r="2.5"/>
-          <circle cx="8" cy="18" r="2.5"/>
-          <circle cx="16" cy="18" r="2.5"/>
-        </svg>
-      ),
-      desc: 'Extract pad colors → LAB space'
-    },
-    {
-      label: 'Score',
-      icon: (
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-          <polyline points="22 4 12 14.01 9 11.01"/>
-        </svg>
-      ),
-      desc: 'Match calibrated references'
-    },
-  ];
 
 const ToolBadge: React.FC<{ name: string }> = ({ name }) => {
   const Icon = ToolIcons[name];
@@ -615,54 +562,6 @@ const TimeOfDayPalette: React.FC = () => {
             </RevealItem>
           ))}
         </RevealGroup>
-      </div>
-    </Panel>
-  );
-};
-
-const ScanFlowDiagram: React.FC = () => {
-  return (
-    <Panel variant="dark">
-      <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-br from-brand/5 to-cyan-500/5" />
-
-      <div className="max-w-5xl mx-auto relative">
-        <PanelIntro eyebrow="Computer Vision Capture" dark>
-          Built to make strip scanning feel effortless and trustworthy, even for first-time pool owners.
-        </PanelIntro>
-
-        <div className="relative">
-          <div className="hidden md:block absolute top-12 left-[10%] right-[10%] h-[2px] bg-gradient-to-r from-brand/0 via-brand/50 to-brand/0" />
-
-          <RevealGroup className="grid grid-cols-2 md:grid-cols-5 gap-8 md:gap-4" staggerBy={0.1}>
-            {SCAN_STEPS.map((step) => (
-              <RevealItem key={step.label} className="flex flex-col items-center text-center">
-                <div className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-night border border-white/15 flex items-center justify-center text-white/70 mb-4 relative">
-                  {step.icon}
-                </div>
-                <p className="text-sm font-bold uppercase tracking-[0.2em] text-white">{step.label}</p>
-                <p className="mt-2 text-sm text-white/60 max-w-[140px]">{step.desc}</p>
-              </RevealItem>
-            ))}
-          </RevealGroup>
-        </div>
-
-        <Reveal className="mt-16">
-          <Tile dark>
-            <div className="flex flex-col md:flex-row items-center gap-8">
-              <p className="flex-1 text-base md:text-lg leading-relaxed text-white/80">
-                The guide rectangle <span className="text-brand">pulses while searching</span>, turns <span className="text-green-400">green when aligned</span>, and provides live instruction. Flash capture → review → confirm.
-              </p>
-              <div className="flex gap-4" aria-hidden="true">
-                <motion.div
-                  className="w-16 h-16 rounded-2xl border-2 border-brand/60"
-                  animate={{ opacity: [0.5, 1, 0.5] }}
-                  transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
-                />
-                <div className="w-16 h-16 rounded-2xl border-2 border-green-400 bg-green-400/10" />
-              </div>
-            </div>
-          </Tile>
-        </Reveal>
       </div>
     </Panel>
   );
@@ -1086,7 +985,19 @@ export const ProjectDetail: React.FC = () => {
                 title={<>Removing Friction From <Accent>Reality</Accent></>}
                 lead="Test strips require manual color comparison, which is error-prone and tedious. The goal was to eliminate interpretive effort entirely."
               />
-              <ScanFlowDiagram />
+            </Container>
+            {/* Pinned scroll story: no overflow clipping on this band, so position: sticky works */}
+            <Container>
+              <div className="relative rounded-[2rem] md:rounded-[3rem] bg-night text-white px-6 md:px-16 pt-16 md:pt-24 pb-16 md:pb-8">
+                <div aria-hidden="true" className="absolute inset-0 rounded-[inherit] bg-gradient-to-br from-brand/5 via-transparent to-cyan-500/5 pointer-events-none" />
+                <Reveal className="relative text-center">
+                  <Eyebrow className="justify-center">Computer Vision Capture</Eyebrow>
+                  <p className="mt-6 max-w-2xl mx-auto text-lg md:text-2xl font-light leading-relaxed text-white/75">
+                    Built to make strip scanning feel effortless and trustworthy, even for first-time pool owners.
+                  </p>
+                </Reveal>
+                <PoolchexScanStory className="relative mt-16 md:mt-0" />
+              </div>
             </Container>
           </Section>
 
