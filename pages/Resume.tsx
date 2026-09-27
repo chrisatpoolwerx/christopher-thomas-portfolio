@@ -10,6 +10,7 @@ import {
   Container,
   Eyebrow,
   Intro,
+  KineticText,
   PAGE_TOP,
   Reveal,
   RevealGroup,
@@ -172,9 +173,9 @@ export const Resume: React.FC = () => {
         {/* Header */}
         <Intro className="border-b border-black/10 pb-16 md:pb-24 flex flex-col md:flex-row md:items-end justify-between gap-10">
           <motion.div variants={fadeUp}>
-            <h1 className="text-6xl md:text-8xl font-serif tracking-tighter leading-[0.9]">
+            <KineticText as="h1" trigger="load" delay={0.1} staggerBy={0.12} className="text-6xl md:text-8xl font-serif tracking-tighter leading-[0.9]">
               Christopher <br /> <span className="text-brand">Thomas</span>
-            </h1>
+            </KineticText>
             <Eyebrow tone="muted" className="mt-8">Product Designer, AI-Driven Experiences</Eyebrow>
           </motion.div>
           <motion.div variants={fadeUp} className="md:text-right space-y-2">

@@ -1,7 +1,7 @@
 import React from 'react';
-import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
-import { DURATION, HOVER_LIFT, TAP, VIEWPORT, fadeUp, stagger, transition } from './motion';
+import { motion, type Variants } from 'framer-motion';
+import { DURATION, EASE, HOVER_LIFT, TAP, VIEWPORT, fade, fadeUp, stagger, transition } from './motion';
+import { TransitionLink } from './transitions';
 
 // Shared building blocks so every page uses the same layout, type, surfaces and motion
 
@@ -73,25 +73,88 @@ const toneClass: Record<Tone, string> = {
   light: 'text-white/60',
 };
 
-// Small uppercase label above a section or field
+// Small uppercase label above a section or field. Inside any reveal it settles in:
+// letter spacing tightens and the variable Inter weight rises from light to bold.
+const eyebrowVariants: Variants = {
+  hidden: { opacity: 0, letterSpacing: '0.6em', fontWeight: 300 },
+  visible: { opacity: 1, letterSpacing: '0.3em', fontWeight: 700, transition: { duration: DURATION.slow, ease: EASE } },
+};
+
+const motionTags = {
+  p: motion.p,
+  h1: motion.h1,
+  h2: motion.h2,
+  h3: motion.h3,
+  span: motion.span,
+  blockquote: motion.blockquote,
+};
+type MotionTag = keyof typeof motionTags;
+
 export const Eyebrow: React.FC<Children & { tone?: Tone; rule?: boolean; as?: 'p' | 'h2' | 'h3' | 'span' }> = ({
   children,
   className,
   tone = 'brand',
   rule = false,
-  as: Tag = 'p',
-}) => (
-  <Tag className={cx('flex items-center gap-4 text-xs font-bold uppercase tracking-[0.3em]', toneClass[tone], className)}>
-    {rule && <span className="w-8 h-px bg-current shrink-0" />}
-    {children}
-  </Tag>
-);
+  as = 'p',
+}) => {
+  const Tag = motionTags[as];
+  return (
+    <Tag variants={eyebrowVariants} className={cx('flex items-center gap-4 text-xs font-bold uppercase tracking-[0.3em]', toneClass[tone], className)}>
+      {rule && <span className="w-8 h-px bg-current shrink-0" />}
+      {children}
+    </Tag>
+  );
+};
+
+// Kinetic headline: every word rises out of its own mask in a quick cascade, which reads as a
+// line-by-line reveal. Nested elements such as <Accent> are split too, keeping their styling.
+const wordVariants: Variants = {
+  hidden: { y: '115%', rotate: 3 },
+  visible: { y: '0%', rotate: 0, transition: { duration: DURATION.slow, ease: EASE } },
+};
+
+const splitWords = (node: React.ReactNode, key: string): React.ReactNode => {
+  if (typeof node === 'string') {
+    return node.split(/(\s+)/).map((part, i) =>
+      part === '' || /^\s+$/.test(part) ? (
+        part
+      ) : (
+        <span key={`${key}-${i}`} className="inline-block overflow-hidden align-top pb-[0.14em] -mb-[0.14em] pr-[0.06em] -mr-[0.06em]">
+          <motion.span className="inline-block origin-bottom-left" variants={wordVariants}>
+            {part}
+          </motion.span>
+        </span>
+      )
+    );
+  }
+  if (Array.isArray(node)) {
+    return node.map((child, i) => <React.Fragment key={`${key}-${i}`}>{splitWords(child, `${key}-${i}`)}</React.Fragment>);
+  }
+  if (React.isValidElement<{ children?: React.ReactNode }>(node) && node.type !== 'br') {
+    return React.cloneElement(node, undefined, splitWords(node.props.children, key));
+  }
+  return node;
+};
+
+export const KineticText: React.FC<
+  Children & { as?: MotionTag; trigger?: 'view' | 'load'; delay?: number; staggerBy?: number; style?: React.CSSProperties }
+> = ({ children, className, as = 'h2', trigger = 'view', delay = 0, staggerBy = 0.05, style }) => {
+  const Tag = motionTags[as];
+  const play = trigger === 'load' ? { animate: 'visible' } : { whileInView: 'visible', viewport: VIEWPORT };
+  return (
+    <Tag className={className} style={style} initial="hidden" {...play} variants={stagger(staggerBy, delay)}>
+      {splitWords(children, 'w')}
+    </Tag>
+  );
+};
 
 // Orange italic emphasis used at the end of headings
 export const Accent: React.FC<Children> = ({ children }) => <span className="text-brand italic font-serif">{children}</span>;
 
 export const H2: React.FC<Children> = ({ children, className }) => (
-  <h2 className={cx('font-serif text-4xl md:text-6xl tracking-tighter leading-[1.05]', className)}>{children}</h2>
+  <KineticText as="h2" className={cx('font-serif text-4xl md:text-6xl tracking-tighter leading-[1.05]', className)}>
+    {children}
+  </KineticText>
 );
 
 export const H3: React.FC<Children> = ({ children, className }) => (
@@ -116,15 +179,21 @@ export const SectionIntro: React.FC<{
 }> = ({ eyebrow, title, lead, align = 'left', className }) => {
   const centered = align === 'center';
   return (
-    <Reveal className={cx('mb-12 md:mb-20', centered && 'text-center', className)}>
+    <div className={cx('mb-12 md:mb-20', centered && 'text-center', className)}>
       {eyebrow && (
-        <Eyebrow rule={!centered} className={cx('mb-6 md:mb-8', centered && 'justify-center')}>
-          {eyebrow}
-        </Eyebrow>
+        <RevealGroup>
+          <Eyebrow rule={!centered} className={cx('mb-6 md:mb-8', centered && 'justify-center')}>
+            {eyebrow}
+          </Eyebrow>
+        </RevealGroup>
       )}
       {title && <H2 className={cx(centered && 'mx-auto max-w-4xl')}>{title}</H2>}
-      {lead && <Lead className={cx('mt-6 md:mt-8 max-w-3xl', centered && 'mx-auto')}>{lead}</Lead>}
-    </Reveal>
+      {lead && (
+        <Reveal delay={0.2}>
+          <Lead className={cx('mt-6 md:mt-8 max-w-3xl', centered && 'mx-auto')}>{lead}</Lead>
+        </Reveal>
+      )}
+    </div>
   );
 };
 
@@ -183,8 +252,9 @@ export const MediaFrame: React.FC<Children & { caption?: React.ReactNode; frameC
   frameClassName,
   onClick,
 }) => (
-  <motion.figure className={className} variants={fadeUp} initial="hidden" whileInView="visible" viewport={VIEWPORT}>
-    <div className={cx('relative overflow-hidden rounded-3xl md:rounded-[2.5rem] bg-black/5', frameClassName)} onClick={onClick}>
+  <motion.figure className={className} variants={fade} initial="hidden" whileInView="visible" viewport={VIEWPORT}>
+    {/* scroll-reveal: frame opens and media settles as it scrolls in (CSS scroll timeline, see index.html) */}
+    <div className={cx('scroll-reveal relative overflow-hidden rounded-3xl md:rounded-[2.5rem] bg-black/5', frameClassName)} onClick={onClick}>
       {children}
     </div>
     {caption && <figcaption className="mt-4 text-xs font-bold uppercase tracking-[0.3em] text-ink-subtle">{caption}</figcaption>}
@@ -236,7 +306,7 @@ export const PillButton: React.FC<{
   return (
     <motion.span className={cx('inline-block rounded-full', className)} whileHover={{ y: -2, transition: transition(DURATION.fast) }} whileTap={TAP}>
       {to ? (
-        <Link to={to} className={classes}>{content}</Link>
+        <TransitionLink to={to} className={classes}>{content}</TransitionLink>
       ) : href ? (
         <a href={href} className={classes}>{content}</a>
       ) : (
@@ -262,11 +332,9 @@ export const ContactFooter: React.FC<{ className?: string }> = ({ className }) =
       transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
     />
     <Container className="relative flex flex-col items-center text-center">
-      <Reveal>
-        <p className="font-serif text-4xl md:text-7xl tracking-tighter leading-[0.95]">
-          Let's build what's <Accent>next.</Accent>
-        </p>
-      </Reveal>
+      <KineticText as="p" className="font-serif text-4xl md:text-7xl tracking-tighter leading-[0.95]" staggerBy={0.08}>
+        Let's build what's <Accent>next.</Accent>
+      </KineticText>
       <Reveal delay={0.1} className="mt-12 md:mt-16">
         <a
           href={`mailto:${EMAIL}`}

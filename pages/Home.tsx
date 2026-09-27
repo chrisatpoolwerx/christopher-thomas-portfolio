@@ -1,10 +1,10 @@
 import React, { useState, memo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Link } from 'react-router-dom';
 import { PROJECTS } from '../constants';
 import { Project } from '../types';
 import { DURATION, fadeUp, transition } from '../components/motion';
-import { Accent, ContactFooter, Container, Eyebrow, Intro, PAGE_TOP, RevealGroup, cx } from '../components/ui';
+import { Accent, ContactFooter, Container, Eyebrow, Intro, KineticText, PAGE_TOP, RevealGroup, cx } from '../components/ui';
+import { TransitionLink, projectTransitionStyle } from '../components/transitions';
 
 // Preload all project hero images
 const preloadImages = () => {
@@ -19,7 +19,7 @@ const ProjectRow: React.FC<{ project: Project }> = memo(({ project }) => {
 
   return (
     <motion.li variants={fadeUp} className="border-t border-black/10">
-      <Link
+      <TransitionLink
         to={`/project/${project.id}`}
         className="group relative -mx-4 md:-mx-8 px-4 md:px-8 py-14 md:py-20 flex flex-col md:flex-row md:items-baseline justify-between gap-6 md:gap-12 rounded-3xl overflow-hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand"
         onMouseEnter={() => setIsHovered(true)}
@@ -27,6 +27,7 @@ const ProjectRow: React.FC<{ project: Project }> = memo(({ project }) => {
         onFocus={() => setIsHovered(true)}
         onBlur={() => setIsHovered(false)}
       >
+        {/* Only the row being opened carries shared transition names, so it alone morphs into the case study */}
         {/* Hover wash */}
         <motion.span
           aria-hidden="true"
@@ -41,6 +42,7 @@ const ProjectRow: React.FC<{ project: Project }> = memo(({ project }) => {
             className="text-4xl md:text-7xl font-serif tracking-tighter leading-[0.95]"
             animate={{ x: isHovered ? 12 : 0 }}
             transition={transition(DURATION.base)}
+            style={projectTransitionStyle('title', project.id, isHovered)}
           >
             {project.title}
           </motion.h2>
@@ -62,7 +64,7 @@ const ProjectRow: React.FC<{ project: Project }> = memo(({ project }) => {
               initial={{ opacity: 0, scale: 0.94, x: '60%', y: '-50%', rotate: 4 }}
               animate={{ opacity: 1, scale: 1, x: '20%', y: '-50%', rotate: 0 }}
               exit={{ opacity: 0, scale: 0.94, x: '60%', y: '-50%', rotate: -4 }}
-              style={{ width: '440px', height: '280px', right: '0', top: '50%' }}
+              style={{ width: '440px', height: '280px', right: '0', top: '50%', ...projectTransitionStyle('image', project.id) }}
               transition={transition(DURATION.base)}
             >
               <img src={project.heroImage} className="w-full h-full object-cover" alt="" />
@@ -82,7 +84,7 @@ const ProjectRow: React.FC<{ project: Project }> = memo(({ project }) => {
             <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </motion.span>
-      </Link>
+      </TransitionLink>
     </motion.li>
   );
 });
@@ -96,17 +98,10 @@ export const Home: React.FC = () => {
     <main className="min-h-screen bg-paper">
       {/* Hero */}
       <Container className={PAGE_TOP}>
-        <div className="overflow-hidden pb-2">
-          <motion.h1
-            className="text-6xl md:text-[10rem] font-serif leading-[0.85] tracking-tighter"
-            initial={{ y: '100%' }}
-            animate={{ y: 0 }}
-            transition={transition(DURATION.slow)}
-          >
-            Christopher <br />
-            <span className="text-brand">Thomas</span>
-          </motion.h1>
-        </div>
+        <KineticText as="h1" trigger="load" delay={0.1} staggerBy={0.12} className="text-6xl md:text-[10rem] font-serif leading-[0.85] tracking-tighter">
+          Christopher <br />
+          <span className="text-brand">Thomas</span>
+        </KineticText>
 
         <Intro delay={0.5}>
           <motion.p variants={fadeUp} className="mt-12 md:mt-16 max-w-4xl text-xl md:text-4xl leading-[1.2] font-light tracking-tight text-ink-muted">

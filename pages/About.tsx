@@ -11,6 +11,7 @@ import {
   Container,
   Eyebrow,
   Intro,
+  KineticText,
   Lead,
   PAGE_TOP,
   PillButton,
@@ -110,9 +111,9 @@ export const About: React.FC = () => {
       <Container className={PAGE_TOP}>
         <div className="grid grid-cols-1 md:grid-cols-12 gap-16 md:gap-24">
           <Intro className="md:col-span-8">
-            <motion.h1 variants={fadeUp} className="text-4xl md:text-7xl font-serif leading-[1.05] tracking-tighter">
+            <KineticText as="h1" trigger="load" delay={0.15} staggerBy={0.04} className="text-4xl md:text-7xl font-serif leading-[1.05] tracking-tighter">
               I design intelligent systems that make complex domains feel <Accent>clear, calm, and naturally understood.</Accent>
-            </motion.h1>
+            </KineticText>
 
             <motion.div variants={fadeUp} className="mt-12 md:mt-16">
               <Lead>
@@ -219,9 +220,9 @@ export const About: React.FC = () => {
         {/* Design Perspective */}
         <Section className="border-t border-black/10 pt-16 md:pt-24">
           <Reveal className="max-w-4xl">
-            <p className="text-3xl md:text-5xl font-serif leading-[1.2] tracking-tight">
+            <KineticText as="p" staggerBy={0.03} className="text-3xl md:text-5xl font-serif leading-[1.2] tracking-tight">
               I'm most energized by problems where technology risks <Accent>overwhelming the people it serves.</Accent>
-            </p>
+            </KineticText>
             <Lead className="mt-8 md:mt-10">
               My work focuses on restoring legibility, ensuring powerful systems feel navigable, intelligence feels supportive, and complexity resolves into clarity.
             </Lead>

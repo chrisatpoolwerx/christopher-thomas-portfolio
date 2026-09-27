@@ -58,6 +58,87 @@
       .text-reveal {
         clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
       }
+
+      /* ---------- View transitions between pages ---------- */
+      /* Nav and reading progress stay put while the page changes underneath */
+      nav[aria-label="Main"] { view-transition-name: site-nav; }
+
+      /* Page change runs out-then-in so the two pages never sit on top of each other */
+      ::view-transition-old(root) {
+        animation: 260ms cubic-bezier(0.4, 0, 1, 1) both vt-page-out;
+      }
+      ::view-transition-new(root) {
+        animation: 650ms cubic-bezier(0.22, 1, 0.36, 1) 200ms both vt-page-in;
+      }
+      /* Shared project title and image morph between list, case study and next-project card */
+      ::view-transition-group(*) {
+        animation-duration: 850ms;
+        animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      ::view-transition-old(*), ::view-transition-new(*) {
+        animation-duration: 850ms;
+        animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+        height: 100%;
+      }
+      /* Images: crossfade between crops while the frame travels */
+      ::view-transition-old(.project-image), ::view-transition-new(.project-image) {
+        object-fit: cover;
+        overflow: clip;
+      }
+      /* Titles: the old text slips away fast and the new text scales in crisp, avoiding ghosting */
+      ::view-transition-old(.project-title) { animation: 180ms linear both vt-fade-out; }
+      ::view-transition-new(.project-title) { animation: none; }
+      @keyframes vt-fade-out { to { opacity: 0; } }
+      @keyframes vt-page-out {
+        to { opacity: 0; transform: translateY(-24px); filter: blur(4px); }
+      }
+      @keyframes vt-page-in {
+        from { opacity: 0; transform: translateY(32px); }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
+      }
+
+      /* ---------- Scroll-driven media reveal ---------- */
+      /* Media frames open from an inset window to full size as they scroll in, and the image
+         settles from a slight zoom. Runs on the compositor; browsers without scroll timelines
+         just show the frame. */
+      @supports (animation-timeline: view()) {
+        @media (prefers-reduced-motion: no-preference) {
+          .scroll-reveal {
+            --frame-radius: 1.5rem;
+            animation: frame-open linear both;
+            animation-timeline: view();
+            animation-range: entry 0% cover 45%;
+          }
+          .scroll-reveal > img,
+          .scroll-reveal > video {
+            animation: media-settle linear both;
+            animation-timeline: view();
+            animation-range: entry 0% cover 60%;
+          }
+          @media (min-width: 768px) {
+            .scroll-reveal { --frame-radius: 2.5rem; }
+          }
+          /* Hero images drift and zoom gently as they scroll away */
+          .scroll-exit > img {
+            animation: media-exit linear both;
+            animation-timeline: view();
+            animation-range: exit 0% exit 100%;
+          }
+        }
+      }
+      @keyframes frame-open {
+        from { clip-path: inset(14% 10% 14% 10% round var(--frame-radius)); }
+        to { clip-path: inset(0 0 0 0 round var(--frame-radius)); }
+      }
+      @keyframes media-settle {
+        from { transform: scale(1.18); }
+        to { transform: scale(1); }
+      }
+      @keyframes media-exit {
+        to { transform: scale(1.08) translateY(6%); }
+      }
     </style>
   <script type="importmap">
 {

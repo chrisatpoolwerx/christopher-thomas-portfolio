@@ -1,10 +1,11 @@
 
 import React, { useEffect, useState, useRef, useCallback } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { PROJECTS } from '../constants';
 import { CircularTextBadge } from '../components/CircularTextBadge';
 import { ReadingProgress } from '../components/ReadingProgress';
+import { TransitionLink, didArriveViaViewTransition, projectTransitionStyle } from '../components/transitions';
 import { DURATION, fadeUp, transition } from '../components/motion';
 import {
   Accent,
@@ -18,6 +19,7 @@ import {
   Eyebrow,
   H3,
   Intro,
+  KineticText,
   Lead,
   MediaFrame,
   PAGE_TOP,
@@ -825,6 +827,8 @@ export const ProjectDetail: React.FC = () => {
   const projectIndex = PROJECTS.findIndex((p) => p.id === id);
   const project = PROJECTS[projectIndex];
   const [isPretotypingOpen, setIsPretotypingOpen] = useState(false);
+  // When the title and hero morph in from the previous page, skip their own entrance
+  const [arrivedViaMorph] = useState(didArriveViaViewTransition);
 
   useEffect(() => {
     setIsPretotypingOpen(false);
@@ -846,14 +850,18 @@ export const ProjectDetail: React.FC = () => {
 
   const heroImage = (
     <motion.div
-      className="w-full aspect-video rounded-3xl md:rounded-[2.5rem] overflow-hidden bg-black/5"
-      initial={{ opacity: 0, scale: 1.04 }}
+      className="scroll-exit w-full aspect-video rounded-3xl md:rounded-[2.5rem] overflow-hidden bg-black/5"
+      style={projectTransitionStyle('image', project.id)}
+      initial={arrivedViaMorph ? false : { opacity: 0, scale: 1.04 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={transition(DURATION.slow, 0.3)}
     >
       <img src={project.heroImage} className="w-full h-full object-cover" alt={project.title} />
     </motion.div>
   );
+
+  const titleClass = 'mt-6 md:mt-8 text-5xl md:text-8xl xl:text-[8.5rem] font-serif leading-[0.9] tracking-tighter';
+  const titleStyle = projectTransitionStyle('title', project.id);
 
   const badgeEntrance = {
     initial: { opacity: 0, scale: 0.85, rotate: -10 },
@@ -871,9 +879,15 @@ export const ProjectDetail: React.FC = () => {
           <motion.div variants={fadeUp}>
             <Eyebrow rule>{project.subtitle}</Eyebrow>
           </motion.div>
-          <motion.h1 variants={fadeUp} className="mt-6 md:mt-8 text-5xl md:text-8xl xl:text-[8.5rem] font-serif leading-[0.9] tracking-tighter">
-            {project.title}
-          </motion.h1>
+          {arrivedViaMorph ? (
+            <h1 className={titleClass} style={titleStyle}>
+              {project.title}
+            </h1>
+          ) : (
+            <KineticText as="h1" trigger="load" delay={0.25} staggerBy={0.1} className={titleClass} style={titleStyle}>
+              {project.title}
+            </KineticText>
+          )}
           <motion.p variants={fadeUp} className="mt-8 md:mt-12 max-w-5xl text-xl md:text-4xl leading-[1.2] font-light tracking-tight text-ink-muted">
             {project.oneLine}
           </motion.p>
@@ -952,9 +966,9 @@ export const ProjectDetail: React.FC = () => {
           <Panel>
             <div aria-hidden="true" className="absolute -top-20 -right-20 w-72 h-72 bg-brand/5 rounded-full blur-3xl" />
             <div className="relative max-w-4xl mx-auto">
-              <h2 className="text-3xl md:text-5xl font-serif tracking-tight text-center mb-12 md:mb-16">
+              <KineticText as="h2" className="text-3xl md:text-5xl font-serif tracking-tight text-center mb-12 md:mb-16">
                 {isAR ? <>Operating in <Accent>Ambiguity</Accent></> : <>Designing Beyond <Accent>the Interface</Accent></>}
-              </h2>
+              </KineticText>
               <RevealGroup className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-8 md:gap-y-10">
                 {project.hardThings.map((thing, i) => (
                   <RevealItem key={thing} className="flex gap-6 items-start">
@@ -973,9 +987,9 @@ export const ProjectDetail: React.FC = () => {
         <Container>
           <Reveal className="text-center">
             <Eyebrow className="justify-center">The Insight</Eyebrow>
-            <blockquote className="mt-10 max-w-5xl mx-auto font-serif italic text-3xl md:text-6xl leading-[1.15] tracking-tight">
-              “{project.insight}”
-            </blockquote>
+            <KineticText as="blockquote" staggerBy={0.03} className="mt-10 max-w-5xl mx-auto font-serif italic text-3xl md:text-6xl leading-[1.15] tracking-tight">
+              {`“${project.insight}”`}
+            </KineticText>
           </Reveal>
         </Container>
       </Section>
@@ -987,9 +1001,9 @@ export const ProjectDetail: React.FC = () => {
             <Container>
               <Panel className="text-center">
                 <Eyebrow className="justify-center mb-8">Design Thesis</Eyebrow>
-                <p className="max-w-4xl mx-auto font-serif italic text-3xl md:text-5xl leading-tight">
+                <KineticText as="p" staggerBy={0.03} className="max-w-4xl mx-auto font-serif italic text-3xl md:text-5xl leading-tight">
                   If users want to know what to do next, the interface must act like a guide: <span className="text-brand">alive</span>, <span className="text-cyan-600">contextual</span>, and quietly intelligent.
-                </p>
+                </KineticText>
               </Panel>
             </Container>
           </Section>
@@ -1416,7 +1430,9 @@ export const ProjectDetail: React.FC = () => {
                 ))}
               </ul>
             ) : (
-              <p className="text-3xl md:text-5xl font-serif leading-tight tracking-tight">{project.outcome}</p>
+              <KineticText as="p" staggerBy={0.015} className="text-3xl md:text-5xl font-serif leading-tight tracking-tight">
+                {project.outcome}
+              </KineticText>
             )}
           </Reveal>
           <Reveal className="mt-20 md:mt-28 pt-16 md:pt-20 border-t border-black/10 max-w-3xl mx-auto text-center">
@@ -1430,14 +1446,17 @@ export const ProjectDetail: React.FC = () => {
       <Section>
         <Container>
           <Reveal>
-            <Link
+            <TransitionLink
               to={`/project/${nextProject.id}`}
               className="group grid grid-cols-1 md:grid-cols-2 overflow-hidden rounded-[2rem] md:rounded-[3rem] bg-white border border-black/[0.06] shadow-[0_1px_2px_rgba(0,0,0,0.04),0_40px_80px_-48px_rgba(0,0,0,0.25)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand"
             >
               <div className="p-8 md:p-14 flex flex-col justify-between gap-12">
                 <Eyebrow rule>Next Project</Eyebrow>
                 <div>
-                  <p className="font-serif text-4xl md:text-6xl tracking-tighter leading-[0.95] transition-colors duration-500 group-hover:text-brand">
+                  <p
+                    className="font-serif text-4xl md:text-6xl tracking-tighter leading-[0.95] transition-colors duration-500 group-hover:text-brand"
+                    style={projectTransitionStyle('title', nextProject.id)}
+                  >
                     {nextProject.title}
                   </p>
                   <Eyebrow tone="muted" className="mt-5">{nextProject.subtitle}</Eyebrow>
@@ -1448,14 +1467,17 @@ export const ProjectDetail: React.FC = () => {
                   </svg>
                 </span>
               </div>
-              <div className="relative aspect-[16/10] md:aspect-auto overflow-hidden bg-black/5">
+              <div
+                className="relative aspect-[16/10] md:aspect-auto overflow-hidden bg-black/5"
+                style={projectTransitionStyle('image', nextProject.id)}
+              >
                 <img
                   src={nextProject.heroImage}
                   alt=""
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
                 />
               </div>
-            </Link>
+            </TransitionLink>
           </Reveal>
         </Container>
       </Section>

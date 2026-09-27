@@ -1,10 +1,12 @@
 import React, { useState, useRef, useEffect, memo } from 'react';
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from 'framer-motion';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import { TransitionLink } from './transitions';
+import { EASE } from './motion';
 import { MagneticButton } from './MagneticButton';
 
 const EMAIL = 'chris@christhomas.co';
-const easeOutExpo = [0.33, 1, 0.68, 1];
+const easeOutExpo = EASE;
 
 const focusRing = 'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand rounded-full';
 
@@ -18,7 +20,7 @@ const NAV_ITEMS = [
 const NavLink = memo<{ text: string; to: string; isActive: boolean }>(({ text, to, isActive }) => {
   return (
     <MagneticButton>
-      <Link
+      <TransitionLink
         to={to}
         aria-current={isActive ? 'page' : undefined}
         className={`relative px-4 py-2 flex flex-col items-center justify-center group ${focusRing}`}
@@ -34,7 +36,7 @@ const NavLink = memo<{ text: string; to: string; isActive: boolean }>(({ text, t
             transition={{ type: 'spring', stiffness: 300, damping: 30 }}
           />
         )}
-      </Link>
+      </TransitionLink>
     </MagneticButton>
   );
 });
@@ -112,18 +114,20 @@ export const Navigation: React.FC = () => {
                   exit={{ y: -30, opacity: 0 }}
                   transition={{ duration: 0.6, ease: easeOutExpo }}
                 >
-                  <Link
+                  <TransitionLink
                     to="/"
                     aria-label="Christopher Thomas, home"
                     className={`group flex items-center gap-3 md:gap-4 text-[#1d1d1f] px-1 ${focusRing}`}
-                    onClick={() => {
-                      if (isHome) window.scrollTo({ top: 0, behavior: 'smooth' });
+                    onClick={(event) => {
+                      if (!isHome) return;
+                      event.preventDefault();
+                      window.scrollTo({ top: 0, behavior: 'smooth' });
                     }}
                   >
                     <span className="w-2 h-2 rounded-full bg-brand shadow-[0_0_8px_rgba(255,92,52,0.7)]" />
                     <span className="md:hidden text-sm font-bold tracking-[0.3em]">CT</span>
                     <span className="hidden md:inline text-xs uppercase font-bold tracking-[0.4em]">Christopher Thomas</span>
-                  </Link>
+                  </TransitionLink>
                 </motion.div>
               )}
             </AnimatePresence>
@@ -193,14 +197,14 @@ export const Navigation: React.FC = () => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.05 + i * 0.06, ease: easeOutExpo }}
                   >
-                    <Link
+                    <TransitionLink
                       to={item.to}
                       aria-current={isActive ? 'page' : undefined}
                       className={`inline-block text-6xl font-serif tracking-tighter ${isActive ? 'text-brand italic' : 'text-[#1d1d1f]'} ${focusRing}`}
                       onClick={() => setIsMenuOpen(false)}
                     >
                       {item.label}
-                    </Link>
+                    </TransitionLink>
                   </motion.li>
                 );
               })}
