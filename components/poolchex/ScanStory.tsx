@@ -44,6 +44,13 @@ const READINGS = [
 
 const SCORE = 87;
 
+// Device geometry, in container-query units (1cqw = 1% of the phone's width) so every size
+// scales together. The screen radius is the frame radius minus the bezel, which keeps the
+// screen perfectly concentric with the frame at any size.
+const FRAME_RADIUS = 15;
+const BEZEL = 3.6;
+const cqw = (value: number) => `${value}cqw`;
+
 export const ScanPhone: React.FC<{ step: number; compact?: boolean }> = ({ step, compact = false }) => {
   const aligned = step >= 1;
   const analysing = step >= 3;
@@ -51,14 +58,32 @@ export const ScanPhone: React.FC<{ step: number; compact?: boolean }> = ({ step,
 
   return (
     <div
-      className={cx(
-        'relative aspect-[9/19.5] rounded-[2.75rem] p-[3.5%] bg-[#0b0b0d] ring-1 ring-white/15 shadow-[0_40px_120px_-30px_rgba(0,0,0,0.9)]',
-        compact ? 'w-[230px]' : 'w-[min(300px,calc((100vh-190px)*0.46))]'
-      )}
+      className={cx('relative', compact ? 'w-[230px]' : 'w-[min(300px,calc((100vh-190px)*0.46))]')}
+      style={{ containerType: 'inline-size' }}
       role="img"
       aria-label={`Poolchex scanning a test strip: ${STATUS[step]}`}
     >
-      <div className="relative h-full w-full overflow-hidden rounded-[2.4rem]">
+      {/* Side buttons: action and volume on the left, power on the right */}
+      {[
+        { side: 'left', top: 18, height: 6 },
+        { side: 'left', top: 27, height: 11 },
+        { side: 'left', top: 40, height: 11 },
+        { side: 'right', top: 31, height: 17 },
+      ].map((button) => (
+        <span
+          key={`${button.side}-${button.top}`}
+          aria-hidden="true"
+          className="absolute rounded-sm bg-[#1c1c20]"
+          style={{ [button.side]: cqw(-0.9), top: `${button.top}%`, height: `${button.height}%`, width: cqw(1.2) }}
+        />
+      ))}
+
+      {/* Frame */}
+      <div
+        className="relative aspect-[9/19.5] bg-[#0b0b0d] shadow-[0_40px_120px_-30px_rgba(0,0,0,0.9),inset_0_0_0_1.5px_rgba(255,255,255,0.14)]"
+        style={{ borderRadius: cqw(FRAME_RADIUS), padding: cqw(BEZEL) }}
+      >
+      <div className="relative h-full w-full overflow-hidden" style={{ borderRadius: cqw(FRAME_RADIUS - BEZEL) }}>
         {/* Camera feed */}
         <div
           className="absolute inset-0"
@@ -69,7 +94,10 @@ export const ScanPhone: React.FC<{ step: number; compact?: boolean }> = ({ step,
         />
 
         {/* Dynamic Island */}
-        <div className="absolute top-[2.2%] left-1/2 -translate-x-1/2 w-[30%] h-[3.4%] rounded-full bg-black z-30" />
+        <div
+          className="absolute left-1/2 -translate-x-1/2 rounded-full bg-black z-30"
+          style={{ top: cqw(2.8), width: cqw(30), height: cqw(8.6) }}
+        />
 
         {/* Status */}
         <div className="absolute top-[8.5%] inset-x-0 flex justify-center z-20">
@@ -155,14 +183,24 @@ export const ScanPhone: React.FC<{ step: number; compact?: boolean }> = ({ step,
         </AnimatePresence>
 
         {/* Shutter */}
-        <motion.div
-          className="absolute bottom-[5%] left-1/2 -ml-[9%] w-[18%] aspect-square rounded-full border-[3px] border-white/85 p-[6%]"
-          initial={false}
-          animate={{ opacity: analysing ? 0 : 1, scale: step === 2 ? [1, 0.82, 1] : 1 }}
-          transition={transition(DURATION.base)}
-        >
-          <div className={cx('w-full h-full rounded-full transition-colors duration-500', aligned ? 'bg-white' : 'bg-white/40')} />
-        </motion.div>
+        {/* Shutter: iOS style white ring with a white disc inside */}
+        <div className="absolute inset-x-0 flex justify-center" style={{ bottom: cqw(10) }}>
+          <motion.div
+            className="rounded-full border-solid border-white flex items-center justify-center"
+            style={{ width: cqw(19), height: cqw(19), borderWidth: cqw(1.1) }}
+            initial={false}
+            animate={{ opacity: analysing ? 0 : 1 }}
+            transition={transition(DURATION.base)}
+          >
+            <motion.div
+              className="rounded-full bg-white"
+              style={{ width: cqw(14.2), height: cqw(14.2) }}
+              initial={false}
+              animate={{ scale: step === 2 ? [1, 0.84, 1] : 1, opacity: aligned ? 1 : 0.55 }}
+              transition={transition(DURATION.base)}
+            />
+          </motion.div>
+        </div>
 
         {/* Pad readings */}
         <AnimatePresence>
@@ -264,6 +302,13 @@ export const ScanPhone: React.FC<{ step: number; compact?: boolean }> = ({ step,
             </motion.div>
           )}
         </AnimatePresence>
+
+        {/* Home indicator */}
+        <div
+          className={cx('absolute left-1/2 -translate-x-1/2 rounded-full z-30 transition-colors duration-500', scored ? 'bg-black/35' : 'bg-white/70')}
+          style={{ bottom: cqw(2.2), width: cqw(35), height: cqw(1.3) }}
+        />
+      </div>
       </div>
     </div>
   );
