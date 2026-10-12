@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { fadeUp } from '../components/motion';
 import {
@@ -17,6 +17,7 @@ import {
   RevealItem,
   Section,
 } from '../components/ui';
+import { WorkAuthorizationDetails, WorkAuthorizationToggle } from '../components/WorkAuthorization';
 
 // Custom icons for expertise categories
 const IconProductDesign = () => (
@@ -167,27 +168,35 @@ const SPEAKING = [
 ];
 
 export const Resume: React.FC = () => {
+  const [isVisaOpen, setIsVisaOpen] = useState(false);
+
   return (
     <main className="min-h-screen bg-paper">
       <Container className={PAGE_TOP}>
         {/* Header */}
-        <Intro className="border-b border-black/10 pb-16 md:pb-24 flex flex-col md:flex-row md:items-end justify-between gap-10">
-          <motion.div variants={fadeUp}>
-            <KineticText as="h1" trigger="load" delay={0.1} staggerBy={0.12} className="text-6xl md:text-8xl font-serif tracking-tighter leading-[0.9]">
-              Christopher <br /> <span className="text-brand">Thomas</span>
-            </KineticText>
-            <Eyebrow tone="muted" className="mt-8">Product Designer, AI-Driven Experiences</Eyebrow>
-          </motion.div>
-          <motion.div variants={fadeUp} className="md:text-right space-y-2">
-            <Eyebrow tone="muted" className="md:justify-end">Based in Brisbane, Australia</Eyebrow>
-            <a
-              href="mailto:chris@christhomas.co"
-              className="block text-lg font-serif italic hover:text-brand transition-colors duration-300 underline decoration-black/15 underline-offset-8"
-            >
-              chris@christhomas.co
-            </a>
-            <p className="text-lg font-serif italic">+61 421 507 365</p>
-          </motion.div>
+        <Intro className="border-b border-black/10 pb-16 md:pb-24 flex flex-col">
+          {/* On small screens the row dissolves so the details can open straight under the toggle */}
+          <div className="contents md:flex md:flex-row md:items-end md:justify-between md:gap-10">
+            <motion.div variants={fadeUp} className="order-1">
+              <KineticText as="h1" trigger="load" delay={0.1} staggerBy={0.12} className="text-6xl md:text-8xl font-serif tracking-tighter leading-[0.9]">
+                Christopher <br /> <span className="text-brand">Thomas</span>
+              </KineticText>
+              <Eyebrow tone="muted" className="mt-8">Product Designer, AI-Driven Experiences</Eyebrow>
+              <WorkAuthorizationToggle className="mt-6" open={isVisaOpen} onToggle={() => setIsVisaOpen(!isVisaOpen)} />
+            </motion.div>
+            <motion.div variants={fadeUp} className="order-3 mt-10 md:mt-0 md:text-right space-y-2">
+              <Eyebrow tone="muted" className="md:justify-end">Based in Brisbane, Australia</Eyebrow>
+              <a
+                href="mailto:chris@christhomas.co"
+                className="block text-lg font-serif italic hover:text-brand transition-colors duration-300 underline decoration-black/15 underline-offset-8"
+              >
+                chris@christhomas.co
+              </a>
+              <p className="text-lg font-serif italic">+61 421 507 365</p>
+            </motion.div>
+          </div>
+          {/* Full-width so opening it never shifts the contact column */}
+          <WorkAuthorizationDetails open={isVisaOpen} className="order-2" />
         </Intro>
 
         {/* Summary */}

@@ -6,6 +6,7 @@ import { PROJECTS } from '../constants';
 import { CircularTextBadge } from '../components/CircularTextBadge';
 import { ReadingProgress } from '../components/ReadingProgress';
 import { PoolchexScanStory } from '../components/poolchex/ScanStory';
+import { WaterSurface } from '../components/poolchex/WaterSurface';
 import { DominosJourneyStory } from '../components/dominos/JourneyStory';
 import { HealthyPoolPhasesStory } from '../components/healthy-pool/PhasesStory';
 import { StoryBand } from '../components/ScrollStory';
@@ -428,27 +429,32 @@ const EcosystemDiagram: React.FC = () => {
 // POOLCHEX DIAGRAMS
 // ============================================
 
+// Gradient approximation, used until the WebGL surface draws (and if WebGL is unavailable)
+const WaterFallback: React.FC = () => (
+  <div aria-hidden="true" className="absolute inset-0 overflow-hidden">
+    <motion.div
+      className="absolute inset-0"
+      style={{ background: 'radial-gradient(ellipse at 50% 50%, rgba(56, 189, 248, 0.15) 0%, transparent 70%)' }}
+      animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
+      transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+    />
+    {[0, 1, 2].map((i) => (
+      <motion.div
+        key={i}
+        className="absolute inset-0"
+        style={{ background: `linear-gradient(${45 + i * 30}deg, transparent 40%, rgba(56, 189, 248, ${0.05 + i * 0.02}) 50%, transparent 60%)` }}
+        animate={{ x: [0, 100, 0], y: [0, 50, 0] }}
+        transition={{ duration: 10 + i * 3, repeat: Infinity, ease: 'easeInOut', delay: i * 2 }}
+      />
+    ))}
+  </div>
+);
+
 const WaterFieldDiagram: React.FC = () => {
   return (
     <Panel variant="water">
-      {/* Animated water simulation background */}
-      <div aria-hidden="true" className="absolute inset-0 overflow-hidden">
-        <motion.div
-          className="absolute inset-0"
-          style={{ background: 'radial-gradient(ellipse at 50% 50%, rgba(56, 189, 248, 0.15) 0%, transparent 70%)' }}
-          animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
-          transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
-        />
-        {[0, 1, 2].map((i) => (
-          <motion.div
-            key={i}
-            className="absolute inset-0"
-            style={{ background: `linear-gradient(${45 + i * 30}deg, transparent 40%, rgba(56, 189, 248, ${0.05 + i * 0.02}) 50%, transparent 60%)` }}
-            animate={{ x: [0, 100, 0], y: [0, 50, 0] }}
-            transition={{ duration: 10 + i * 3, repeat: Infinity, ease: 'easeInOut', delay: i * 2 }}
-          />
-        ))}
-      </div>
+      {/* Live water surface: interfering swells and ripples, plus ripples from the pointer */}
+      <WaterSurface fallback={<WaterFallback />} />
 
       <div className="max-w-4xl mx-auto relative">
         <PanelIntro eyebrow="The Animated Water Field" dark>
@@ -464,7 +470,7 @@ const WaterFieldDiagram: React.FC = () => {
               <Tile dark className="h-full backdrop-blur-sm">
                 <div className="flex items-center gap-4 mb-5">
                   <motion.div
-                    className="w-3 h-3 rounded-full bg-cyan-300"
+                    className="w-3 h-3 rounded-full bg-cyan-300 shrink-0"
                     animate={{ scale: [1, item.scale, 1] }}
                     transition={{ duration: item.pulse, repeat: Infinity, ease: 'easeInOut' }}
                   />

@@ -20,39 +20,7 @@ import {
   RevealItem,
   Section,
 } from '../components/ui';
-
-const VISA_POINTS = [
-  { icon: 'check-circle', title: 'No lottery', desc: '10,500 annual quota never reached' },
-  { icon: 'refresh', title: 'Renewable indefinitely', desc: 'Two-year increments' },
-  { icon: 'users', title: 'Spousal work rights', desc: 'Partner can work unrestricted' },
-  { icon: 'zap', title: 'Fast & streamlined', desc: 'Quicker than H-1B process' },
-];
-
-const VisaIcon: React.FC<{ name: string }> = ({ name }) => (
-  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-    {name === 'check-circle' && (
-      <>
-        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
-        <polyline points="22 4 12 14.01 9 11.01" />
-      </>
-    )}
-    {name === 'refresh' && (
-      <>
-        <polyline points="23 4 23 10 17 10" />
-        <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10" />
-      </>
-    )}
-    {name === 'users' && (
-      <>
-        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-        <circle cx="9" cy="7" r="4" />
-        <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-      </>
-    )}
-    {name === 'zap' && <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />}
-  </svg>
-);
+import { VISA_POINTS, VisaIcon } from '../components/WorkAuthorization';
 
 const PRINCIPLES = [
   { title: 'Clarity is the highest form of craft.', text: "Minimalism eliminates cognitive friction. If it's confusing, it's not finished." },
