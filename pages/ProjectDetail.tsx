@@ -6,6 +6,8 @@ import { PROJECTS } from '../constants';
 import { CircularTextBadge } from '../components/CircularTextBadge';
 import { ReadingProgress } from '../components/ReadingProgress';
 import { PoolchexScanStory } from '../components/poolchex/ScanStory';
+import { DominosJourneyStory } from '../components/dominos/JourneyStory';
+import { StoryBand } from '../components/ScrollStory';
 import { TransitionLink, didArriveViaViewTransition, projectTransitionStyle } from '../components/transitions';
 import { DURATION, fadeUp, transition } from '../components/motion';
 import {
@@ -350,65 +352,6 @@ const SpatialDiagram: React.FC = () => {
             <p className="mt-3 text-base leading-relaxed text-white/70">Gesture-based manipulation triggers immediate visual and haptic feedback, building confidence in the customization outcome.</p>
           </div>
         </div>
-      </div>
-    </Panel>
-  );
-};
-
-const MomentumDiagram: React.FC = () => {
-  return (
-    <Panel variant="dark">
-      <div aria-hidden="true" className="absolute inset-0 bg-brand/5 blur-[100px] pointer-events-none" />
-      <div className="max-w-5xl mx-auto relative">
-        <PanelIntro eyebrow="User Journey Compression" dark />
-
-        <RevealGroup className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 items-center" staggerBy={0.15}>
-          {/* Before */}
-          <RevealItem className="space-y-5">
-            <div className="flex items-center gap-4 mb-8">
-              <span className="text-xs font-bold uppercase tracking-[0.3em] text-white/60">Before</span>
-              <div className="h-px flex-grow bg-white/10" />
-            </div>
-            {['Browse Menu', 'Select Item', 'Choose Size', 'Select Crust', 'Add Toppings', 'Review Changes', 'Confirm'].map((step, i) => (
-              <div key={step} className="flex items-center gap-4">
-                <span className="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center text-xs text-white/60 tabular-nums">{i + 1}</span>
-                <span className="text-white/70 text-sm">{step}</span>
-              </div>
-            ))}
-            <p className="pt-4 text-xs font-bold uppercase tracking-[0.3em] text-white/50">7 discrete steps</p>
-          </RevealItem>
-
-          {/* After */}
-          <RevealItem className="space-y-8">
-            <div className="flex items-center gap-4 mb-8">
-              <span className="text-xs font-bold uppercase tracking-[0.3em] text-brand">After</span>
-              <div className="h-px flex-grow bg-brand/30" />
-            </div>
-            <div className="relative">
-              <div className="absolute left-4 top-0 bottom-0 w-[2px] bg-gradient-to-b from-brand via-brand/50 to-brand/20" />
-              {['Select & Customize', 'Progressive Options', 'Live Preview & Confirm'].map((step, i) => (
-                <div key={step} className="flex items-center gap-6 mb-8">
-                  <span className="w-8 h-8 rounded-full bg-brand flex items-center justify-center text-xs text-white font-bold shadow-lg shadow-brand/30 z-10 tabular-nums">{i + 1}</span>
-                  <span className="text-white text-base font-medium">{step}</span>
-                </div>
-              ))}
-            </div>
-            <p className="text-xs font-bold uppercase tracking-[0.3em] text-brand">Progressive flow</p>
-          </RevealItem>
-        </RevealGroup>
-
-        <RevealGroup className="mt-16 md:mt-24 pt-12 border-t border-white/10 grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
-          {[
-            { value: '57%', label: 'Fewer decision points', accent: true },
-            { value: '3.2s', label: 'Avg. time reduction per order', accent: false },
-            { value: '↑24%', label: 'Completion rate increase', accent: true },
-          ].map((stat) => (
-            <RevealItem key={stat.label} className="text-center">
-              <span className={cx('text-4xl md:text-5xl font-serif', stat.accent ? 'text-brand' : 'text-white')}>{stat.value}</span>
-              <p className="mt-3 text-sm text-white/60">{stat.label}</p>
-            </RevealItem>
-          ))}
-        </RevealGroup>
       </div>
     </Panel>
   );
@@ -986,19 +929,12 @@ export const ProjectDetail: React.FC = () => {
                 lead="Test strips require manual color comparison, which is error-prone and tedious. The goal was to eliminate interpretive effort entirely."
               />
             </Container>
-            {/* Pinned scroll story: no overflow clipping on this band, so position: sticky works */}
-            <Container>
-              <div className="relative rounded-[2rem] md:rounded-[3rem] bg-night text-white px-6 md:px-16 pt-16 md:pt-24 pb-16 md:pb-8">
-                <div aria-hidden="true" className="absolute inset-0 rounded-[inherit] bg-gradient-to-br from-brand/5 via-transparent to-cyan-500/5 pointer-events-none" />
-                <Reveal className="relative text-center">
-                  <Eyebrow className="justify-center">Computer Vision Capture</Eyebrow>
-                  <p className="mt-6 max-w-2xl mx-auto text-lg md:text-2xl font-light leading-relaxed text-white/75">
-                    Built to make strip scanning feel effortless and trustworthy, even for first-time pool owners.
-                  </p>
-                </Reveal>
-                <PoolchexScanStory className="relative mt-16 md:mt-0" />
-              </div>
-            </Container>
+            <StoryBand
+              eyebrow="Computer Vision Capture"
+              intro="Built to make strip scanning feel effortless and trustworthy, even for first-time pool owners."
+            >
+              <PoolchexScanStory />
+            </StoryBand>
           </Section>
 
           {/* The Score Card */}
@@ -1227,8 +1163,10 @@ export const ProjectDetail: React.FC = () => {
                 title={<>Designing for <Accent>Momentum</Accent></>}
                 lead="Removing friction from the path to purchase by reducing decision fatigue, compressing steps, and making progress continuously visible."
               />
-              <MomentumDiagram />
             </Container>
+            <StoryBand eyebrow="User Journey Compression">
+              <DominosJourneyStory />
+            </StoryBand>
           </Section>
 
           {/* Customization Flow */}
