@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { motion, useInView, useScroll, useSpring } from 'framer-motion';
-import { cx } from './ui';
+import { Container, Eyebrow, Reveal, cx } from './ui';
 
 // Pinned scroll storytelling. On desktop the visual stays pinned (position: sticky, no
 // scroll hijacking) while the steps scroll past; the step nearest the middle of the screen
@@ -117,3 +117,22 @@ export const ScrollStory: React.FC<{
     </div>
   );
 };
+
+// Dark band that holds a scroll story. It deliberately has no overflow clipping, because
+// any clipping ancestor would stop position: sticky from pinning the visual.
+export const StoryBand: React.FC<{ eyebrow: React.ReactNode; intro?: React.ReactNode; children: React.ReactNode }> = ({
+  eyebrow,
+  intro,
+  children,
+}) => (
+  <Container>
+    <div className="relative rounded-[2rem] md:rounded-[3rem] bg-night text-white px-6 md:px-16 pt-16 md:pt-24 pb-16 md:pb-8">
+      <div aria-hidden="true" className="absolute inset-0 rounded-[inherit] bg-gradient-to-br from-brand/5 via-transparent to-cyan-500/5 pointer-events-none" />
+      <Reveal className="relative text-center">
+        <Eyebrow className="justify-center">{eyebrow}</Eyebrow>
+        {intro && <p className="mt-6 max-w-2xl mx-auto text-lg md:text-2xl font-light leading-relaxed text-white/75">{intro}</p>}
+      </Reveal>
+      <div className="relative mt-16 md:mt-0">{children}</div>
+    </div>
+  </Container>
+);
