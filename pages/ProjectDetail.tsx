@@ -7,6 +7,7 @@ import { CircularTextBadge } from '../components/CircularTextBadge';
 import { ReadingProgress } from '../components/ReadingProgress';
 import { PoolchexScanStory } from '../components/poolchex/ScanStory';
 import { DominosJourneyStory } from '../components/dominos/JourneyStory';
+import { HealthyPoolPhasesStory } from '../components/healthy-pool/PhasesStory';
 import { StoryBand } from '../components/ScrollStory';
 import { TransitionLink, didArriveViaViewTransition, projectTransitionStyle } from '../components/transitions';
 import { DURATION, fadeUp, transition } from '../components/motion';
@@ -973,28 +974,11 @@ export const ProjectDetail: React.FC = () => {
                 lead="Before committing to native, we shipped a cross-platform layer to validate behaviors at speed, then migrated deliberately once patterns stabilized."
               />
 
-              {/* Phase Journey Cards */}
-              <RevealGroup className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-20 md:mb-28">
-                <IconCard
-                  label="Phase 1"
-                  title="Ship Fast"
-                  text="Flutter-based mobile and web layer. Real users, real data, rapid iteration across technician tools and dashboards."
-                  icon={<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />}
-                />
-                <IconCard
-                  label="Phase 2"
-                  title="Observe Patterns"
-                  text="Field testing revealed where cross-platform fell short: offline reliability, background uploads, memory on constrained devices."
-                  icon={<><circle cx="12" cy="12" r="10" /><path d="M12 16v-4M12 8h.01" /></>}
-                />
-                <IconCard
-                  label="Phase 3"
-                  title="Go Native"
-                  text="Migrated to SwiftUI and Kotlin with evidence in hand. The architecture was designed to make this transition low-risk."
-                  icon={<><path d="M12 2L2 7l10 5 10-5-10-5z" /><path d="M2 17l10 5 10-5" /><path d="M2 12l10 5 10-5" /></>}
-                />
-              </RevealGroup>
-
+            </Container>
+            <StoryBand eyebrow="Pretotyping at Scale">
+              <HealthyPoolPhasesStory />
+            </StoryBand>
+            <Container className="mt-20 md:mt-28">
               {/* Architecture Decisions */}
               <Reveal>
                 <Eyebrow rule className="mb-10 md:mb-12">Architecture Decisions</Eyebrow>
